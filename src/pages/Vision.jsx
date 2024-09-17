@@ -1,10 +1,5 @@
-
 const Vision = () => {
-    return (
-        <div>
+  return <>ss</>;
+};
 
-        </div>
-    )
-}
-
-export default Vision
+export default Vision;

@@ -12,7 +12,7 @@ const Devs = () => {
                       <div className="flex items-center justify-between sm:justify-start">
                         <a
                           className="flex items-center sm:hidden"
-                          style="height: 32px; width: 136px"
+                          style={{ height: "32px", width: "136px" }}
                           href="/en"
                         >
                           <img
@@ -22,13 +22,13 @@ const Devs = () => {
                             height="32"
                             decoding="async"
                             data-nimg="1"
-                            style="color: transparent"
+                            style={{ color: "transparent" }}
                             src="/_next/image?url=%2Fimages%2Flogo-glow.png&amp;w=384&amp;q=75"
                           />
                         </a>
                         <a
                           className="hidden items-center sm:flex lg:hidden"
-                          style="height: 40px; width: 170px"
+                          style={{ height: "40px", width: "170px" }}
                           href="/en"
                         >
                           <img
@@ -38,13 +38,13 @@ const Devs = () => {
                             height="40"
                             decoding="async"
                             data-nimg="1"
-                            style="color: transparent"
+                            style={{ color: "transparent" }}
                             src="/_next/image?url=%2Fimages%2Flogo-glow.png&amp;w=384&amp;q=75"
                           />
                         </a>
                         <a
                           className="hidden items-center lg:flex"
-                          style="height: 54px; width: 256px"
+                          style={{ height: "54px", width: "256px" }}
                           href="/en"
                         >
                           <img
@@ -54,7 +54,7 @@ const Devs = () => {
                             height="54"
                             decoding="async"
                             data-nimg="1"
-                            style="color: transparent"
+                            style={{ color: "transparent" }}
                             src="/_next/image?url=%2Fimages%2Flogo-glow.png&amp;w=640&amp;q=75"
                           />
                         </a>
@@ -70,7 +70,7 @@ const Devs = () => {
                           <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
                             <a
                               className="interactive-text text-camo-300"
-                              href="/en/airdrop"
+                              href="/airdrop"
                             >
                               Airdrop
                             </a>
@@ -78,7 +78,7 @@ const Devs = () => {
                           <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
                             <a
                               className="interactive-text text-camo-300"
-                              href="/en/leaderboard"
+                              href="/leaderboard"
                             >
                               Leaderboard
                             </a>
@@ -86,7 +86,7 @@ const Devs = () => {
                           <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
                             <a
                               className="interactive-text text-yellow-100"
-                              href="/en/devs"
+                              href="/devs"
                             >
                               Devs
                             </a>
@@ -94,7 +94,7 @@ const Devs = () => {
                           <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
                             <a
                               className="interactive-text text-camo-300"
-                              href="/en/bridge"
+                              href="/bridge"
                             >
                               Bridge
                             </a>
@@ -102,7 +102,7 @@ const Devs = () => {
                           <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
                             <a
                               className="interactive-text shiny-text"
-                              href="/en/bigbang"
+                              href="/bigbang"
                             >
                               Big Bang
                             </a>
@@ -114,7 +114,7 @@ const Devs = () => {
                               className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
                             >
                               <svg
-                                style="height: 24px; width: 24px"
+                                style={{ height: "24px", width: "24px" }}
                                 viewBox="0 0 24 24"
                               >
                                 <use xlinkHref="/icons/library.svg#globe"></use>
@@ -129,7 +129,7 @@ const Devs = () => {
                           className="text-yellow-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
                         >
                           <svg
-                            style="height: 24px; width: 24px"
+                            style={{ height: "24px", width: "24px" }}
                             viewBox="0 0 24 24"
                           >
                             <use xlinkHref="/icons/library.svg#menu-hamburger"></use>
@@ -154,13 +154,17 @@ const Devs = () => {
                     >
                       <img
                         alt=""
-                        fetchPriority="high"
+                        // fetchpriority="high"
                         width="504"
                         height="504"
                         decoding="async"
                         data-nimg="1"
                         className="w-full max-w-[504px] self-center object-contain sm:mb-12 sm:w-1/2 sm:self-start"
-                        style="color: transparent"
+                        style={{ color: "transparent" }}
+                        srcSet="
+                          /_next/image?url=%2Fimages%2Fillustration-devs.png&amp;w=640&amp;q=75  1x,
+                          /_next/image?url=%2Fimages%2Fillustration-devs.png&amp;w=1080&amp;q=75 2x
+                        "
                         src="/_next/image?url=%2Fimages%2Fillustration-devs.png&amp;w=1080&amp;q=75"
                       />
                       <div className="w-full max-w-prose pt-0 sm:pt-32">
@@ -203,7 +207,11 @@ const Devs = () => {
                               decoding="async"
                               data-nimg="1"
                               className="aspect-square w-12"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fthumbnail-native-yield.png&amp;w=48&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fthumbnail-native-yield.png&amp;w=96&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fthumbnail-native-yield.png&amp;w=96&amp;q=75"
                             />
                             <h3 className="typography-brand-heading-3-caps text-yellow-100">
@@ -227,7 +235,11 @@ const Devs = () => {
                               decoding="async"
                               data-nimg="1"
                               className="aspect-square w-12"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fthumbnail-gas-fees.png&amp;w=48&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fthumbnail-gas-fees.png&amp;w=96&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fthumbnail-gas-fees.png&amp;w=96&amp;q=75"
                             />
                             <h3 className="typography-brand-heading-3-caps text-yellow-100">
@@ -251,11 +263,11 @@ const Devs = () => {
                               decoding="async"
                               data-nimg="1"
                               className="aspect-square w-12"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
                               srcSet="
-                              /_next/image?url=%2Fimages%2Fthumbnail-token-airdrop.png&amp;w=48&amp;q=75 1x,
-                              /_next/image?url=%2Fimages%2Fthumbnail-token-airdrop.png&amp;w=96&amp;q=75 2x
-                            "
+                                /_next/image?url=%2Fimages%2Fthumbnail-token-airdrop.png&amp;w=48&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fthumbnail-token-airdrop.png&amp;w=96&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fthumbnail-token-airdrop.png&amp;w=96&amp;q=75"
                             />
                             <h3 className="typography-brand-heading-3-caps text-yellow-100">
@@ -270,83 +282,11 @@ const Devs = () => {
                         </div>
                       </div>
                     </section>
-                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32">
-                      <svg
-                        className="w-full"
-                        fill="none"
-                        height="15"
-                        width="1177"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M653.476 7.969h29.202v6.489h-29.202zM.918 7.969H30.12v6.489H.918zM701.334 7.969h29.202v6.489h-29.202zM48.776 7.969h29.202v6.489H48.776zM511 7.965h138.691v6.489H511zM1077.49 7.965h64v6.489h-64zM944.612 7.969h29.202v6.489h-29.202zM690.465 7.969h3.082v6.489h-3.082zM37.907 7.969h3.082v6.489h-3.082zM751.303 7.969h3.082v6.489h-3.082zM98.745 7.969h3.082v6.489h-3.082zM756.333 7.969h3.082v6.489h-3.082zM103.774 7.969h3.082v6.489h-3.082zM868.686 7.969h3.082v6.489h-3.082zM873.715 7.965h3.082v6.489h-3.082zM1145.94 7.965h3.082v6.489h-3.082zM1159.67 7.965h3.082v6.489h-3.082zM1173.41 7.965h3.082v6.489h-3.082zM937.744 7.969h3.082v6.489h-3.082zM821.226 7.969h3.082v6.489h-3.082zM168.668 7.969h3.082v6.489h-3.082z"
-                          fill="currentColor"
-                        ></path>
-                        <circle
-                          cx="843.128"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="916.059"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="979.06"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="847.995"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="920.926"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="983.927"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="852.862"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="925.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="988.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <path
-                          d="M1176 1 0 1.01M458.489 1l-12.5 12.5h-230.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        ></path>
-                      </svg>
-                    </div>
+                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32"></div>
                     <section id="code_examples">
                       <h2 className="typography-brand-heading-2 w-full text-yellow-100 sm:max-w-[936px]">
-                        If you've deployed on mainnet or any L2, you can easily
-                        deploy on Blast.
+                        If you&apos;ve deployed on mainnet or any L2, you can
+                        easily deploy on Blast.
                       </h2>
                       <p className="typography-brand-heading-3 my-8 mt-8 max-w-prose text-camo-300 sm:mb-16 sm:mt-6">
                         Blast is EVM equivalent, so you can build Dapps on Blast
@@ -364,66 +304,7 @@ const Devs = () => {
                           Earn Gas Fee Revenue
                         </button>
                       </div>
-                      <div
-                        className="relative my-6 overflow-hidden rounded-xl transition-all sm:mb-16"
-                        style="height: 0px; max-height: 0px"
-                      >
-                        {/* <pre
-                        className="absolute inset-0 !m-0 h-max !bg-black !p-8 !pt-0 transition-opacity opacity-100"
-                      ><code className="language-solidity">
-interface IBlast {
-  // See IBlast interface source code
-}
 
-contract ContractWithAutomaticYield {
-  constructor() {
-      // Contract balance will grow automatically
-      IBlast(0x43...02).configureAutomaticYield();
-  }
-}
-</code></pre>
-                      <pre
-                        className="absolute inset-0 !m-0 h-max !bg-black !p-8 !pt-0 transition-opacity opacity-0"
-                      ><code className="language-solidity">
-interface IBlast {
-  // See IBlast interface source code
-}
-
-contract ContractWithClaimableYield {
-  constructor() {
-      IBlast(0x43...02).configureClaimableYield()
-  }
-  
-  function claimYield(address recipient, uint256 amount) external {
-      // This function is public meaning anyone can claim the yield
-      IBlast(0x43...02).claimYield(address(this), recipient, amount);
-  }
-  
-  function claimAllYield(address recipient) external {
-      // This function is public meaning anyone can claim the yield
-      IBlast(0x43...02).claimAllYield(address(this), recipient);
-  }
-}
-</code></pre>
-                      <pre
-                        className="absolute inset-0 !m-0 h-max !bg-black !p-8 !pt-0 transition-opacity opacity-0"
-                      ><code className="language-solidity">
-interface IBlast {
-  // See IBlast interface source code
-}
-
-contract ContractEarnsGasFeeRevnue {
-  constructor() {
-      IBlast(0x43...02).configureClaimableGas()
-  }
-  
-  function claimAllGas(address recipient) external {
-      // This function is public meaning anyone can claim the gas
-      IBlast(0x43...02).claimAllGas(address(this), recipient);
-  }
-}
-</code></pre> */}
-                      </div>
                       <div className="m-auto w-max">
                         <h3 className="typography-brand-heading-3 mb-6 text-center text-yellow-100">
                           Compatible with
@@ -432,102 +313,36 @@ contract ContractEarnsGasFeeRevnue {
                           <img
                             alt="Compatible with Hardhat"
                             loading="lazy"
-                            width="256"
-                            height="1"
+                            width={256}
+                            height={1}
                             decoding="async"
-                            data-nimg="1"
-                            style="color: transparent"
-                            src="/_next/image?url=%2Fimages%2Fwordmark-hardhat-camo300.png&amp;w=640&amp;q=75"
+                            style={{ color: "transparent" }}
+                            srcSet="
+                              /_next/image?url=%2Fimages%2Fwordmark-hardhat-camo300.png&w=256&q=75 1x,
+                              /_next/image?url=%2Fimages%2Fwordmark-hardhat-camo300.png&w=640&q=75 2x
+                            "
+                            src="/_next/image?url=%2Fimages%2Fwordmark-hardhat-camo300.png&w=640&q=75"
                           />
                           <img
                             alt="Compatible with Foundry"
                             loading="lazy"
-                            width="256"
-                            height="1"
+                            width={256}
+                            height={1}
                             decoding="async"
-                            data-nimg="1"
-                            style="color: transparent"
-                            src="/_next/image?url=%2Fimages%2Fwordmark-foundry-camo300.png&amp;w=640&amp;q=75"
+                            style={{ color: "transparent" }}
+                            srcSet="
+                              /_next/image?url=%2Fimages%2Fwordmark-foundry-camo300.png&w=256&q=75 1x,
+                              /_next/image?url=%2Fimages%2Fwordmark-foundry-camo300.png&w=640&q=75 2x
+                            "
+                            src="/_next/image?url=%2Fimages%2Fwordmark-foundry-camo300.png&w=640&q=75"
                           />
                         </div>
                       </div>
                     </section>
-                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32">
-                      <svg
-                        className="w-full"
-                        fill="none"
-                        height="15"
-                        width="1177"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M653.476 7.969h29.202v6.489h-29.202zM.918 7.969H30.12v6.489H.918zM701.334 7.969h29.202v6.489h-29.202zM48.776 7.969h29.202v6.489H48.776zM511 7.965h138.691v6.489H511zM1077.49 7.965h64v6.489h-64zM944.612 7.969h29.202v6.489h-29.202zM690.465 7.969h3.082v6.489h-3.082zM37.907 7.969h3.082v6.489h-3.082zM751.303 7.969h3.082v6.489h-3.082zM98.745 7.969h3.082v6.489h-3.082zM756.333 7.969h3.082v6.489h-3.082zM103.774 7.969h3.082v6.489h-3.082zM868.686 7.969h3.082v6.489h-3.082zM873.715 7.965h3.082v6.489h-3.082zM1145.94 7.965h3.082v6.489h-3.082zM1159.67 7.965h3.082v6.489h-3.082zM1173.41 7.965h3.082v6.489h-3.082zM937.744 7.969h3.082v6.489h-3.082zM821.226 7.969h3.082v6.489h-3.082zM168.668 7.969h3.082v6.489h-3.082z"
-                          fill="currentColor"
-                        ></path>
-                        <circle
-                          cx="843.128"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="916.059"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="979.06"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="847.995"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="920.926"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="983.927"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="852.862"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="925.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="988.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <path
-                          d="M1176 1 0 1.01M458.489 1l-12.5 12.5h-230.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        ></path>
-                      </svg>
-                    </div>
+                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32"></div>
                     <section id="l2_comparison">
                       <h2 className="typography-brand-heading-2 w-full max-w-[936px] text-yellow-100">
-                        It's time to ditch other L2s
+                        It&apos;s time to ditch other L2s
                       </h2>
                       <p className="typography-brand-heading-3 my-8 mt-8 text-camo-300 sm:mb-16 sm:mt-6">
                         Blast has the same features you love on other L2s while
@@ -541,7 +356,11 @@ contract ContractEarnsGasFeeRevnue {
                         decoding="async"
                         data-nimg="1"
                         className="w-full"
-                        style="color: transparent"
+                        style={{ color: "transparent" }}
+                        srcSet="
+                          /_next/image?url=%2Fimages%2Fblast-l2-comparison_en.png&amp;w=828&amp;q=75  1x,
+                          /_next/image?url=%2Fimages%2Fblast-l2-comparison_en.png&amp;w=1920&amp;q=75 2x
+                        "
                         src="/_next/image?url=%2Fimages%2Fblast-l2-comparison_en.png&amp;w=1920&amp;q=75"
                       />
                     </section>
@@ -631,7 +450,11 @@ contract ContractEarnsGasFeeRevnue {
                           decoding="async"
                           data-nimg="1"
                           className="aspect-square w-[300px] max-w-full"
-                          style="color: transparent"
+                          style={{ color: "transparent" }}
+                          srcSet="
+                            /_next/image?url=%2Fimages%2Fillustration-liquidity.png&amp;w=384&amp;q=75 1x,
+                            /_next/image?url=%2Fimages%2Fillustration-liquidity.png&amp;w=640&amp;q=75 2x
+                          "
                           src="/_next/image?url=%2Fimages%2Fillustration-liquidity.png&amp;w=640&amp;q=75"
                         />
                         <div>
@@ -656,7 +479,11 @@ contract ContractEarnsGasFeeRevnue {
                             decoding="async"
                             data-nimg="1"
                             className="aspect-square w-[300px] max-w-full"
-                            style="color: transparent"
+                            style={{ color: "transparent" }}
+                            srcSet="
+                              /_next/image?url=%2Fimages%2Fillustration-airdrop.png&amp;w=384&amp;q=75 1x,
+                              /_next/image?url=%2Fimages%2Fillustration-airdrop.png&amp;w=640&amp;q=75 2x
+                            "
                             src="/_next/image?url=%2Fimages%2Fillustration-airdrop.png&amp;w=640&amp;q=75"
                           />
                           <div>
@@ -680,7 +507,11 @@ contract ContractEarnsGasFeeRevnue {
                           decoding="async"
                           data-nimg="1"
                           className="mt-10 hidden w-full sm:block"
-                          style="color: transparent"
+                          style={{ color: "transparent" }}
+                          srcSet="
+                            /_next/image?url=%2Fimages%2Fblast-timeline-devs.png&amp;w=1200&amp;q=75 1x,
+                            /_next/image?url=%2Fimages%2Fblast-timeline-devs.png&amp;w=3840&amp;q=75 2x
+                          "
                           src="/_next/image?url=%2Fimages%2Fblast-timeline-devs.png&amp;w=3840&amp;q=75"
                         />
                         <img
@@ -691,7 +522,11 @@ contract ContractEarnsGasFeeRevnue {
                           decoding="async"
                           data-nimg="1"
                           className="ml-auto mr-auto block w-full max-w-md sm:hidden"
-                          style="color: transparent"
+                          style={{ color: "transparent" }}
+                          srcSet="
+                            /_next/image?url=%2Fimages%2Fblast-timeline-abstract.png&amp;w=384&amp;q=75 1x,
+                            /_next/image?url=%2Fimages%2Fblast-timeline-abstract.png&amp;w=750&amp;q=75 2x
+                          "
                           src="/_next/image?url=%2Fimages%2Fblast-timeline-abstract.png&amp;w=750&amp;q=75"
                         />
                       </div>
@@ -705,7 +540,11 @@ contract ContractEarnsGasFeeRevnue {
                             decoding="async"
                             data-nimg="1"
                             className="aspect-square w-[300px] max-w-full"
-                            style="color: transparent"
+                            style={{ color: "transparent" }}
+                            srcSet="
+                              /_next/image?url=%2Fimages%2Fillustration-community.png&amp;w=384&amp;q=75 1x,
+                              /_next/image?url=%2Fimages%2Fillustration-community.png&amp;w=640&amp;q=75 2x
+                            "
                             src="/_next/image?url=%2Fimages%2Fillustration-community.png&amp;w=640&amp;q=75"
                           />
                           <div>
@@ -715,12 +554,13 @@ contract ContractEarnsGasFeeRevnue {
                             <p className="typography-brand-heading-3 mb-6 mt-3 max-w-3xl text-left text-yellow-100 xs:text-center sm:mt-6 sm:text-left">
                               In the meantime, join our developer community on
                               Discord to learn more about Blast (also so you
-                              don't miss the airdrop).
+                              don&apos;t miss the airdrop).
                             </p>
                             <a
                               className="group mb-4 ml-auto mr-auto hidden w-full max-w-md sm:m-0 sm:block sm:max-w-xs"
                               href="https://discord.gg/blast-l2"
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               <div className="transition-[filter]">
                                 <button
@@ -737,6 +577,7 @@ contract ContractEarnsGasFeeRevnue {
                           className="group ml-auto mr-auto mt-6 block w-full max-w-md sm:hidden"
                           href="https://discord.gg/blast-l2"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <div className="transition-[filter]">
                             <button
@@ -749,79 +590,7 @@ contract ContractEarnsGasFeeRevnue {
                         </a>
                       </div>
                     </section>
-                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32">
-                      <svg
-                        className="w-full"
-                        fill="none"
-                        height="15"
-                        width="1177"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M653.476 7.969h29.202v6.489h-29.202zM.918 7.969H30.12v6.489H.918zM701.334 7.969h29.202v6.489h-29.202zM48.776 7.969h29.202v6.489H48.776zM511 7.965h138.691v6.489H511zM1077.49 7.965h64v6.489h-64zM944.612 7.969h29.202v6.489h-29.202zM690.465 7.969h3.082v6.489h-3.082zM37.907 7.969h3.082v6.489h-3.082zM751.303 7.969h3.082v6.489h-3.082zM98.745 7.969h3.082v6.489h-3.082zM756.333 7.969h3.082v6.489h-3.082zM103.774 7.969h3.082v6.489h-3.082zM868.686 7.969h3.082v6.489h-3.082zM873.715 7.965h3.082v6.489h-3.082zM1145.94 7.965h3.082v6.489h-3.082zM1159.67 7.965h3.082v6.489h-3.082zM1173.41 7.965h3.082v6.489h-3.082zM937.744 7.969h3.082v6.489h-3.082zM821.226 7.969h3.082v6.489h-3.082zM168.668 7.969h3.082v6.489h-3.082z"
-                          fill="currentColor"
-                        ></path>
-                        <circle
-                          cx="843.128"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="916.059"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="979.06"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="847.995"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="920.926"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="983.927"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="852.862"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="925.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="988.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <path
-                          d="M1176 1 0 1.01M458.489 1l-12.5 12.5h-230.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        ></path>
-                      </svg>
-                    </div>
+                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32"></div>
                     <section className="space-y-8" id="infrastructure_partners">
                       <h2 className="typography-brand-heading-2 text-center text-yellow-100">
                         Infrastructure Partners
@@ -836,7 +605,11 @@ contract ContractEarnsGasFeeRevnue {
                               height="1"
                               decoding="async"
                               data-nimg="1"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fwordmark-quicknode-camo300.png&amp;w=256&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fwordmark-quicknode-camo300.png&amp;w=640&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fwordmark-quicknode-camo300.png&amp;w=640&amp;q=75"
                             />
                           </div>
@@ -848,7 +621,11 @@ contract ContractEarnsGasFeeRevnue {
                               height="1"
                               decoding="async"
                               data-nimg="1"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fwordmark-thegraph-camo300.png&amp;w=256&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fwordmark-thegraph-camo300.png&amp;w=640&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fwordmark-thegraph-camo300.png&amp;w=640&amp;q=75"
                             />
                           </div>
@@ -860,7 +637,11 @@ contract ContractEarnsGasFeeRevnue {
                               height="1"
                               decoding="async"
                               data-nimg="1"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fwordmark-ankr-camo300.png&amp;w=256&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fwordmark-ankr-camo300.png&amp;w=384&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fwordmark-ankr-camo300.png&amp;w=384&amp;q=75"
                             />
                           </div>
@@ -874,7 +655,11 @@ contract ContractEarnsGasFeeRevnue {
                               height="1"
                               decoding="async"
                               data-nimg="1"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fwordmark-pyth-camo300.png&amp;w=256&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fwordmark-pyth-camo300.png&amp;w=384&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fwordmark-pyth-camo300.png&amp;w=384&amp;q=75"
                             />
                           </div>
@@ -887,7 +672,11 @@ contract ContractEarnsGasFeeRevnue {
                               decoding="async"
                               data-nimg="1"
                               className="opacity-90"
-                              style="color: transparent"
+                              style={{ color: "transparent" }}
+                              srcSet="
+                                /_next/image?url=%2Fimages%2Fwordmark-conduit-camo300.png&amp;w=256&amp;q=75 1x,
+                                /_next/image?url=%2Fimages%2Fwordmark-conduit-camo300.png&amp;w=640&amp;q=75 2x
+                              "
                               src="/_next/image?url=%2Fimages%2Fwordmark-conduit-camo300.png&amp;w=640&amp;q=75"
                             />
                           </div>
@@ -899,106 +688,16 @@ contract ContractEarnsGasFeeRevnue {
                           className="interactive-text text-yellow-300"
                           href="https://tally.so/r/wbdKM6"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Get in touch.
                         </a>
                       </aside>
                     </section>
-                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32">
-                      <svg
-                        className="w-full"
-                        fill="none"
-                        height="15"
-                        width="1177"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M653.476 7.969h29.202v6.489h-29.202zM.918 7.969H30.12v6.489H.918zM701.334 7.969h29.202v6.489h-29.202zM48.776 7.969h29.202v6.489H48.776zM511 7.965h138.691v6.489H511zM1077.49 7.965h64v6.489h-64zM944.612 7.969h29.202v6.489h-29.202zM690.465 7.969h3.082v6.489h-3.082zM37.907 7.969h3.082v6.489h-3.082zM751.303 7.969h3.082v6.489h-3.082zM98.745 7.969h3.082v6.489h-3.082zM756.333 7.969h3.082v6.489h-3.082zM103.774 7.969h3.082v6.489h-3.082zM868.686 7.969h3.082v6.489h-3.082zM873.715 7.965h3.082v6.489h-3.082zM1145.94 7.965h3.082v6.489h-3.082zM1159.67 7.965h3.082v6.489h-3.082zM1173.41 7.965h3.082v6.489h-3.082zM937.744 7.969h3.082v6.489h-3.082zM821.226 7.969h3.082v6.489h-3.082zM168.668 7.969h3.082v6.489h-3.082z"
-                          fill="currentColor"
-                        ></path>
-                        <circle
-                          cx="843.128"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="916.059"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="979.06"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="847.995"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="920.926"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="983.927"
-                          cy="11.374"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="852.862"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="925.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <circle
-                          cx="988.794"
-                          cy="11.37"
-                          fill="currentColor"
-                          r="1.46"
-                        ></circle>
-                        <path
-                          d="M1176 1 0 1.01M458.489 1l-12.5 12.5h-230.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        ></path>
-                      </svg>
-                    </div>
+                    <div className="mb-12 mt-12 w-full text-camo-500 sm:mb-32 sm:mt-32"></div>
                     <div className="inline-block w-full">
                       <div className="relative mb-0 ml-auto mr-auto w-full pt-0 sm:mb-[56px] sm:mt-[64px] max-w-[1024px]">
-                        <div className="absolute top-[-64px] hidden w-full sm:block">
-                          <svg
-                            className="w-full max-w-full"
-                            fill="none"
-                            height="64"
-                            preserveAspectRatio="none"
-                            viewBox="0 0 1024 65"
-                            width="1024"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              className="fill-camo-700"
-                              d="m785.052 17.217 15.329-15.19h55.905l13.976 11.392h13.976l.451-11.392h17.414l.169 6.582h23.444V2.027H1014c5.52 0 10 4.477 10 10v53.48H0L.258 52.34a10 10 0 0 1 9.999-9.804h271.972L350.758.508H610.9l14.878 16.709h159.274Z"
-                            ></path>
-                            <path
-                              className="fill-camo-500"
-                              d="M818 29.507h29.202v6.489H818zM865.858 29.507h29.202v6.489h-29.202zM854.989 29.507h3.082v6.489h-3.082zM915.827 29.507h3.082v6.489h-3.082zM920.856 29.507h3.082v6.489h-3.082zM985.75 29.507h3.082v6.489h-3.082z"
-                            ></path>
-                          </svg>
-                        </div>
+                        <div className="absolute top-[-64px] hidden w-full sm:block"></div>
                         <div className="w-full bg-none px-0 pb-0 pt-0 sm:bg-camo-700 sm:px-8 sm:pb-6 sm:pt-2">
                           <article className="flex flex-col items-center">
                             <h2 className="typography-brand-heading-2 max-w-lg text-yellow-100">
@@ -1029,163 +728,13 @@ contract ContractEarnsGasFeeRevnue {
                             </div>
                           </article>
                         </div>
-                        <div className="absolute bottom-[-55px] hidden w-full sm:block">
-                          <svg
-                            className="w-full max-w-full"
-                            fill="none"
-                            height="56"
-                            preserveAspectRatio="none"
-                            viewBox="0 0 1024 55"
-                            width="1024"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              className="fill-camo-700"
-                              d="m357.918 40.867-15.307 14.64h-28.814l-13.956-10.98h-13.957l-.45 10.98h-17.39l-.168-6.344H127.41v6.344H10c-5.523 0-10-4.477-10-10v-45h1024v1.565c0 5.523-4.48 10-10 10H849.432L781 54.775H589.776l-14.857-13.908H357.918Z"
-                            ></path>
-                            <path
-                              className="fill-camo-500"
-                              d="M275.02 28.507c0 .806-.649 1.46-1.45 1.46-.801 0-1.45-.654-1.45-1.46 0-.806.649-1.46 1.45-1.46.801 0 1.45.654 1.45 1.46ZM406.52 28.507c0 .806-.649 1.46-1.45 1.46-.801 0-1.45-.654-1.45-1.46 0-.806.649-1.46 1.45-1.46.801 0 1.45.654 1.45 1.46ZM412.424 28.507c0 .806-.649 1.46-1.45 1.46a1.456 1.456 0 0 1-1.451-1.46c0-.806.65-1.46 1.451-1.46s1.45.654 1.45 1.46ZM418.327 28.507c0 .806-.649 1.46-1.45 1.46-.801 0-1.45-.654-1.45-1.46 0-.806.649-1.46 1.45-1.46.801 0 1.45.654 1.45 1.46ZM424.23 28.507c0 .806-.649 1.46-1.45 1.46-.801 0-1.45-.654-1.45-1.46 0-.806.649-1.46 1.45-1.46.801 0 1.45.654 1.45 1.46ZM28 25.507h17.04v6H28v-6ZM477.872 25.507h17.041v6h-17.041v-6ZM121.393 25.507h145.849v6H121.393v-6ZM289.921 25.507h5.321v6h-5.321v-6ZM395.296 25.507h5.321v6h-5.321v-6ZM427.233 25.507h5.322v6h-5.322v-6Z"
-                            ></path>
-                            <path
-                              className="fill-camo-500"
-                              d="M452.992 32.507v-8h1.5v8h-1.5Z"
-                            ></path>
-                            <path
-                              className="fill-camo-500"
-                              d="M449.742 27.757h8v1.5h-8v-1.5Z"
-                            ></path>
-                          </svg>
-                        </div>
+                        <div className="absolute bottom-[-55px] hidden w-full sm:block"></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </main>
             </div>
-            <div className="bg-black duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity"></div>
-            <div className="duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full bg-[#1c1718] transition-opacity"></div>
-          </div>
-          <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500 bg-black sm:h-[13px]"></div>
-          <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 bg-black sm:h-[13px]"></div>
-          <img
-            alt=""
-            loading="lazy"
-            width="597"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
-            style="color: transparent"
-            src="/images/frame-corner-sm-top-left.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="465"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute right-0 top-0 z-20 hidden md:block"
-            style="color: transparent"
-            src="/images/frame-corner-sm-top-right.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="150"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
-            style="color: transparent"
-            src="/images/frame-corner-top-left.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="211"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
-            style="color: transparent"
-            src="/images/frame-corner-top-right.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="465"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
-            style="color: transparent"
-            src="/images/frame-corner-sm-bottom-right.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="211"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
-            style="color: transparent"
-            src="/images/frame-corner-bottom-right.svg"
-          />
-          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
-          <img
-            alt=""
-            loading="lazy"
-            width="597"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
-            style="color: transparent"
-            src="/images/frame-corner-sm-bottom-left.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="150"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
-            style="color: transparent"
-            src="/images/frame-corner-bottom-left.svg"
-          />
-          <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
-            <a
-              href="https://twitter.com/Blast"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <button
-                aria-label="Twitter"
-                className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-              >
-                <svg style="height: 24px; width: 24px" viewBox="0 0 24 24">
-                  <use xlinkHref="/icons/library.svg#twitter-filled"></use>
-                </svg>
-              </button>
-            </a>
-            <a
-              href="https://discord.gg/blast-l2"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <button
-                aria-label="Discord"
-                className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-              >
-                <svg style="height: 24px; width: 24px" viewBox="0 0 24 24">
-                  <use xlinkHref="/icons/library.svg#discord"></use>
-                </svg>
-              </button>
-            </a>
           </div>
         </div>
       </div>
