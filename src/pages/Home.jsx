@@ -236,12 +236,12 @@ const Home = () => {
                         <div className="flex flex-col items-center gap-4 pt-6">
                           <a className="group min-w-[256px]" href="/bridge">
                             <div className="transition-[filter] drop-shadow-glow-sm-yellow-300 hover:drop-shadow-glow-sm-white-300">
-                              <button
-                                tabIndex="-1"
+                              <Link
+                                to="/bridge"
                                 className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 group-focus-visible:bg-white group-active:bg-white media-hover:hover:bg-white text-black"
                               >
                                 Bridge & Earn
-                              </button>
+                              </Link>
                             </div>
                           </a>
                           <a
