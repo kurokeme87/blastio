@@ -17,6 +17,7 @@ import cutout_bottom_left from "../assets/frame-corner-sm-top-right.svg";
 import cutout_top_right_sm from "../assets/frame-corner-sm-top-right.svg";
 import cutout_bottom_right_sm from "../assets/frame-corner-sm-top-right.svg";
 import cutout_bottom_left_sm from "../assets/frame-corner-sm-top-right.svg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -31,10 +32,10 @@ const Home = () => {
                     <header className="relative z-[11] flex h-max justify-between px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 sm:mr-0">
                       <div className="flex w-full items-center justify-between gap-2.5 md:gap-5">
                         <div className="flex items-center justify-between sm:justify-start">
-                          <a
+                          <Link
                             className="flex items-center sm:hidden"
                             style={{ height: "32px", width: "136px" }}
-                            href="/"
+                            to="/"
                           >
                             <img
                               alt="Blast Logo"
@@ -46,11 +47,11 @@ const Home = () => {
                               // style={{ color: "transparent" }}
                               src={logo}
                             />
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="hidden items-center sm:flex lg:hidden"
                             style={{ height: "40px", width: "170px" }}
-                            href="/"
+                            to="/"
                           >
                             <img
                               alt="Blast Logo"
@@ -62,11 +63,11 @@ const Home = () => {
                               style={{ color: "transparent" }}
                               src={logo}
                             />
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="hidden items-center lg:flex"
                             style={{ height: "54px", width: "256px" }}
-                            href="/en"
+                            to="/"
                           >
                             <img
                               alt="Blast Logo"
@@ -78,55 +79,55 @@ const Home = () => {
                               style={{ color: "transparent" }}
                               src={logo}
                             />
-                          </a>
+                          </Link>
                           <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text text-camo-300"
-                                href="https://blog.blast.io/vision"
+                                to="https://blog.blast.io/vision"
                               >
                                 Vision
-                              </a>
+                              </Link>
                             </div>
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text text-camo-300"
-                                href="/airdrop"
+                                to="/airdrop"
                               >
                                 Airdrop
-                              </a>
+                              </Link>
                             </div>
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text text-camo-300"
-                                href="/leaderboard"
+                                to="/leaderboard"
                               >
                                 Leaderboard
-                              </a>
+                              </Link>
                             </div>
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text text-camo-300"
-                                href="/devs"
+                                to="/devs"
                               >
                                 Devs
-                              </a>
+                              </Link>
                             </div>
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text text-camo-300"
-                                href="/bridge"
+                                to="/bridge"
                               >
                                 Bridge
-                              </a>
+                              </Link>
                             </div>
                             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                              <a
+                              <Link
                                 className="interactive-text shiny-text"
-                                href="/bigbang"
+                                to="/bigbang"
                               >
                                 Big Bang
-                              </a>
+                              </Link>
                             </div>
                             <div>
                               <button
@@ -402,7 +403,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-top-left.svg"
+          src={cutout_left}
         />
         <img
           alt=""
@@ -413,7 +414,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-top-right.svg"
+          src={cutout_top_right}
         />
         <img
           alt=""
@@ -424,7 +425,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-sm-bottom-right.svg"
+          src={cutout_bottom_right}
         />
         <img
           alt=""
@@ -435,7 +436,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-bottom-right.svg"
+          src={cutout_bottom_right_sm}
         />
         <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
         <img
@@ -447,7 +448,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-sm-bottom-left.svg"
+          src={cutout_bottom_left}
         />
         <img
           alt=""
@@ -458,7 +459,7 @@ const Home = () => {
           data-nimg="1"
           className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src="/images/frame-corner-bottom-left.svg"
+          src={cutout_bottom_left_sm}
         />
         <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
           <a href="https://twitter.com/Blast" rel="noreferrer" target="_blank">
