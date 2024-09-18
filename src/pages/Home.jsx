@@ -374,7 +374,7 @@ const Home = () => {
         </div>
         <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500 bg-black sm:h-[13px]"></div>
         <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 bg-black sm:h-[13px]"></div>
-        <img
+        {/* <img
           alt=""
           loading="lazy"
           height="0"
@@ -393,8 +393,8 @@ const Home = () => {
           className="pointer-events-none absolute w-16 right-0 top-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
           src={cutout_top_right_sm}
-        />
-        <img
+        /> */}
+        {/* <img
           alt=""
           loading="lazy"
           width="150"
@@ -404,8 +404,8 @@ const Home = () => {
           className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_left}
-        />
-        <img
+        /> */}
+        {/* <img
           alt=""
           loading="lazy"
           width="211"
@@ -415,7 +415,7 @@ const Home = () => {
           className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_top_right}
-        />
+        /> */}
         <img
           alt=""
           loading="lazy"
@@ -427,7 +427,7 @@ const Home = () => {
           style={{ color: "transparent" }}
           src={cutout_bottom_right}
         />
-        <img
+        {/* <img
           alt=""
           loading="lazy"
           width="211"
@@ -437,9 +437,9 @@ const Home = () => {
           className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_bottom_right_sm}
-        />
+        /> */}
         <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
-        <img
+        {/* <img
           alt=""
           loading="lazy"
           width="597"
@@ -449,8 +449,8 @@ const Home = () => {
           className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
           src={cutout_bottom_left}
-        />
-        <img
+        /> */}
+        {/* <img
           alt=""
           loading="lazy"
           width="150"
@@ -460,7 +460,7 @@ const Home = () => {
           className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_bottom_left_sm}
-        />
+        /> */}
         <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
           <a href="https://twitter.com/Blast" rel="noreferrer" target="_blank">
             <button
