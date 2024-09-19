@@ -54,11 +54,11 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 ",
+        "relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-8 lg:pt-10 ",
         isDev && "border-b border-camo-400"
       )}
     >
-      <div className="flex  w-full items-center justify-between gap-2.5 md:gap-5">
+      <div className="flex w-full items-center justify-between gap-2.5 md:gap-5">
         <div className="flex items-center w-full xs:w-auto justify-between sm:justify-start">
           <Link
             className="flex items-center sm:hidden"
@@ -334,11 +334,11 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      {/* <div
-          aria-hidden="true"
-          className="absolute z-20 h-[1px] bg-yellow-100"
-          style={{ bottom: "-1px", left: "578px", width: "88px" }}
-        ></div> */}
+      <div
+        aria-hidden="true"
+        className="absolute z-20 h-[1px] bg-yellow-100"
+        style={{ bottom: "-1px", left: "578px", width: "88px" }}
+      ></div>
     </header>
   );
 };
