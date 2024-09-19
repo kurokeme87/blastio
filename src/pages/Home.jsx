@@ -1,15 +1,19 @@
 import background_video from "../assets/home-splash.webm";
 import logo from "../assets/logo.png";
+import logo_mobile from "../assets/logo-mobile.png";
 import santiago from "../assets/santiago.png";
 import andrew_kang from "../assets/andrew-kang.png";
 import egirl from "../assets/egirl.png";
 import larry_cemark from "../assets/larry-cermak.png";
 import paradigm from "../assets/paradigm.png";
 import standard_crypto from "../assets/standard-crypto.png";
+import video_mobile from "../assets/video_mobile.webm";
 import video_left from "../assets/Blast.webm";
 import video_right from "../assets/Blast_2.webm";
 import video_top_right from "../assets/Blast_4.webm";
+import video_top_right_mobile from "../assets/Blast_7.webm";
 import cutout_left from "../assets/frame-corner-top-left.svg";
+
 import cutout_top_right from "../assets/frame-corner-top-right.svg";
 import cutout_left_sm from "../assets/frame-corner-top-left.svg";
 import cutout_bottom_right from "../assets/frame-corner-sm-bottom-right.svg";
@@ -45,7 +49,7 @@ const Home = () => {
                               decoding="async"
                               data-nimg="1"
                               // style={{ color: "transparent" }}
-                              src={logo}
+                              src={logo_mobile}
                             />
                           </Link>
                           <Link
@@ -61,7 +65,7 @@ const Home = () => {
                               decoding="async"
                               data-nimg="1"
                               style={{ color: "transparent" }}
-                              src={logo}
+                              src={logo_mobile}
                             />
                           </Link>
                           <Link
@@ -354,7 +358,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="bg-black duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity"></div>
+          <div className="duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity"></div>
           <div className="duration-[0ms] opacity-100 pointer-events-none absolute inset-0 z-0 h-full w-full bg-[#1c1718] transition-opacity"></div>
           <video
             autoPlay
@@ -367,33 +371,84 @@ const Home = () => {
             autoPlay
             loop
             muted
-            src="/videos/home-splash-mobile.webm"
+            src={video_mobile}
             className="pointer-events-none absolute inset-0 z-0 h-full w-full animate-enter-fade transition-opacity duration-1000 xs:hidden"
           ></video>
           <div className="animation-enter-fade absolute inset-0 hidden bg-[radial-gradient(circle,transparent,black)] opacity-75 sm:block"></div>
         </div>
-        <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500 bg-black sm:h-[13px]"></div>
-        <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 bg-black sm:h-[13px]"></div>
-        {/* <img
-          alt=""
-          loading="lazy"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none  w-16 absolute left-0 top-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_left}
-        />
+        <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500  sm:h-[13px]"></div>
+        <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 m:h-[13px]">
+          {/* <img
+            alt=""
+            loading="lazy"
+            width="465"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_right}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="211"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_right_sm}
+          />
+          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
+          <img
+            alt=""
+            loading="lazy"
+            // width="597"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none w-[579px] absolute bottom-0 left-0 z-20 hidden md:block"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_left}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="150"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_left_sm}
+          /> */}
+        </div>
+        {/* <div className="pointer-events-none h-[40px] w-[400px]   absolute left-0 top-0 z-20 hidden md:block">
+          <img
+            alt=""
+            loading="lazy"
+            decoding="async"
+            data-nimg="1"
+            height=""
+            className="h-full   w-full"
+            // width="590px"
+
+            style={{ color: "transparent" }}
+            src={cutout_left}
+          />
+        </div> */}
+
         <img
           alt=""
           loading="lazy"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute w-16 right-0 top-0 z-20 hidden md:block"
+          className="pointer-events-none absolute w-[200px] right-0 top-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
           src={cutout_top_right_sm}
-        /> */}
+        />
         {/* <img
           alt=""
           loading="lazy"
@@ -404,11 +459,11 @@ const Home = () => {
           className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_left}
-        /> */}
-        {/* <img
+        />
+        <img
           alt=""
           loading="lazy"
-          width="211"
+          width="212"
           height="0"
           decoding="async"
           data-nimg="1"
@@ -416,51 +471,187 @@ const Home = () => {
           style={{ color: "transparent" }}
           src={cutout_top_right}
         /> */}
-        <img
-          alt=""
-          loading="lazy"
-          width="465"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_right}
-        />
-        {/* <img
-          alt=""
-          loading="lazy"
-          width="211"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_right_sm}
-        /> */}
-        <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
-        {/* <img
-          alt=""
-          loading="lazy"
-          width="597"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_left}
-        /> */}
-        {/* <img
-          alt=""
-          loading="lazy"
-          width="150"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_left_sm}
-        /> */}
+        <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60">
+          <div className="typography-brand-body flex w-full animate-appear-expand-right items-center gap-2.5 uppercase leading-[160%] text-yellow-100">
+            <div className="flex h-[8.64px] flex-1 items-stretch justify-end gap-1 overflow-x-hidden text-camo-400 opacity-50 [&>*]:min-w-max">
+              <svg fill="none" viewBox="0 0 524 8">
+                <path
+                  d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                  fill="currentColor"
+                ></path>
+                <circle
+                  cx="189.847"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="194.714"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="199.581"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="279.219"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+              </svg>
+              <svg fill="none" viewBox="0 0 524 8">
+                <path
+                  d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                  fill="currentColor"
+                ></path>
+                <circle
+                  cx="189.847"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="194.714"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="199.581"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="279.219"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+              </svg>
+              <svg fill="none" viewBox="0 0 524 8">
+                <path
+                  d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                  fill="currentColor"
+                ></path>
+                <circle
+                  cx="189.847"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="194.714"
+                  cy="4.397"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="199.581"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+                <circle
+                  cx="279.219"
+                  cy="4.396"
+                  fill="currentColor"
+                  r="1.46"
+                ></circle>
+              </svg>
+            </div>
+            <div>TVL / $1,181,584,862</div>
+            <div className="hidden gap-1 opacity-50 min-[1260px]:flex">
+              <div className="h-[7px] w-[3px] bg-camo-400"></div>
+              <div className="h-[7px] w-[3px] bg-camo-400"></div>
+              <div className="h-[7px] w-[21px] bg-camo-400"></div>
+            </div>
+            <div className="hidden min-[1260px]:block">
+              Total Users / 1,841,328
+            </div>
+            <div className="hidden gap-1 opacity-50 min-[1440px]:flex">
+              <div className="h-[7px] w-[14px] bg-camo-400"></div>
+              <div className="h-[7px] w-[3px] bg-camo-400"></div>
+            </div>
+            <div className="hidden min-[1440px]:block">Airdrop Live</div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-6 left-6 top-20 hidden w-1.5 animate-enter-fade flex-col text-camo-400 [animation-delay:0.5s] [animation-fill-mode:both] xs:flex [&amp;>*]:opacity-50">
+          <div className="absolute inset-0 bottom-1/4 flex flex-col">
+            <div className="flex-0 animate-[flex-grow_20s_ease-in-out_alternate_infinite] [animation-delay:2s]"></div>
+            <div className="flex w-full flex-col gap-4">
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+            </div>
+          </div>
+          <div className="absolute inset-0 top-16 flex flex-col">
+            <div className="flex-0 animate-[flex-grow_14s_ease-in-out_alternate_infinite]"></div>
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-32 bg-current"></div>
+              <div className="h-8 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 w-1 self-center rounded-full bg-current"></div>
+            </div>
+          </div>
+          <div className="absolute inset-x-0 inset-y-1/4 flex flex-col">
+            <div className="flex-0 animate-[flex-grow_10s_ease-in-out_alternate_infinite]"></div>
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+              <div className="h-4"></div>
+              <div className="h-1 w-1 self-center rounded-full bg-current"></div>
+              <div className="h-1 w-1 self-center rounded-full bg-current"></div>
+              <div className="h-1 w-1 self-center rounded-full bg-current"></div>
+              <div className="h-4"></div>
+              <div className="h-1 bg-current"></div>
+            </div>
+          </div>
+          <div className="absolute inset-0 top-1/3 flex flex-col">
+            <div className="flex-0 animate-[flex-grow_10s_ease-in-out_alternate_infinite] [animation-delay:3s]"></div>
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+            </div>
+          </div>
+          <div className="absolute inset-0 top-1/2 flex flex-col">
+            <div className="flex-0 animate-[flex-grow_16s_ease-in-out_alternate_infinite]"></div>
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-8 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+              <div className="h-8 bg-current"></div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-20 right-6 top-6 hidden w-1.5 animate-enter-fade flex-col text-camo-400 [animation-delay:0.5s] [animation-fill-mode:both] xs:flex [&amp;>*]:opacity-50">
+          <div className="absolute inset-0 bottom-40 flex flex-col justify-end">
+            <div className="flex w-full flex-col gap-4">
+              <div className="h-1 bg-current"></div>
+            </div>
+            <div className="flex-0 animate-[flex-grow_20s_ease-in-out_alternate_infinite] [animation-delay:2s]"></div>
+          </div>
+          <div className="absolute inset-0 bottom-24 top-1/2 flex flex-col justify-end">
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-1 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+            </div>
+            <div className="flex-0 animate-[flex-grow_10s_ease-in-out_alternate_infinite] [animation-delay:3s]"></div>
+          </div>
+          <div className="absolute inset-0 top-1/2 flex flex-col justify-end">
+            <div className="flex w-full flex-col gap-1">
+              <div className="h-8 bg-current"></div>
+              <div className="h-1 bg-current"></div>
+              <div className="h-8 bg-current"></div>
+            </div>
+            <div className="flex-0 animate-[flex-grow_16s_ease-in-out_alternate_infinite]"></div>
+          </div>
+        </div>
         <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
           <a href="https://twitter.com/Blast" rel="noreferrer" target="_blank">
             <button
@@ -482,7 +673,7 @@ const Home = () => {
           >
             <button
               aria-label="Discord"
-              className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+              className=" uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
             >
               <svg
                 style={{ height: "24px", width: "24px" }}

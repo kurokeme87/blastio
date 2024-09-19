@@ -4,7 +4,36 @@ import logo from "../assets/logo.png";
 import blast from "../assets/blast-color.svg";
 import eth from "../assets/eth-color.svg";
 import across from "../assets/across-color.svg";
+import { useState } from "react";
+import logo_mobile from "../assets/logo-mobile.png";
+import {
+  useConnect,
+  useAccount,
+  useDisconnect,
+  useEnsAvatar,
+  useEnsName,
+} from "wagmi";
+import { GlobeIcon } from "@radix-ui/react-icons";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "../lib/utils";
 const Bridge = () => {
+  const { connectors, connect } = useConnect();
+  console.log(connectors);
+  const [showConnect, setShowConnect] = useState(false);
+  const { address } = useAccount();
+  const { disconnect } = useDisconnect();
+  const { data: ensName } = useEnsName({ address });
+  const { data: ensAvatar } = useEnsAvatar({
+    name: ensName || undefined || address,
+  });
+  console.log(ensAvatar);
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -12,120 +41,174 @@ const Bridge = () => {
           <div className="relative flex min-h-full w-full flex-1 flex-col rounded-md border-2 border-camo-500 transition-colors overflow-hidden bg-gradient-to-b from-[#11140C] from-[27.54%] to-[#252B1B]">
             <div className="relative z-10 flex flex-1 flex-col pb-16 h-screen overflow-hidden">
               <header className="relative z-[11] flex h-max justify-between px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 border-b border-camo-400">
-                <div className="flex items-center justify-between sm:justify-start">
-                  <Link
-                    className="flex items-center sm:hidden"
-                    style={{ height: "32px", width: "136px" }}
-                    to="/"
-                  >
-                    <img
-                      alt="Blast Logo"
-                      loading="lazy"
-                      width="136"
-                      height="32"
-                      decoding="async"
-                      data-nimg="1"
-                      // style={{ color: "transparent" }}
-                      src={logo}
-                    />
-                  </Link>
-                  <Link
-                    className="hidden items-center sm:flex lg:hidden"
-                    style={{ height: "40px", width: "170px" }}
-                    to="/"
-                  >
-                    <img
-                      alt="Blast Logo"
-                      loading="lazy"
-                      width="170"
-                      height="40"
-                      decoding="async"
-                      data-nimg="1"
-                      style={{ color: "transparent" }}
-                      src={logo}
-                    />
-                  </Link>
-                  <Link
-                    className="hidden items-center lg:flex"
-                    style={{ height: "54px", width: "256px" }}
-                    to="/"
-                  >
-                    <img
-                      alt="Blast Logo"
-                      loading="lazy"
-                      width="256"
-                      height="54"
-                      decoding="async"
-                      data-nimg="1"
-                      style={{ color: "transparent" }}
-                      src={logo}
-                    />
-                  </Link>
-                  <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text text-camo-300"
-                        to="https://blog.blast.io/vision"
-                      >
-                        Vision
-                      </Link>
-                    </div>
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text text-camo-300"
-                        to="/airdrop"
-                      >
-                        Airdrop
-                      </Link>
-                    </div>
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text text-camo-300"
-                        to="/leaderboard"
-                      >
-                        Leaderboard
-                      </Link>
-                    </div>
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text text-camo-300"
-                        to="/devs"
-                      >
-                        Devs
-                      </Link>
-                    </div>
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text text-camo-300"
-                        to="/bridge"
-                      >
-                        Bridge
-                      </Link>
-                    </div>
-                    <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                      <Link
-                        className="interactive-text shiny-text"
-                        to="/bigbang"
-                      >
-                        Big Bang
-                      </Link>
-                    </div>
-                    <div>
-                      <button
-                        aria-haspopup="menu"
-                        aria-label="Choose your language"
-                        className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-                      >
-                        <svg
-                          style={{ height: "24px", width: "24px" }}
-                          viewBox="0 0 24 24"
+                <div className="flex w-full items-center justify-between gap-2.5 md:gap-5">
+                  <div className="flex items-center justify-between sm:justify-start">
+                    <Link
+                      className="flex items-center sm:hidden"
+                      style={{ height: "32px", width: "136px" }}
+                      to="/"
+                    >
+                      <img
+                        alt="Blast Logo"
+                        loading="lazy"
+                        width="136"
+                        height="32"
+                        decoding="async"
+                        data-nimg="1"
+                        // style={{ color: "transparent" }}
+                        src={logo}
+                      />
+                    </Link>
+                    <Link
+                      className="hidden items-center sm:flex lg:hidden"
+                      style={{ height: "40px", width: "170px" }}
+                      to="/"
+                    >
+                      <img
+                        alt="Blast Logo"
+                        loading="lazy"
+                        width="170"
+                        height="40"
+                        decoding="async"
+                        data-nimg="1"
+                        style={{ color: "transparent" }}
+                        src={logo_mobile}
+                      />
+                    </Link>
+                    <Link
+                      className="hidden items-center lg:flex"
+                      style={{ height: "54px", width: "256px" }}
+                      to="/"
+                    >
+                      <img
+                        alt="Blast Logo"
+                        loading="lazy"
+                        width="256"
+                        height="54"
+                        decoding="async"
+                        data-nimg="1"
+                        style={{ color: "transparent" }}
+                        src={logo_mobile}
+                      />
+                    </Link>
+                    <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
+                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <a
+                          className="interactive-text text-camo-300"
+                          href="https://blog.blast.io/vision"
                         >
-                          <use xlinkHref="/icons/library.svg#globe"></use>
-                        </svg>
-                      </button>
-                    </div>
-                  </nav>
+                          Vision
+                        </a>
+                      </div>
+                      <Link className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <a
+                          className="interactive-text text-camo-300"
+                          href="airdrop"
+                        >
+                          Airdrop
+                        </a>
+                      </Link>
+                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <Link
+                          className="interactive-text text-camo-300"
+                          to="/leaderboard"
+                        >
+                          Leaderboard
+                        </Link>
+                      </div>
+                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <Link
+                          className="interactive-text text-camo-300"
+                          to="devs"
+                        >
+                          Devs
+                        </Link>
+                      </div>
+                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <Link
+                          className="interactive-text text-yellow-100"
+                          to="/bridge"
+                        >
+                          Bridge
+                        </Link>
+                      </div>
+                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
+                        <Link
+                          className="interactive-text shiny-text"
+                          to="/en/bigbang"
+                        >
+                          Big Bang
+                        </Link>
+                      </div>
+                      <div>
+                        <button
+                          aria-haspopup="menu"
+                          aria-label="Choose your language"
+                          className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+                        >
+                          <svg
+                            style={{ height: "24px", width: "24px" }}
+                            viewBox="0 0 24 24"
+                          >
+                            <use xlinkHref="/icons/library.svg#globe"></use>
+                          </svg>
+                        </button>
+                      </div>
+                    </nav>
+                  </div>
+                  <div className="block transition-transform duration-500 xs:hidden rotate-0">
+                    <button
+                      aria-label="Open Navigation menu"
+                      className="text-yellow-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+                    ></button>
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <div className="hidden min-w-0 gap-2  items-center lg:flex md:gap-4">
+                        <img
+                          alt="0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885"
+                          className="rounded-full h-10 w-10"
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEdjXKq46T8DEghwm4TMxWBv2JWHV55U/YyjDhh0IYAewehxSmoaIKQeIw2MOmDQhcB0Ez28+Z6QZOaZS3iVEEwDow4Y8BAYLQeGfwjYhD5AaQ+gZ9qdQikoQoTKdvQQc383B385MOqAAQ+Br+kuKGkAPY6pnQvQzWMcdcCAhwB6o5RQg4RQ/Y8uT6jcINgeINTRIOSgUQeQHAKEgpyQgaTqH+0bDngIAABqzwOU+pd/5AAAAABJRU5ErkJggg=="
+                          // style={{ height: "100%", width: "100%" }}
+                        />
+                        {address && (
+                          <div className="flex items-center gap-2">
+                            {ensName
+                              ? `${ensName} (${address})`
+                              : address.substring(0, 12)}
+                            <GlobeIcon className="h-6 w-6 " fill="camo-300" />
+                          </div>
+                        )}
+
+                        {/* <button onClick={() => disconnect()}>Disconnect</button> */}
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Billing</DropdownMenuItem>
+                      <DropdownMenuItem>Team</DropdownMenuItem>
+                      <DropdownMenuItem>Subscription</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
+                {/* <div
+                  aria-hidden="true"
+                  className="absolute z-20 h-[1px] bg-yellow-100"
+                  style={{ bottom: "-1px", left: "578px", width: "88px" }}
+                ></div> */}
+                <div
+                  className={cn(
+                    "absolute inset-0 top-[-12px] bg-red-500 -z-10 transition-opacity duration-300",
+                    {
+                      "opacity-100 z-10": scrollY > 0,
+                      "opacity-0": scrollY <= 0,
+                      "bg-[linear-gradient(to_bottom,_rgba(17,20,12,0.95)_27.54%,_rgba(37,43,27,0.85))]": true,
+                      "backdrop-blur-[6px]": true,
+                    }
+                  )}
+                ></div>
               </header>
               <main className="relative flex h-full flex-1 px-6 pt-6 md:ml-16 md:pl-14 md:pr-14 lg:pt-14 overflow-hidden">
                 <div className="relative flex h-full w-full animate-enter-fade">
@@ -369,7 +452,10 @@ const Bridge = () => {
                                 <div className="p-[1px] transition-all bg-transparent">
                                   <div className="transition-[filter]">
                                     <button
-                                      type="submit"
+                                      onClick={(e) => {
+                                        setShowConnect(true);
+                                        e.preventDefault();
+                                      }}
                                       className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                                     >
                                       <div className="">Connect Wallet</div>
@@ -415,12 +501,137 @@ const Bridge = () => {
                 </div>
               </main>
             </div>
-            <div className="bg-black duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity"></div>
-            <div className="duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full bg-[#1c1718] transition-opacity"></div>
+            <div
+              className={cn(
+                "absolute bottom-0 left-0 right-0 transition-opacity duration-300"
+              )}
+            >
+              <div className="w-full h-[2px] bg-camo-500"></div>
+            </div>
           </div>
           {/* Frame corners and social media links */}
         </div>
       </div>
+      {showConnect && (
+        <div
+          onClick={() => {
+            setShowConnect(false);
+          }}
+          className="pointer-events-none fixed inset-0 z-50"
+        >
+          <div
+            role="presentation"
+            className="pointer-events-auto absolute inset-0 bg-black/90"
+          ></div>
+          <div
+            data-focus-guard="true"
+            tabIndex="0"
+            style={{
+              width: "1px",
+              height: "0px",
+              padding: "0px",
+              overflow: "hidden",
+              position: "fixed",
+              top: "1px",
+              left: "1px",
+            }}
+          ></div>
+          <div data-focus-lock-disabled="false" className="pointer-events-auto">
+            <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center">
+              <div
+                className="rounded-[6px] p-[1px] bg-camo-400 pointer-events-auto"
+                aria-modal="true"
+                aria-label="Choose a Wallet to connect"
+                role="dialog"
+                style={{
+                  clipPath:
+                    "polygon(112.188px 24px, 136.188px 0px, 100% 0px, 100% calc(100% - 56px), calc(100% - 56px) 100%, 0px 100%, 0px 60px, 36px 24px)",
+                }}
+              >
+                <div
+                  className="relative h-max rounded-[5px] bg-camo-700 w-max px-6 xs:px-8 pb-14 pt-16"
+                  style={{
+                    clipPath:
+                      "polygon(112.188px 24px, 136.188px 0px, 100% 0px, 100% calc(100% - 56px), calc(100% - 56px) 100%, 0px 100%, 0px 60px, 36px 24px)",
+                  }}
+                >
+                  <div className="absolute right-0 top-0 px-6 xs:px-8 py-3">
+                    <h2 className="typography-brand-body-l-caps text-yellow-100">
+                      Connect Wallet
+                    </h2>
+                  </div>
+                  <div className="flex w-max flex-col gap-6">
+                    {connectors.map((connector) => (
+                      <>
+                        <div className="p-[1px] transition-all bg-transparent">
+                          <div className="transition-[filter]">
+                            <button
+                              key={connector.uid}
+                              onClick={() => connect({ connector })}
+                              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-100 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
+                            >
+                              <div className="typography-brand-body-bold uppercase [letter-spacing:1.3px]">
+                                <div className="flex w-full items-center justify-start gap-3">
+                                  <img
+                                    alt="Metamask"
+                                    loading="lazy"
+                                    width="24"
+                                    height="24"
+                                    decoding="async"
+                                    data-nimg="1"
+                                    src={connector.icon}
+                                    style={{ color: "transparent" }}
+                                  />
+                                  {connector.name}
+                                </div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+
+                    <div className="typography-brand-body mt-2 w-72 text-yellow-100">
+                      By using Blast, you agree to our{" "}
+                      <a
+                        className="interactive-text text-yellow-300"
+                        href="https://drive.google.com/file/d/1ukK4sFt4CIY2xPUF9E_WIwp5HzRSEPuT/view"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Terms of Service
+                      </a>{" "}
+                      and our{" "}
+                      <a
+                        className="interactive-text text-yellow-300"
+                        href="https://drive.google.com/file/d/18mMV6pYRMpWKVQunHYUl14PNAwu1w2bQ/view"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Privacy Policy
+                      </a>
+                      .
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-focus-guard="true"
+              tabIndex="0"
+              style={{
+                width: "1px",
+                height: "0px",
+                padding: "0px",
+                overflow: "hidden",
+                position: "fixed",
+                top: "1px",
+                left: "1px",
+              }}
+            ></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

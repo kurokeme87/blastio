@@ -1,7 +1,31 @@
-import React from "react";
+import { useEffect, useCallback, useState } from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { cn } from "../lib/utils";
 const Leaderboard = () => {
+  const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
+
+  const hasScrolledPastMain = () => {
+    const mainElement = document.querySelector("main");
+    if (mainElement) {
+      const rect = mainElement.getBoundingClientRect();
+      return rect.top < 40; // Returns true if the main element is above the viewport
+    }
+    return false; // Returns false if the main element is not found
+  };
+
+  const checkScroll = useCallback(() => {
+    const isScrolledPast = hasScrolledPastMain();
+    setScrolledPast(isScrolledPast); // Update state
+    console.log("Scrolled past main:", isScrolledPast);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, [checkScroll]);
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -145,7 +169,20 @@ const Leaderboard = () => {
                   <div className="absolute bottom-0 left-0 right-0 transition-opacity duration-300 opacity-0">
                     <div className="w-full h-[2px] bg-camo-500"></div>
                   </div>
-                  <div className="absolute inset-0 top-[-12px] -z-10 transition-opacity duration-300 opacity-0 bg-gradient-to-b from-[rgba(17,20,12,0.95)] from-[27.54%] to-[rgba(37,43,27,0.85)] backdrop-blur-[6px]"></div>
+                  <div
+                    className={cn(
+                      console.log(
+                        scrolledPast
+                          ? "opacity-100 absolute  -z-10 bg-gradient-to-b from-[rgba(17,20,12,0.95)] from-[27.54%] to-[rgba(37,43,27,0.85)] backdrop-blur-[6px]"
+                          : "opacity-0 z-10"
+                      ),
+
+                      scrolledPast
+                        ? "opacity-100 absolute -z-10 bg-gradient-to-b from-[rgba(17,20,12,0.95)] from-[27.54%] to-[rgba(37,43,27,0.85)] backdrop-blur-[6px]"
+                        : "opacity-0 z-10",
+                      "inset-0 top-[-12px] transition-opacity duration-300"
+                    )}
+                  ></div>
                 </div>
               </div>
               <main className="relative flex h-full flex-1 px-6 pt-6 md:ml-16 md:pl-14 md:pr-14 lg:pt-14 overflow-hidden">
