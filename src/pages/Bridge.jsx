@@ -22,6 +22,13 @@ import dai from "../assets/dai-color.svg";
 import steth from "../assets/steth-color.svg";
 import tether from "../assets/tether-color.svg";
 import usdc from "../assets/usdc-color.svg";
+import cutout_left_lg from "../assets/frame-corner-sm-top-left_3.svg";
+import cutout_top_right from "../assets/frame-corner-top-right.svg";
+import cutout_top_right_lg from "../assets/frame-corner-sm-top-right_2.svg";
+import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
+import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
+import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
+import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
 const Bridge = () => {
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
@@ -378,7 +385,122 @@ const Bridge = () => {
               <div className="w-full h-[2px] bg-camo-500"></div>
             </div>
           </div>
-          {/* Frame corners and social media links */}
+
+          <img
+            alt=""
+            loading="lazy"
+            width="597"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
+            style={{ color: "transparent", position: "absolute" }}
+            src={cutout_left_lg}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="465"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute right-0 top-0 z-20 hidden md:block"
+            style={{ color: "transparent", position: "absolute" }}
+            src={cutout_top_right_lg}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="597"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_lg}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="465"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_right_lg}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="211"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
+            style={{ color: "transparent" }}
+            src={cutout_top_right}
+          />
+          <img
+            alt=""
+            loading="lazy"
+            width="211"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute h-[51.14px] bottom-0 right-0 z-20 block md:hidden"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_right}
+          />
+          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
+          <img
+            alt=""
+            loading="lazy"
+            width="150"
+            height="0"
+            decoding="async"
+            data-nimg="1"
+            className="pointer-events-none absolute h-[51.42px] bottom-0 left-0 z-20 block md:hidden"
+            style={{ color: "transparent" }}
+            src={cutout_bottom_left}
+          />
+
+          <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
+            <a
+              href="https://twitter.com/Blast"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <button
+                aria-label="Twitter"
+                className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+              >
+                <svg
+                  style={{ height: "24px", width: "24px" }}
+                  viewBox="0 0 24 24"
+                >
+                  <use xlinkHref="/icons/library.svg#twitter-filled"></use>
+                </svg>
+              </button>
+            </a>
+            <a
+              href="https://discord.gg/blast-l2"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <button
+                aria-label="Discord"
+                className=" uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+              >
+                <svg
+                  style={{ height: "24px", width: "24px" }}
+                  viewBox="0 0 24 24"
+                >
+                  <use xlinkHref="/icons/library.svg#discord"></use>
+                </svg>
+              </button>
+            </a>
+          </div>
         </div>
       </div>
       {showConnect && (

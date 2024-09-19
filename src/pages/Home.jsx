@@ -14,15 +14,14 @@ import video_right from "../assets/Blast_2.webm";
 import video_top_right from "../assets/Blast_4.webm";
 import video_top_right_mobile from "../assets/Blast_7.webm";
 import cutout_left from "../assets/frame-corner-top-left.svg";
-
+import cutout_left_lg from "../assets/frame-corner-sm-top-left_3.svg";
 import cutout_top_right from "../assets/frame-corner-top-right.svg";
-import cutout_left_sm from "../assets/frame-corner-top-left.svg";
-import cutout_bottom_right from "../assets/frame-corner-sm-bottom-right.svg";
-import cutout_bottom_left from "../assets/frame-corner-sm-top-right.svg";
+import cutout_top_right_lg from "../assets/frame-corner-sm-top-right_2.svg";
+import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
+import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
+import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
+import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
 import cutout_top_right_sm from "../assets/frame-corner-sm-top-right.svg";
-import cutout_bottom_right_sm from "../assets/frame-corner-sm-top-right.svg";
-import cutout_bottom_left_sm from "../assets/frame-corner-sm-top-right.svg";
-import { Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
 
@@ -64,9 +63,9 @@ const Home = () => {
                 <div className="sticky top-[14px] z-10 md:top-[13px]">
                   <div className="relative">
                     <Navbar />
-                    <div className="absolute bottom-0 left-0 right-0 transition-opacity duration-300 opacity-0">
+                    {/* <div className="absolute bottom-0 left-0 right-0 transition-opacity duration-300 opacity-0">
                       <div className="w-full h-[2px] bg-camo-500"></div>
-                    </div>
+                    </div> */}
                     <div
                       className={cn(
                         console.log(
@@ -306,83 +305,49 @@ const Home = () => {
           <div className="animation-enter-fade absolute inset-0 hidden bg-[radial-gradient(circle,transparent,black)] opacity-75 sm:block"></div>
         </div>
         <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500  sm:h-[13px]"></div>
-        <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 m:h-[13px]">
-          {/* <img
-            alt=""
-            loading="lazy"
-            width="465"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
-            style={{ color: "transparent" }}
-            src={cutout_bottom_right}
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="211"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
-            style={{ color: "transparent" }}
-            src={cutout_bottom_right_sm}
-          />
-          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
-          <img
-            alt=""
-            loading="lazy"
-            // width="597"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none w-[579px] absolute bottom-0 left-0 z-20 hidden md:block"
-            style={{ color: "transparent" }}
-            src={cutout_bottom_left}
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="150"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
-            style={{ color: "transparent" }}
-            src={cutout_bottom_left_sm}
-          /> */}
-        </div>
         <img
           alt=""
           loading="lazy"
+          width="597"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none  w-16 absolute left-0 top-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_left}
+          className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
+          style={{ color: "transparent", position: "absolute" }}
+          src={cutout_left_lg}
         />
         <img
           alt=""
           loading="lazy"
+          width="465"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute w-16 right-0 top-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_top_right_sm}
+          className="pointer-events-none absolute right-0 top-0 z-20 hidden md:block"
+          style={{ color: "transparent", position: "absolute" }}
+          src={cutout_top_right_lg}
         />
         <img
           alt=""
           loading="lazy"
-          width="150"
+          width="597"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
+          className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
-          src={cutout_left}
+          src={cutout_bottom_lg}
+        />
+        <img
+          alt=""
+          loading="lazy"
+          width="465"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
+          style={{ color: "transparent" }}
+          src={cutout_bottom_right_lg}
         />
         <img
           alt=""
@@ -398,37 +363,15 @@ const Home = () => {
         <img
           alt=""
           loading="lazy"
-          width="465"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_right}
-        />
-        <img
-          alt=""
-          loading="lazy"
           width="211"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
+          className="pointer-events-none absolute h-[51.14px] bottom-0 right-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src={cutout_bottom_right_sm}
+          src={cutout_bottom_right}
         />
         <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
-        <img
-          alt=""
-          loading="lazy"
-          width="597"
-          height="0"
-          decoding="async"
-          data-nimg="1"
-          className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
-          style={{ color: "transparent" }}
-          src={cutout_bottom_left}
-        />
         <img
           alt=""
           loading="lazy"
@@ -436,9 +379,9 @@ const Home = () => {
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
+          className="pointer-events-none absolute h-[51.42px] bottom-0 left-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
-          src={cutout_bottom_left_sm}
+          src={cutout_bottom_left}
         />
         <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60">
           <div className="typography-brand-body flex w-full animate-appear-expand-right items-center gap-2.5 uppercase leading-[160%] text-yellow-100">

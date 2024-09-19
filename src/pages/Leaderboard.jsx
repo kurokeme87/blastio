@@ -3,6 +3,13 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
+import cutout_left_lg from "../assets/frame-corner-sm-top-left_3.svg";
+import cutout_top_right from "../assets/frame-corner-top-right.svg";
+import cutout_top_right_lg from "../assets/frame-corner-sm-top-right_2.svg";
+import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
+import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
+import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
+import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
 const Leaderboard = () => {
   const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
 
@@ -93,8 +100,6 @@ const Leaderboard = () => {
             <div className="bg-black duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity"></div>
             <div className="duration-[0ms] opacity-0 pointer-events-none absolute inset-0 z-0 h-full w-full bg-[#1c1718] transition-opacity"></div>
           </div>
-          <div className="absolute left-0 right-0 top-0 z-20 h-[14px] border-b-2 border-camo-500 bg-black sm:h-[13px]"></div>
-          <div className="absolute bottom-0 left-0 right-0 z-20 h-[14px] border-t-2 border-camo-500 bg-black sm:h-[13px]"></div>
           <img
             alt=""
             loading="lazy"
@@ -103,8 +108,8 @@ const Leaderboard = () => {
             decoding="async"
             data-nimg="1"
             className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
-            style={{ color: "transparent" }}
-            src="/images/frame-corner-sm-top-left.svg"
+            style={{ color: "transparent", position: "absolute" }}
+            src={cutout_left_lg}
           />
           <img
             alt=""
@@ -114,30 +119,19 @@ const Leaderboard = () => {
             decoding="async"
             data-nimg="1"
             className="pointer-events-none absolute right-0 top-0 z-20 hidden md:block"
-            style={{ color: "transparent" }}
-            src="/images/frame-corner-sm-top-right.svg"
+            style={{ color: "transparent", position: "absolute" }}
+            src={cutout_top_right_lg}
           />
           <img
             alt=""
             loading="lazy"
-            width="150"
+            width="597"
             height="0"
             decoding="async"
             data-nimg="1"
-            className="pointer-events-none absolute left-0 top-0 z-20 block md:hidden"
+            className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
             style={{ color: "transparent" }}
-            src="/images/frame-corner-top-left.svg"
-          />
-          <img
-            alt=""
-            loading="lazy"
-            width="211"
-            height="0"
-            decoding="async"
-            data-nimg="1"
-            className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
-            style={{ color: "transparent" }}
-            src="/images/frame-corner-top-right.svg"
+            src={cutout_bottom_lg}
           />
           <img
             alt=""
@@ -148,7 +142,7 @@ const Leaderboard = () => {
             data-nimg="1"
             className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
             style={{ color: "transparent" }}
-            src="/images/frame-corner-sm-bottom-right.svg"
+            src={cutout_bottom_right_lg}
           />
           <img
             alt=""
@@ -157,22 +151,22 @@ const Leaderboard = () => {
             height="0"
             decoding="async"
             data-nimg="1"
-            className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
+            className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
             style={{ color: "transparent" }}
-            src="/images/frame-corner-bottom-right.svg"
+            src={cutout_top_right}
           />
-          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
           <img
             alt=""
             loading="lazy"
-            width="597"
+            width="211"
             height="0"
             decoding="async"
             data-nimg="1"
-            className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
+            className="pointer-events-none absolute h-[51.14px] bottom-0 right-0 z-20 block md:hidden"
             style={{ color: "transparent" }}
-            src="/images/frame-corner-sm-bottom-left.svg"
+            src={cutout_bottom_right}
           />
+          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
           <img
             alt=""
             loading="lazy"
@@ -180,10 +174,11 @@ const Leaderboard = () => {
             height="0"
             decoding="async"
             data-nimg="1"
-            className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
+            className="pointer-events-none absolute h-[51.42px] bottom-0 left-0 z-20 block md:hidden"
             style={{ color: "transparent" }}
-            src="/images/frame-corner-bottom-left.svg"
+            src={cutout_bottom_left}
           />
+
           <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
             <a
               href="https://twitter.com/Blast"
@@ -209,7 +204,7 @@ const Leaderboard = () => {
             >
               <button
                 aria-label="Discord"
-                className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+                className=" uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
               >
                 <svg
                   style={{ height: "24px", width: "24px" }}

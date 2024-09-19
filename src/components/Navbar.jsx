@@ -50,9 +50,14 @@ const Navbar = () => {
 
   const location = useLocation();
   const isBridge = location.pathname === "/bridge";
-
+  const isDev = location.pathname !== "/";
   return (
-    <header className="relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 border-b border-camo-400">
+    <header
+      className={cn(
+        "relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 ",
+        isDev && "border-b border-camo-400"
+      )}
+    >
       <div className="flex  w-full items-center justify-between gap-2.5 md:gap-5">
         <div className="flex items-center w-full xs:w-auto justify-between sm:justify-start">
           <Link
@@ -112,10 +117,11 @@ const Navbar = () => {
                 Vision
               </a>
             </div>
-            <Link className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-              <a className="interactive-text text-camo-300" href="airdrop">
-                Airdrop
-              </a>
+            <Link
+              to="/airdrop"
+              className="typography-brand-body-l-caps px-2 py-2 md:px-4"
+            >
+              <p className="interactive-text text-camo-300">Airdrop</p>
             </Link>
             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
               <Link
@@ -126,7 +132,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-              <Link className="interactive-text text-camo-300" to="devs">
+              <Link className="interactive-text text-camo-300" to="/devs">
                 Devs
               </Link>
             </div>
