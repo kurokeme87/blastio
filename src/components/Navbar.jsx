@@ -23,6 +23,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "../lib/utils";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const Navbar = () => {
   const { connectors, connect } = useConnect();
@@ -110,12 +115,66 @@ const Navbar = () => {
           </Link>
           <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-              <a
-                className="interactive-text text-camo-300"
-                href="https://blog.blast.io/vision"
-              >
-                Vision
-              </a>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <a
+                    className="interactive-text text-camo-300"
+                    href="https://blog.blast.io/vision"
+                  >
+                    Vision
+                  </a>
+                </HoverCardTrigger>
+                <HoverCardContent className="p-0">
+                  <div
+                    className="rounded-[6px] p-[1px] w-full bg-camo-400"
+                    style={{
+                      clipPath:
+                        "polygon(36.2125px 10px, 46.2125px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                    }}
+                  >
+                    <div
+                      className="relative h-max rounded-[5px] bg-camo-700 w-full px-6 pb-4 pt-6"
+                      style={{
+                        clipPath:
+                          "polygon(36.2125px 10px, 46.2125px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                      }}
+                    >
+                      <div
+                        className="flex flex-col gap-2"
+                        role="menu"
+                        tabIndex="0"
+                      >
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Vision
+                          </a>
+                        </div>
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Q2 2024
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             </div>
             <Link
               to="/airdrop"
@@ -132,9 +191,102 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-              <Link className="interactive-text text-camo-300" to="/devs">
-                Devs
-              </Link>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Link className="interactive-text text-camo-300" to="/devs">
+                    Devs
+                  </Link>
+                </HoverCardTrigger>
+                <HoverCardContent className="p-0">
+                  <div
+                    className="rounded-[6px] p-[1px] w-[20rem] bg-camo-400"
+                    style={{
+                      clipPath:
+                        "polygon(36.2125px 10px, 46.2125px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                    }}
+                  >
+                    <div
+                      className="relative h-max rounded-[5px] bg-camo-700 w-full px-6 pb-4 pt-6"
+                      style={{
+                        clipPath:
+                          "polygon(36.2125px 10px, 46.2125px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                      }}
+                    >
+                      <div
+                        className="flex flex-col gap-2"
+                        role="menu"
+                        tabIndex="0"
+                      >
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Why Blast
+                          </a>
+                        </div>
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Documentation
+                          </a>
+                        </div>
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Developer Airdrop
+                          </a>
+                        </div>
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Points API
+                          </a>
+                        </div>
+                        <div
+                          role="menuitem"
+                          tabIndex="-1"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                        >
+                          <a
+                            className="w-full outline-none"
+                            href="https://blog.blast.io/vision"
+                            id="nav-subitem-vision"
+                          >
+                            Developer Discord
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             </div>
             <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
               <Link className="interactive-text text-yellow-100" to="/bridge">
