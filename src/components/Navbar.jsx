@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import "./Bridge.css";
 import logo from "../assets/logo.png";
 import { useState, useEffect } from "react";
@@ -47,6 +47,9 @@ const Navbar = () => {
   });
 
   console.log(ensAvatar, balance.data);
+
+  const location = useLocation();
+  const isBridge = location.pathname === "/bridge";
 
   return (
     <header className="relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 border-b border-camo-400">
@@ -169,36 +172,38 @@ const Navbar = () => {
             <HamburgerMenuIcon className=" h-6 w-6" />
           </button>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <div className="hidden min-w-0 gap-2  items-center xl:flex md:gap-4">
-              <img
-                alt="0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885"
-                className="rounded-full h-10 w-10"
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEdjXKq46T8DEghwm4TMxWBv2JWHV55U/YyjDhh0IYAewehxSmoaIKQeIw2MOmDQhcB0Ez28+Z6QZOaZS3iVEEwDow4Y8BAYLQeGfwjYhD5AaQ+gZ9qdQikoQoTKdvQQc383B385MOqAAQ+Br+kuKGkAPY6pnQvQzWMcdcCAhwB6o5RQg4RQ/Y8uT6jcINgeINTRIOSgUQeQHAKEgpyQgaTqH+0bDngIAABqzwOU+pd/5AAAAABJRU5ErkJggg=="
-                // style={{ height: "100%", width: "100%" }}
-              />
-              {address && (
-                <div className="flex items-center gap-2">
-                  {ensName
-                    ? `${ensName} (${address})`
-                    : address.substring(0, 12)}
-                  <GlobeIcon className="h-6 w-6 " fill="camo-300" />
-                </div>
-              )}
+        {isBridge && (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <div className="hidden min-w-0 gap-2  items-center xl:flex md:gap-4">
+                <img
+                  alt="0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885"
+                  className="rounded-full h-10 w-10"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEdjXKq46T8DEghwm4TMxWBv2JWHV55U/YyjDhh0IYAewehxSmoaIKQeIw2MOmDQhcB0Ez28+Z6QZOaZS3iVEEwDow4Y8BAYLQeGfwjYhD5AaQ+gZ9qdQikoQoTKdvQQc383B385MOqAAQ+Br+kuKGkAPY6pnQvQzWMcdcCAhwB6o5RQg4RQ/Y8uT6jcINgeINTRIOSgUQeQHAKEgpyQgaTqH+0bDngIAABqzwOU+pd/5AAAAABJRU5ErkJggg=="
+                  // style={{ height: "100%", width: "100%" }}
+                />
+                {address && (
+                  <div className="flex items-center gap-2">
+                    {ensName
+                      ? `${ensName} (${address})`
+                      : address.substring(0, 12)}
+                    <GlobeIcon className="h-6 w-6 " fill="camo-300" />
+                  </div>
+                )}
 
-              {/* <button onClick={() => disconnect()}>Disconnect</button> */}
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                {/* <button onClick={() => disconnect()}>Disconnect</button> */}
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
         {showMobileNav && (
           <div className="absolute inset-0 z-[-1] h-screen pb-6 pt-20 backdrop-blur-[12px] backdrop-brightness-50">
             <div className="w-full h-[2px] translate-y-[-2px] bg-camo-500"></div>

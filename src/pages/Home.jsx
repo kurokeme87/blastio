@@ -28,7 +28,7 @@ import Navbar from "../components/Navbar";
 
 const Home = () => {
   const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
-
+  const [showYield, setShowYield] = useState(false);
   const hasScrolledPastMain = () => {
     const mainElement = document.querySelector("main");
     if (mainElement) {
@@ -37,6 +37,10 @@ const Home = () => {
     }
     return false; // Returns false if the main element is not found
   };
+
+  setTimeout(() => {
+    setShowYield(true);
+  }, 4000);
 
   const checkScroll = useCallback(() => {
     const isScrolledPast = hasScrolledPastMain();
@@ -85,21 +89,21 @@ const Home = () => {
                       autoPlay
                       loop
                       muted
-                      className="fixed right-5 top-4 hidden sm:block sm:w-12 md:w-24"
+                      className="fixed right-5 top-4 hidden lg:block sm:w-12 md:w-24"
                       src={video_top_right}
                     ></video>
                     <video
                       autoPlay
                       loop
                       muted
-                      className="absolute left-0 top-0 -z-10 hidden h-full sm:block"
+                      className="absolute left-0 top-0 -z-10 hidden h-full lg:block"
                       src={video_left}
                     ></video>
                     <video
                       autoPlay
                       loop
                       muted
-                      className="absolute right-0 top-0 -z-10 hidden h-full sm:block"
+                      className="absolute right-0 top-0 -z-10 hidden h-full lg:block"
                       src={video_right}
                     ></video>
                     <div className="flex h-full flex-col items-center gap-6">
@@ -117,54 +121,71 @@ const Home = () => {
                           <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
                             <div className="flex size-6 items-center justify-center rounded-full text-black bg-yellow-300">
                               <svg
-                                style={{ height: "16px", width: "16px" }}
                                 viewBox="0 0 24 24"
+                                style={{ height: "16px", width: "16px" }}
                               >
                                 <use xlinkHref="/icons/library.svg#usdb"></use>
                               </svg>
                             </div>
-                            <div className="flex gap-1">
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:0ms]"></div>
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:250ms]"></div>
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
-                            </div>
+                            {!showYield ? (
+                              <div className="flex gap-1">
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:0ms]"></div>
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:250ms]"></div>
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
+                              </div>
+                            ) : (
+                              <div className="text-camo-100">USDB 6%</div>
+                            )}
                           </div>
                           <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
                             <div className="flex size-6 items-center justify-center rounded-full text-black bg-camo-200">
                               <svg
-                                style={{ height: "16px", width: "16px" }}
                                 viewBox="0 0 24 24"
+                                style={{ height: "16px", width: "16px" }}
                               >
                                 <use xlinkHref="/icons/library.svg#eth"></use>
                               </svg>
                             </div>
-                            <div className="flex gap-1">
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:0ms]"></div>
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:250ms]"></div>
-                              <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
-                            </div>
+                            {!showYield ? (
+                              <div className="flex gap-1">
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:0ms]"></div>
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:250ms]"></div>
+                                <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
+                              </div>
+                            ) : (
+                              <div className="text-camo-100">ETH 3%</div>
+                            )}
                           </div>
                         </div>
                         <div className="flex flex-col items-center gap-4 pt-6">
-                          <a className="group min-w-[256px]" href="/bridge">
+                          <a className="group min-w-[256px]" href="/en/bridge">
                             <div className="transition-[filter] drop-shadow-glow-sm-yellow-300 hover:drop-shadow-glow-sm-white-300">
-                              <Link
-                                to="/bridge"
+                              <button
+                                tabIndex="-1"
                                 className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 group-focus-visible:bg-white group-active:bg-white media-hover:hover:bg-white text-black"
                               >
-                                Bridge & Earn
-                              </Link>
+                                Bridge &amp; Earn
+                              </button>
                             </div>
                           </a>
                           <a
                             className="interactive-text typography-brand-body-l-caps tracking-widest text-yellow-300"
-                            href="/about"
+                            href="/en/about"
                           >
                             Learn More
                           </a>
                         </div>
                       </div>
-                      <div className="flex justify-center xs:hidden"></div>
+                      <div className="flex justify-center xs:hidden">
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="typography-brand-body-l-caps text-yellow-100">
+                            TVL
+                          </div>
+                          <div className="typography-brand-heading-2 max-w-[80vw] overflow-hidden text-ellipsis text-camo-200">
+                            $1,211,351,657
+                          </div>
+                        </div>
+                      </div>
                       <div className="flex animate-enter-fade flex-col gap-6 xs:max-w-max sm:max-w-full sm:gap-3.5">
                         <div className="flex animate-appear-slide-up flex-col items-center justify-center gap-4 xs:items-start sm:flex-row sm:items-center sm:gap-8">
                           <h4 className="typography-brand-body-l-caps text-center text-yellow-100 xs:text-left sm:text-center sm:text-camo-400">
