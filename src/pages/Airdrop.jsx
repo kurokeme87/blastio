@@ -166,7 +166,116 @@ const Airdrop = () => {
             style={{ color: "transparent" }}
             src={cutout_bottom_right}
           />
-          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
+          <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60">
+            <div className="typography-brand-body flex w-full animate-appear-expand-right items-center gap-2.5 uppercase leading-[160%] text-camo-400">
+              <div className="flex h-[8.64px] flex-1 items-stretch justify-end gap-1 overflow-x-hidden text-camo-400 opacity-50 [&amp;>*]:min-w-max">
+                <svg fill="none" viewBox="0 0 524 8">
+                  <path
+                    d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                    fill="currentColor"
+                  ></path>
+                  <circle
+                    cx="189.847"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="194.714"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="199.581"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="279.219"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                </svg>
+                <svg fill="none" viewBox="0 0 524 8">
+                  <path
+                    d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                    fill="currentColor"
+                  ></path>
+                  <circle
+                    cx="189.847"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="194.714"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="199.581"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="279.219"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                </svg>
+                <svg fill="none" viewBox="0 0 524 8">
+                  <path
+                    d="M.195.99h29.202v6.489H.195zM48.054.99h29.202v6.489H48.054zM324.254.989h138.691v6.489H324.254zM37.185.99h3.082v6.489h-3.082zM98.022.99h3.082v6.489h-3.082zM103.052.99h3.082v6.489h-3.082zM215.405.99h3.082v6.489h-3.082zM220.435.989h3.082v6.489h-3.082zM492.654.989h3.082v6.489h-3.082zM506.39.989h3.082v6.489h-3.082zM520.125.989h3.082v6.489h-3.082zM284.464.99h3.082v6.489h-3.082zM167.946.99h3.082v6.489h-3.082z"
+                    fill="currentColor"
+                  ></path>
+                  <circle
+                    cx="189.847"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="194.714"
+                    cy="4.397"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="199.581"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                  <circle
+                    cx="279.219"
+                    cy="4.396"
+                    fill="currentColor"
+                    r="1.46"
+                  ></circle>
+                </svg>
+              </div>
+              <div>TVL / $1,209,300,898</div>
+              <div className="hidden gap-1 opacity-50 min-[1260px]:flex">
+                <div className="h-[7px] w-[3px] bg-camo-400"></div>
+                <div className="h-[7px] w-[3px] bg-camo-400"></div>
+                <div className="h-[7px] w-[21px] bg-camo-400"></div>
+              </div>
+              <div className="hidden min-[1260px]:block">
+                Total Users / 1,842,161
+              </div>
+              <div className="hidden gap-1 opacity-50 min-[1440px]:flex">
+                <div className="h-[7px] w-[14px] bg-camo-400"></div>
+                <div className="h-[7px] w-[3px] bg-camo-400"></div>
+              </div>
+              <div className="hidden min-[1440px]:block">Airdrop Live</div>
+            </div>
+          </div>{" "}
           <img
             alt=""
             loading="lazy"
@@ -178,7 +287,6 @@ const Airdrop = () => {
             style={{ color: "transparent" }}
             src={cutout_bottom_left}
           />
-
           <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
             <a
               href="https://twitter.com/Blast"

@@ -12,8 +12,6 @@ import video_mobile from "../assets/video_mobile.webm";
 import video_left from "../assets/Blast.webm";
 import video_right from "../assets/Blast_2.webm";
 import video_top_right from "../assets/Blast_4.webm";
-import video_top_right_mobile from "../assets/Blast_7.webm";
-import cutout_left from "../assets/frame-corner-top-left.svg";
 import cutout_left_lg from "../assets/frame-corner-sm-top-left_3.svg";
 import cutout_top_right from "../assets/frame-corner-top-right.svg";
 import cutout_top_right_lg from "../assets/frame-corner-sm-top-right_2.svg";
@@ -21,7 +19,7 @@ import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
 import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
 import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
 import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
-import cutout_top_right_sm from "../assets/frame-corner-sm-top-right.svg";
+
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
 
@@ -133,7 +131,9 @@ const Home = () => {
                                 <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
                               </div>
                             ) : (
-                              <div className="text-camo-100">USDB 6%</div>
+                              <div className="typography-brand-heading-4 font-normal uppercase text-camo-100">
+                                USDB 6%
+                              </div>
                             )}
                           </div>
                           <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
@@ -152,7 +152,9 @@ const Home = () => {
                                 <div className="h-6 w-[3px] animate-loader-camo [animation-delay:500ms]"></div>
                               </div>
                             ) : (
-                              <div className="text-camo-100">ETH 3%</div>
+                              <div className="typography-brand-heading-4 font-normal uppercase text-camo-100">
+                                ETH 3%
+                              </div>
                             )}
                           </div>
                         </div>
