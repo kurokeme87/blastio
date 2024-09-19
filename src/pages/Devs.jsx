@@ -19,6 +19,7 @@ import conduit from "../assets/wordmark-conduit-camo300.png";
 import hardhat from "../assets/wordmark-hardhat-camo300.png";
 import foundry from "../assets/wordmark-foundry-camo300.png";
 import { cn } from "../lib/utils";
+import Navbar from "../components/Navbar";
 
 const Devs = () => {
   const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
@@ -53,122 +54,7 @@ const Devs = () => {
             <div className="relative z-10 flex flex-1 flex-col pb-16">
               <div className="sticky top-[14px] z-10 md:top-[13px]">
                 <div className="relative">
-                  <header className="relative z-[11] flex h-max justify-between px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 border-b border-camo-400">
-                    <div className="flex items-center justify-between sm:justify-start">
-                      <Link
-                        className="flex items-center sm:hidden"
-                        style={{ height: "32px", width: "136px" }}
-                        to="/"
-                      >
-                        <img
-                          alt="Blast Logo"
-                          loading="lazy"
-                          width="136"
-                          height="32"
-                          decoding="async"
-                          data-nimg="1"
-                          // style={{ color: "transparent" }}
-                          src={logo}
-                        />
-                      </Link>
-                      <Link
-                        className="hidden items-center sm:flex lg:hidden"
-                        style={{ height: "40px", width: "170px" }}
-                        to="/"
-                      >
-                        <img
-                          alt="Blast Logo"
-                          loading="lazy"
-                          width="170"
-                          height="40"
-                          decoding="async"
-                          data-nimg="1"
-                          style={{ color: "transparent" }}
-                          src={logo}
-                        />
-                      </Link>
-                      <Link
-                        className="hidden items-center lg:flex"
-                        style={{ height: "54px", width: "256px" }}
-                        to="/"
-                      >
-                        <img
-                          alt="Blast Logo"
-                          loading="lazy"
-                          width="256"
-                          height="54"
-                          decoding="async"
-                          data-nimg="1"
-                          style={{ color: "transparent" }}
-                          src={logo}
-                        />
-                      </Link>
-                      <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text text-camo-300"
-                            to="https://blog.blast.io/vision"
-                          >
-                            Vision
-                          </Link>
-                        </div>
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text text-camo-300"
-                            to="/airdrop"
-                          >
-                            Airdrop
-                          </Link>
-                        </div>
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text text-camo-300"
-                            to="/leaderboard"
-                          >
-                            Leaderboard
-                          </Link>
-                        </div>
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text text-camo-300"
-                            to="/devs"
-                          >
-                            Devs
-                          </Link>
-                        </div>
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text text-camo-300"
-                            to="/bridge"
-                          >
-                            Bridge
-                          </Link>
-                        </div>
-                        <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                          <Link
-                            className="interactive-text shiny-text"
-                            to="/bigbang"
-                          >
-                            Big Bang
-                          </Link>
-                        </div>
-                        <div>
-                          <button
-                            aria-haspopup="menu"
-                            aria-label="Choose your language"
-                            className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-                          >
-                            <svg
-                              style={{ height: "24px", width: "24px" }}
-                              viewBox="0 0 24 24"
-                            >
-                              <use xlinkHref="/icons/library.svg#globe"></use>
-                            </svg>
-                          </button>
-                        </div>
-                      </nav>
-                    </div>
-                  </header>
+                  <Navbar />
                   <div className="absolute bottom-0 left-0 right-0 transition-opacity duration-300 opacity-0">
                     <div className="w-full h-[2px] bg-camo-500"></div>
                   </div>

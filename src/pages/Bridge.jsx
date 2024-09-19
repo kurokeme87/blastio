@@ -1,215 +1,58 @@
-import { Link } from "react-router-dom";
 import "./Bridge.css";
-import logo from "../assets/logo.png";
-import blast from "../assets/blast-color.svg";
+import blast_icon from "../assets/blast-color.svg";
 import eth from "../assets/eth-color.svg";
 import across from "../assets/across-color.svg";
 import { useState } from "react";
-import logo_mobile from "../assets/logo-mobile.png";
 import {
   useConnect,
   useAccount,
   useDisconnect,
   useEnsAvatar,
   useEnsName,
+  useSwitchChain,
+  useBalance,
 } from "wagmi";
-import { GlobeIcon } from "@radix-ui/react-icons";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { cn } from "../lib/utils";
+import metamask from "../assets/metamask-color.svg";
+import Navbar from "../components/Navbar";
+import wbtc from "../assets/wbtc-color.svg";
+import weth from "../assets/weth-color.svg";
+import dai from "../assets/dai-color.svg";
+import steth from "../assets/steth-color.svg";
+import tether from "../assets/tether-color.svg";
+import usdc from "../assets/usdc-color.svg";
 const Bridge = () => {
   const { connectors, connect } = useConnect();
+  const { chains, switchChain } = useSwitchChain();
+  console.log(chains);
+  const blast = chains.filter((chain) => {
+    return chain.name === "Blast";
+  });
+
+  console.log(blast);
   console.log(connectors);
   const [showConnect, setShowConnect] = useState(false);
   const { address } = useAccount();
+  const [open, setOpen] = useState(false);
+
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({
     name: ensName || undefined || address,
   });
-  console.log(ensAvatar);
+  const balance = useBalance({
+    address: address,
+  });
+
+  console.log(ensAvatar, balance.data);
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
         <div className="relative flex min-h-screen w-screen px-[11px] py-[12px] sm:py-[11px] h-screen overflow-hidden">
           <div className="relative flex min-h-full w-full flex-1 flex-col rounded-md border-2 border-camo-500 transition-colors overflow-hidden bg-gradient-to-b from-[#11140C] from-[27.54%] to-[#252B1B]">
             <div className="relative z-10 flex flex-1 flex-col pb-16 h-screen overflow-hidden">
-              <header className="relative z-[11] flex h-max justify-between px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-10 lg:pt-14 border-b border-camo-400">
-                <div className="flex w-full items-center justify-between gap-2.5 md:gap-5">
-                  <div className="flex items-center justify-between sm:justify-start">
-                    <Link
-                      className="flex items-center sm:hidden"
-                      style={{ height: "32px", width: "136px" }}
-                      to="/"
-                    >
-                      <img
-                        alt="Blast Logo"
-                        loading="lazy"
-                        width="136"
-                        height="32"
-                        decoding="async"
-                        data-nimg="1"
-                        // style={{ color: "transparent" }}
-                        src={logo}
-                      />
-                    </Link>
-                    <Link
-                      className="hidden items-center sm:flex lg:hidden"
-                      style={{ height: "40px", width: "170px" }}
-                      to="/"
-                    >
-                      <img
-                        alt="Blast Logo"
-                        loading="lazy"
-                        width="170"
-                        height="40"
-                        decoding="async"
-                        data-nimg="1"
-                        style={{ color: "transparent" }}
-                        src={logo_mobile}
-                      />
-                    </Link>
-                    <Link
-                      className="hidden items-center lg:flex"
-                      style={{ height: "54px", width: "256px" }}
-                      to="/"
-                    >
-                      <img
-                        alt="Blast Logo"
-                        loading="lazy"
-                        width="256"
-                        height="54"
-                        decoding="async"
-                        data-nimg="1"
-                        style={{ color: "transparent" }}
-                        src={logo_mobile}
-                      />
-                    </Link>
-                    <nav className="ml-2 hidden items-center overflow-x-hidden xs:flex md:ml-6 md:gap-2">
-                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <a
-                          className="interactive-text text-camo-300"
-                          href="https://blog.blast.io/vision"
-                        >
-                          Vision
-                        </a>
-                      </div>
-                      <Link className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <a
-                          className="interactive-text text-camo-300"
-                          href="airdrop"
-                        >
-                          Airdrop
-                        </a>
-                      </Link>
-                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <Link
-                          className="interactive-text text-camo-300"
-                          to="/leaderboard"
-                        >
-                          Leaderboard
-                        </Link>
-                      </div>
-                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <Link
-                          className="interactive-text text-camo-300"
-                          to="devs"
-                        >
-                          Devs
-                        </Link>
-                      </div>
-                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <Link
-                          className="interactive-text text-yellow-100"
-                          to="/bridge"
-                        >
-                          Bridge
-                        </Link>
-                      </div>
-                      <div className="typography-brand-body-l-caps px-2 py-2 md:px-4">
-                        <Link
-                          className="interactive-text shiny-text"
-                          to="/en/bigbang"
-                        >
-                          Big Bang
-                        </Link>
-                      </div>
-                      <div>
-                        <button
-                          aria-haspopup="menu"
-                          aria-label="Choose your language"
-                          className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-                        >
-                          <svg
-                            style={{ height: "24px", width: "24px" }}
-                            viewBox="0 0 24 24"
-                          >
-                            <use xlinkHref="/icons/library.svg#globe"></use>
-                          </svg>
-                        </button>
-                      </div>
-                    </nav>
-                  </div>
-                  <div className="block transition-transform duration-500 xs:hidden rotate-0">
-                    <button
-                      aria-label="Open Navigation menu"
-                      className="text-yellow-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
-                    ></button>
-                  </div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <div className="hidden min-w-0 gap-2  items-center lg:flex md:gap-4">
-                        <img
-                          alt="0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885"
-                          className="rounded-full h-10 w-10"
-                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEdjXKq46T8DEghwm4TMxWBv2JWHV55U/YyjDhh0IYAewehxSmoaIKQeIw2MOmDQhcB0Ez28+Z6QZOaZS3iVEEwDow4Y8BAYLQeGfwjYhD5AaQ+gZ9qdQikoQoTKdvQQc383B385MOqAAQ+Br+kuKGkAPY6pnQvQzWMcdcCAhwB6o5RQg4RQ/Y8uT6jcINgeINTRIOSgUQeQHAKEgpyQgaTqH+0bDngIAABqzwOU+pd/5AAAAABJRU5ErkJggg=="
-                          // style={{ height: "100%", width: "100%" }}
-                        />
-                        {address && (
-                          <div className="flex items-center gap-2">
-                            {ensName
-                              ? `${ensName} (${address})`
-                              : address.substring(0, 12)}
-                            <GlobeIcon className="h-6 w-6 " fill="camo-300" />
-                          </div>
-                        )}
-
-                        {/* <button onClick={() => disconnect()}>Disconnect</button> */}
-                      </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Billing</DropdownMenuItem>
-                      <DropdownMenuItem>Team</DropdownMenuItem>
-                      <DropdownMenuItem>Subscription</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                {/* <div
-                  aria-hidden="true"
-                  className="absolute z-20 h-[1px] bg-yellow-100"
-                  style={{ bottom: "-1px", left: "578px", width: "88px" }}
-                ></div> */}
-                <div
-                  className={cn(
-                    "absolute inset-0 top-[-12px] bg-red-500 -z-10 transition-opacity duration-300",
-                    {
-                      "opacity-100 z-10": scrollY > 0,
-                      "opacity-0": scrollY <= 0,
-                      "bg-[linear-gradient(to_bottom,_rgba(17,20,12,0.95)_27.54%,_rgba(37,43,27,0.85))]": true,
-                      "backdrop-blur-[6px]": true,
-                    }
-                  )}
-                ></div>
-              </header>
+              <Navbar />
               <main className="relative flex h-full flex-1 px-6 pt-6 md:ml-16 md:pl-14 md:pr-14 lg:pt-14 overflow-hidden">
                 <div className="relative flex h-full w-full animate-enter-fade">
                   <div className="flex flex-1 flex-col mt-8 lg:mt-0">
@@ -228,7 +71,29 @@ const Bridge = () => {
                         <h3 className="typography-brand-heading-3 mb-10 text-yellow-100">
                           Blast Points can be redeemed in June.
                         </h3>
-                        <div className="mb-14 mt-14 h-24"></div>
+                        {blast.map((chain) => (
+                          <>
+                            <button
+                              key={chain.id}
+                              onClick={() => switchChain({ chainId: chain.id })}
+                              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div>Add {chain.name} to Wallet</div>
+                                <img
+                                  alt=""
+                                  loading="lazy"
+                                  width="24"
+                                  height="24"
+                                  decoding="async"
+                                  data-nimg="1"
+                                  src={metamask}
+                                  style={{ color: "transparent" }}
+                                />
+                              </div>
+                            </button>
+                          </>
+                        ))}
                       </div>
                       <div className="relative flex h-fit max-h-full w-[520px]">
                         <fieldset className="absolute left-0 right-0 top-0 flex">
@@ -341,6 +206,9 @@ const Bridge = () => {
                                         </div>
                                         <div className="w-44 rounded-br-lg rounded-tr-lg border border-l-0 border-camo-400 transition-colors">
                                           <button
+                                            onClick={() => {
+                                              setOpen(true);
+                                            }}
                                             aria-label="Select token"
                                             className="typography-brand-heading-3 interactive-text flex h-full w-full items-center justify-center text-yellow-300 transition-colors disabled:text-camo-300"
                                             type="button"
@@ -374,6 +242,7 @@ const Bridge = () => {
                                           </button>
                                         </div>
                                       </div>
+
                                       <div className="mb-3 mt-2 flex items-center gap-2">
                                         <label
                                           className="typography-UI-body flex cursor-pointer items-center gap-2 text-camo-400"
@@ -418,7 +287,7 @@ const Bridge = () => {
                                             decoding="async"
                                             data-nimg="1"
                                             style={{ color: "transparent" }}
-                                            src={blast}
+                                            src={blast_icon}
                                           />
                                           <select
                                             disabled={true}
@@ -464,17 +333,17 @@ const Bridge = () => {
                                 </div>
                               </div>
                               <div className="mt-3 flex flex-1 flex-row justify-center">
-                                <aside className="typography-brand-body-l-caps text-camo-300">
+                                <aside className="typography-brand-body-l-caps  text-camo-300">
                                   Or
                                   <a
-                                    className="interactive-text text-yellow-300"
+                                    className="interactive-text ml-2 text-yellow-300"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     href="https://app.across.to/bridge?inputToken=ETH&amp;to=81457&amp;from=1&amp;integrator=blast&amp;integrator_id=002b"
                                   >
                                     Deposit from other chains
                                   </a>
-                                  <div className="typography-brand-body-l flex justify-center gap-2 normal-case text-camo-300">
+                                  <div className="typography-brand-body-l mt-1 flex justify-center gap-2 normal-case text-camo-300">
                                     Powered by
                                     <span>
                                       <img
@@ -629,6 +498,348 @@ const Bridge = () => {
                 left: "1px",
               }}
             ></div>
+          </div>
+        </div>
+      )}
+      {open && (
+        <div
+          onClick={() => {
+            setOpen(false);
+          }}
+          className=" cursor-auto bg-black/85  absolute inset-0 z-50 flex items-center justify-center"
+        >
+          <div
+            className="rounded-[6px] bg-red-500  p-[1px] bg-camo-400 pointer-events-auto"
+            aria-modal="true"
+            aria-label="Select token"
+            role="dialog"
+            style={{
+              clipPath:
+                "polygon(137.828px 24px, 161.828px 0px, 100% 0px, 100% calc(100% - 56px), calc(100% - 56px) 100%, 0px 100%, 0px 60px, 36px 24px)",
+            }}
+          >
+            <div
+              className="relative h-max rounded-[5px] bg-camo-700 w-max px-6 xs:px-8 pb-14 pt-16"
+              style={{
+                clipPath:
+                  "polygon(137.828px 24px, 161.828px 0px, 100% 0px, 100% calc(100% - 56px), calc(100% - 56px) 100%, 0px 100%, 0px 60px, 36px 24px)",
+              }}
+            >
+              <div className="absolute right-0 top-0 px-6 xs:px-8 py-3">
+                <h2 className="typography-brand-body-l-caps  text-yellow-100">
+                  Select Token
+                </h2>
+              </div>
+              <div className="absolute left-0 w-full bottom-5 pl-6 pr-[56px]">
+                <div className="w-full overflow-hidden">
+                  <div className="text-camo-500">
+                    <svg
+                      fill="none"
+                      height="9"
+                      viewBox="0 0 250 9"
+                      width="250"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="Group 17">
+                        <rect
+                          fill="currentColor"
+                          height="7"
+                          id="Rectangle 7"
+                          width="74"
+                          y="0.75"
+                        ></rect>
+                        <circle
+                          cx="97.6632"
+                          cy="4.41323"
+                          fill="currentColor"
+                          id="Ellipse 44"
+                          r="1.46011"
+                        ></circle>
+                        <circle
+                          cx="107.398"
+                          cy="4.41323"
+                          fill="currentColor"
+                          id="Ellipse 45"
+                          r="1.46011"
+                        ></circle>
+                        <rect
+                          fill="currentColor"
+                          height="7"
+                          id="Rectangle 15"
+                          width="26"
+                          x="224"
+                          y="1.24805"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 8"
+                          width="3.08245"
+                          x="89"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 16"
+                          width="3.08245"
+                          x="76.9883"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 9"
+                          width="3.08245"
+                          x="121.008"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 10"
+                          width="3.08245"
+                          x="126.039"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 12"
+                          width="3.08245"
+                          x="196.18"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 13"
+                          width="3.08245"
+                          x="186.18"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 14"
+                          width="3.08245"
+                          x="218.18"
+                          y="1.00586"
+                        ></rect>
+                        <rect
+                          fill="currentColor"
+                          height="6.48937"
+                          id="Rectangle 11"
+                          width="3.08245"
+                          x="190.93"
+                          y="1.00586"
+                        ></rect>
+                        <circle
+                          cx="134.64"
+                          cy="4.41323"
+                          fill="currentColor"
+                          id="Ellipse 41"
+                          r="1.46011"
+                        ></circle>
+                        <circle
+                          cx="139.507"
+                          cy="4.41323"
+                          fill="currentColor"
+                          id="Ellipse 42"
+                          r="1.46011"
+                        ></circle>
+                        <circle
+                          cx="144.374"
+                          cy="4.41323"
+                          fill="currentColor"
+                          id="Ellipse 43"
+                          r="1.46011"
+                        ></circle>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div className="divide-y divide-camo-400">
+                <button
+                  disabled
+                  value="DAI"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$DAI Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={dai}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    Dai
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+                <button
+                  disabled
+                  value="ETH"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-yellow-100"
+                >
+                  <img
+                    alt="$ETH Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={eth}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    ETH
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                  <svg
+                    viewBox="0 0 24 24"
+                    style={{
+                      height: "24px",
+                      width: "24px",
+                    }}
+                  >
+                    <use xlinkHref="/icons/library.svg#checkmark-circle"></use>
+                  </svg>
+                </button>
+                <button
+                  disabled
+                  value="STETH"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$STETH (Lido Staked Ether) Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={steth}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    stETH
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+                <button
+                  disabled
+                  value="USDC"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$USDC Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={usdc}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    USDC
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+                <button
+                  disabled
+                  value="USDT"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$USDT Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={tether}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    Tether
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+                <button
+                  disabled
+                  value="WETH"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$WETH (Wrapped Ethereum) Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={weth}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    WETH
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+                <button
+                  disabled
+                  value="WBTC"
+                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                >
+                  <img
+                    alt="$WBTC (Wrapped Bitcoin) Token"
+                    loading="lazy"
+                    width="24"
+                    height="24"
+                    decoding="async"
+                    data-nimg="1"
+                    src={wbtc}
+                    style={{
+                      color: "transparent",
+                    }}
+                  />
+                  <div className="typography-brand-heading-3 text-camo-300 text-current">
+                    WBTC
+                  </div>
+                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                    0.00
+                  </div>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
