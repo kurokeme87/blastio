@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from "react";
 import background_video from "../assets/home-splash.webm";
 import logo from "../assets/logo.png";
 import logo_mobile from "../assets/logo-mobile.png";
@@ -22,8 +23,32 @@ import cutout_top_right_sm from "../assets/frame-corner-sm-top-right.svg";
 import cutout_bottom_right_sm from "../assets/frame-corner-sm-top-right.svg";
 import cutout_bottom_left_sm from "../assets/frame-corner-sm-top-right.svg";
 import { Link } from "react-router-dom";
+import { cn } from "../lib/utils";
 
 const Home = () => {
+  const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
+
+  const hasScrolledPastMain = () => {
+    const mainElement = document.querySelector("main");
+    if (mainElement) {
+      const rect = mainElement.getBoundingClientRect();
+      return rect.top < 40; // Returns true if the main element is above the viewport
+    }
+    return false; // Returns false if the main element is not found
+  };
+
+  const checkScroll = useCallback(() => {
+    const isScrolledPast = hasScrolledPastMain();
+    setScrolledPast(isScrolledPast); // Update state
+    console.log("Scrolled past main:", isScrolledPast);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, [checkScroll]);
   return (
     <div className="font-geom">
       <div className="relative flex min-h-screen w-screen px-[11px] py-[12px] sm:py-[11px] h-auto sm:h-screen">
@@ -168,7 +193,20 @@ const Home = () => {
                     <div className="absolute bottom-0 left-0 right-0 transition-opacity duration-300 opacity-0">
                       <div className="w-full h-[2px] bg-camo-500"></div>
                     </div>
-                    <div className="absolute inset-0 top-[-12px] -z-10 transition-opacity duration-300 opacity-0 backdrop-blur-[12px]"></div>
+                    <div
+                      className={cn(
+                        console.log(
+                          scrolledPast
+                            ? "opacity-100 absolute  -z-10 bg-gradient-to-b from-[rgba(17,20,12,0.95)] from-[27.54%] to-[rgba(37,43,27,0.85)] backdrop-blur-[6px]"
+                            : "opacity-0 z-10"
+                        ),
+
+                        scrolledPast
+                          ? "opacity-100 absolute -z-10 bg-gradient-to-b from-[rgba(17,20,12,0.95)] from-[27.54%] to-[rgba(37,43,27,0.85)] backdrop-blur-[6px]"
+                          : "opacity-0 z-10",
+                        "inset-0 top-[-12px] transition-opacity duration-300"
+                      )}
+                    ></div>
                   </div>
                 </div>
                 <main className="relative flex h-full flex-1 px-6 pt-6 md:ml-16 md:pl-14 md:pr-14 lg:pt-14 overflow-hidden sm:pr-0">
@@ -424,32 +462,27 @@ const Home = () => {
             src={cutout_bottom_left_sm}
           /> */}
         </div>
-        {/* <div className="pointer-events-none h-[40px] w-[400px]   absolute left-0 top-0 z-20 hidden md:block">
-          <img
-            alt=""
-            loading="lazy"
-            decoding="async"
-            data-nimg="1"
-            height=""
-            className="h-full   w-full"
-            // width="590px"
-
-            style={{ color: "transparent" }}
-            src={cutout_left}
-          />
-        </div> */}
-
         <img
           alt=""
           loading="lazy"
           height="0"
           decoding="async"
           data-nimg="1"
-          className="pointer-events-none absolute w-[200px] right-0 top-0 z-20 hidden md:block"
+          className="pointer-events-none  w-16 absolute left-0 top-0 z-20 hidden md:block"
+          style={{ color: "transparent" }}
+          src={cutout_left}
+        />
+        <img
+          alt=""
+          loading="lazy"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute w-16 right-0 top-0 z-20 hidden md:block"
           style={{ color: "transparent" }}
           src={cutout_top_right_sm}
         />
-        {/* <img
+        <img
           alt=""
           loading="lazy"
           width="150"
@@ -463,14 +496,59 @@ const Home = () => {
         <img
           alt=""
           loading="lazy"
-          width="212"
+          width="211"
           height="0"
           decoding="async"
           data-nimg="1"
           className="pointer-events-none absolute right-0 top-0 z-20 block md:hidden"
           style={{ color: "transparent" }}
           src={cutout_top_right}
-        /> */}
+        />
+        <img
+          alt=""
+          loading="lazy"
+          width="465"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute bottom-0 right-0 z-20 hidden md:block"
+          style={{ color: "transparent" }}
+          src={cutout_bottom_right}
+        />
+        <img
+          alt=""
+          loading="lazy"
+          width="211"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute bottom-0 right-0 z-20 block md:hidden"
+          style={{ color: "transparent" }}
+          src={cutout_bottom_right_sm}
+        />
+        <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60"></div>
+        <img
+          alt=""
+          loading="lazy"
+          width="597"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute bottom-0 left-0 z-20 hidden md:block"
+          style={{ color: "transparent" }}
+          src={cutout_bottom_left}
+        />
+        <img
+          alt=""
+          loading="lazy"
+          width="150"
+          height="0"
+          decoding="async"
+          data-nimg="1"
+          className="pointer-events-none absolute bottom-0 left-0 z-20 block md:hidden"
+          style={{ color: "transparent" }}
+          src={cutout_bottom_left_sm}
+        />
         <div className="absolute bottom-5 z-20 hidden animate-appear-expand-right items-center xs:left-[150px] xs:right-[180px] xs:flex md:left-[600px] md:right-60">
           <div className="typography-brand-body flex w-full animate-appear-expand-right items-center gap-2.5 uppercase leading-[160%] text-yellow-100">
             <div className="flex h-[8.64px] flex-1 items-stretch justify-end gap-1 overflow-x-hidden text-camo-400 opacity-50 [&>*]:min-w-max">
