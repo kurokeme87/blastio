@@ -23,10 +23,11 @@ import eth from "../assets/eth-home.png";
 import blast_home from "../assets/blast_home.png";
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
-
 const Home = () => {
   const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
   const [showYield, setShowYield] = useState(false);
+  const [showPopupEth, setShowPopupEth] = useState(false);
+  const [showPopupBlast, setShowPopupBlast] = useState(false);
   const hasScrolledPastMain = () => {
     const mainElement = document.querySelector("main");
     if (mainElement) {
@@ -116,9 +117,13 @@ const Home = () => {
                           </h3>
                         </div>
                         <div className="flex gap-6">
-                          <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
+                          <div
+                            className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5"
+                            onMouseEnter={() => setShowPopupBlast(true)}
+                            onMouseLeave={() => setShowPopupBlast(false)}
+                          >
                             <div className="flex size-7 items-center justify-center rounded-full text-black bg-yellow-300">
-                              <img className=" h-5 w-5" src={blast_home} />
+                              <img className="h-5 w-5" src={blast_home} />
                             </div>
                             {!showYield ? (
                               <div className="flex gap-1">
@@ -132,7 +137,11 @@ const Home = () => {
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
+                          <div
+                            onMouseEnter={() => setShowPopupEth(true)}
+                            onMouseLeave={() => setShowPopupEth(false)}
+                            className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5"
+                          >
                             <div className="flex size-7 items-center justify-center rounded-full text-black bg-camo-200">
                               <img className="h-5 w-5 " src={eth} />
                             </div>
@@ -589,6 +598,136 @@ const Home = () => {
             </button>
           </a>
         </div>
+        {showPopupBlast && (
+          <div className="pointer-events-none fixed inset-0 z-50">
+            <div
+              data-focus-guard="true"
+              tabIndex="-1"
+              style={{
+                width: "1px",
+                height: "0px",
+                padding: "0px",
+                overflow: "hidden",
+                position: "fixed",
+                top: "1px",
+                left: "1px",
+              }}
+            ></div>
+            <div
+              data-focus-lock-disabled="disabled"
+              className="pointer-events-auto"
+            >
+              <div
+                data-popper-reference-hidden="false"
+                data-popper-escaped="false"
+                data-popper-placement="top"
+                style={{
+                  position: "absolute",
+                  inset: "auto auto 0px 0px",
+                  transform: "translate(695px, -468px)",
+                }}
+              >
+                <div
+                  className="rounded-[6px] p-[1px] bg-camo-400"
+                  style={{
+                    clipPath:
+                      "polygon(64px 10px, 74px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                  }}
+                >
+                  <div
+                    className="relative h-max rounded-[5px] bg-camo-700 w-max px-6 pb-4 pt-6"
+                    style={{
+                      clipPath:
+                        "polygon(64px 10px, 74px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                    }}
+                  >
+                    <div className="typography-brand-body max-w-xs text-camo-200">
+                      USDB on Blast automatically earns 6% yield + Blast Points.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-focus-guard="true"
+              tabIndex="-1"
+              style={{
+                width: "1px",
+                height: "0px",
+                padding: "0px",
+                overflow: "hidden",
+                position: "fixed",
+                top: "1px",
+                left: "1px",
+              }}
+            ></div>
+          </div>
+        )}
+        {showPopupEth && (
+          <div className="pointer-events-none fixed inset-0 z-50">
+            <div
+              data-focus-guard="true"
+              tabIndex="-1"
+              style={{
+                width: "1px",
+                height: "0px",
+                padding: "0px",
+                overflow: "hidden",
+                position: "fixed",
+                top: "1px",
+                left: "1px",
+              }}
+            ></div>
+            <div
+              data-focus-lock-disabled="disabled"
+              className="pointer-events-auto"
+            >
+              <div
+                data-popper-reference-hidden="false"
+                data-popper-escaped="false"
+                data-popper-placement="top"
+                style={{
+                  position: "absolute",
+                  inset: "auto auto 0px 0px",
+                  transform: "translate(920px, -468px)",
+                }}
+              >
+                <div
+                  className="rounded-[6px] p-[1px] bg-camo-400"
+                  style={{
+                    clipPath:
+                      "polygon(64px 10px, 74px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                  }}
+                >
+                  <div
+                    className="relative h-max rounded-[5px] bg-camo-700 w-max px-6 pb-4 pt-6"
+                    style={{
+                      clipPath:
+                        "polygon(64px 10px, 74px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)",
+                    }}
+                  >
+                    <div className="typography-brand-body max-w-xs text-camo-200">
+                      ETH on Blast automatically earns 3% yield + Blast Points.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-focus-guard="true"
+              tabIndex="-1"
+              style={{
+                width: "1px",
+                height: "0px",
+                padding: "0px",
+                overflow: "hidden",
+                position: "fixed",
+                top: "1px",
+                left: "1px",
+              }}
+            ></div>
+          </div>
+        )}
       </div>
     </div>
   );
