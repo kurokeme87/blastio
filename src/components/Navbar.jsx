@@ -59,7 +59,7 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-8 lg:pt-10 ",
+        "relative z-[11] flex h-max justify-between  px-6 pb-3 pt-9 md:ml-16 md:mr-14 md:pl-14 md:pr-0 md:pt-8 lg:pt-14 ",
         isDev && "border-b border-camo-400"
       )}
     >
