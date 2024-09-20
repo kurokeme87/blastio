@@ -25,6 +25,8 @@ import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
 import discord from "../assets/icons8-discord-50.png";
 import twitter from "../assets/icons8-twitter-50.png";
+import { Link } from "react-router-dom";
+
 const Home = () => {
   const [scrolledPast, setScrolledPast] = useState(false); // State for scroll status
   const [showYield, setShowYield] = useState(false);
@@ -161,7 +163,7 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="flex flex-col items-center gap-4 pt-6">
-                          <a className="group min-w-[256px]" href="/en/bridge">
+                          <Link className="group min-w-[256px]" to="/bridge">
                             <div className="transition-[filter] drop-shadow-glow-sm-yellow-300 hover:drop-shadow-glow-sm-white-300">
                               <button
                                 tabIndex="-1"
@@ -170,10 +172,10 @@ const Home = () => {
                                 Bridge &amp; Earn
                               </button>
                             </div>
-                          </a>
+                          </Link>
                           <a
                             className="interactive-text typography-brand-body-l-caps tracking-widest text-yellow-300"
-                            href="/en/about"
+                            href="blast.io/en/about"
                           >
                             Learn More
                           </a>
