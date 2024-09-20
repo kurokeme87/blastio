@@ -124,7 +124,7 @@ const Navbar = () => {
                     Vision
                   </a>
                 </HoverCardTrigger>
-                <HoverCardContent className="p-0">
+                <HoverCardContent className="p-4 mt-2">
                   <div
                     className="rounded-[6px] p-[1px] w-full bg-camo-400"
                     style={{
@@ -197,7 +197,7 @@ const Navbar = () => {
                     Devs
                   </Link>
                 </HoverCardTrigger>
-                <HoverCardContent className="p-0">
+                <HoverCardContent className="p-4 mt-2">
                   <div
                     className="rounded-[6px] p-[1px] w-[20rem] bg-camo-400"
                     style={{
@@ -213,7 +213,7 @@ const Navbar = () => {
                       }}
                     >
                       <div
-                        className="flex flex-col gap-4 sm:gap-0"
+                        className="flex flex-col gap-4 sm:gap-2"
                         role="menu"
                         tabIndex="0"
                       >
