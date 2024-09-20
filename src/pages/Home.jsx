@@ -19,7 +19,8 @@ import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
 import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
 import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
 import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
-
+import eth from "../assets/eth-home.png";
+import blast_home from "../assets/blast_home.png";
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
 
@@ -116,13 +117,8 @@ const Home = () => {
                         </div>
                         <div className="flex gap-6">
                           <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
-                            <div className="flex size-6 items-center justify-center rounded-full text-black bg-yellow-300">
-                              <svg
-                                viewBox="0 0 24 24"
-                                style={{ height: "16px", width: "16px" }}
-                              >
-                                <use xlinkHref="/icons/library.svg#usdb"></use>
-                              </svg>
+                            <div className="flex size-7 items-center justify-center rounded-full text-black bg-yellow-300">
+                              <img className=" h-5 w-5" src={blast_home} />
                             </div>
                             {!showYield ? (
                               <div className="flex gap-1">
@@ -137,13 +133,8 @@ const Home = () => {
                             )}
                           </div>
                           <div className="flex items-center gap-2.5 rounded-full bg-camo-500 px-4 py-1.5">
-                            <div className="flex size-6 items-center justify-center rounded-full text-black bg-camo-200">
-                              <svg
-                                viewBox="0 0 24 24"
-                                style={{ height: "16px", width: "16px" }}
-                              >
-                                <use xlinkHref="/icons/library.svg#eth"></use>
-                              </svg>
+                            <div className="flex size-7 items-center justify-center rounded-full text-black bg-camo-200">
+                              <img className="h-5 w-5 " src={eth} />
                             </div>
                             {!showYield ? (
                               <div className="flex gap-1">

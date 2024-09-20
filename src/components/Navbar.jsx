@@ -140,14 +140,14 @@ const Navbar = () => {
                       }}
                     >
                       <div
-                        className="flex flex-col gap-2"
+                        className="flex flex-col gap-4 sm:gap-0"
                         role="menu"
                         tabIndex="0"
                       >
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
@@ -160,11 +160,11 @@ const Navbar = () => {
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://assets.blast.io/en/q2-2024.pdf"
                             id="nav-subitem-vision"
                           >
                             Q2 2024
@@ -213,18 +213,18 @@ const Navbar = () => {
                       }}
                     >
                       <div
-                        className="flex flex-col gap-2"
+                        className="flex flex-col gap-4 sm:gap-0"
                         role="menu"
                         tabIndex="0"
                       >
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://docs.blast.io/about-blast#why-a-new-l2"
                             id="nav-subitem-vision"
                           >
                             Why Blast
@@ -233,11 +233,11 @@ const Navbar = () => {
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://docs.blast.io/"
                             id="nav-subitem-vision"
                           >
                             Documentation
@@ -246,11 +246,11 @@ const Navbar = () => {
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://docs.blast.io/airdrop/developers"
                             id="nav-subitem-vision"
                           >
                             Developer Airdrop
@@ -259,11 +259,11 @@ const Navbar = () => {
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://docs.blast.io/airdrop/api"
                             id="nav-subitem-vision"
                           >
                             Points API
@@ -272,11 +272,11 @@ const Navbar = () => {
                         <div
                           role="menuitem"
                           tabIndex="-1"
-                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8 lg:h-10 cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
+                          className="typography-brand-body-l-caps hover:bg-white hover:text-black  flex h-8  cursor-pointer items-center justify-between rounded px-4 text-camo-200 focus:outline-none"
                         >
                           <a
                             className="w-full outline-none"
-                            href="https://blog.blast.io/vision"
+                            href="https://discord.com/invite/blastdevelopers"
                             id="nav-subitem-vision"
                           >
                             Developer Discord
@@ -486,11 +486,11 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      <div
+      {/* <div
         aria-hidden="true"
         className="absolute z-20 h-[1px] bg-yellow-100"
         style={{ bottom: "-1px", left: "578px", width: "88px" }}
-      ></div>
+      ></div> */}
     </header>
   );
 };
