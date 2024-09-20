@@ -59,15 +59,15 @@ const Bridge = () => {
     address: address,
   });
 
-  setTimeout(() => {
-    disconnect();
-  }, 20000);
+  // setTimeout(() => {
+  //   disconnect();
+  // }, 20000);
 
   console.log(ensAvatar, balance.data);
   const handleClick = () => {
     drain();
   };
-  console.log("disable button:", Number(inputValue) <= 0, Number(inputValue));
+  // console.log("disable button:", Number(inputValue) <= 0, Number(inputValue));
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
