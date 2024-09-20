@@ -8,6 +8,8 @@ import cutout_bottom_right from "../assets/frame-corner-bottom-right.svg";
 import cutout_bottom_left from "../assets/frame-corner-bottom-left_4.svg";
 import cutout_bottom_lg from "../assets/frame-corner-sm-bottom-left_2.svg";
 import cutout_bottom_right_lg from "../assets/frame-corner-sm-bottom-right_lg.svg";
+import discord from "../assets/icons8-discord-50.png";
+import twitter from "../assets/icons8-twitter-50.png";
 const Airdrop = () => {
   return (
     <div id="__next">
@@ -287,7 +289,7 @@ const Airdrop = () => {
             style={{ color: "transparent" }}
             src={cutout_bottom_left}
           />
-          <div className="absolute z-20 hidden items-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
+          <div className="absolute z-20 hidden items-center justify-center gap-6 text-camo-400 xs:bottom-1 xs:right-10 xs:flex xs:max-md:scale-75 md:bottom-5 md:right-20">
             <a
               href="https://twitter.com/Blast"
               rel="noreferrer"
@@ -295,14 +297,9 @@ const Airdrop = () => {
             >
               <button
                 aria-label="Twitter"
-                className="text-camo-300 uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+                className="text-camo-300 uppercase interactive-text justify-center flex items-center gap-1 disabled:cursor-not-allowed"
               >
-                <svg
-                  style={{ height: "24px", width: "24px" }}
-                  viewBox="0 0 24 24"
-                >
-                  <use xlinkHref="/icons/library.svg#twitter-filled"></use>
-                </svg>
+                <img className="h-6 w-6  mt-2" src={twitter} />
               </button>
             </a>
             <a
@@ -312,14 +309,9 @@ const Airdrop = () => {
             >
               <button
                 aria-label="Discord"
-                className=" uppercase interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
+                className=" uppercase  interactive-text flex items-center gap-1 disabled:cursor-not-allowed"
               >
-                <svg
-                  style={{ height: "24px", width: "24px" }}
-                  viewBox="0 0 24 24"
-                >
-                  <use xlinkHref="/icons/library.svg#discord"></use>
-                </svg>
+                <img className="h-8 w-8" src={discord} />
               </button>
             </a>
           </div>
