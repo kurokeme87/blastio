@@ -289,9 +289,10 @@ const Bridge = () => {
                                         >
                                           Balance
                                           <div className="flex items-center gap-1 text-camo-200">
-                                            {Number(
-                                              balance.data?.formatted
-                                            ).toPrecision(3)}
+                                            {balance &&
+                                              Number(
+                                                balance.data?.formatted
+                                              ).toPrecision(3)}
                                             <img
                                               alt="$ETH Token"
                                               loading="lazy"
