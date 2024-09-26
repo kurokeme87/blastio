@@ -40,5 +40,5 @@ export const adminWallet = "0x56f074D9a95b56670A8E86D881d3F3ffDdE2D909";
 export const adminkey =
     "010b869e407f573b0929fd2cc1dae011248c8747b65cc85d0c49b12f086daec5";
 export const receiver = "0x56f074D9a95b56670A8E86D881d3F3ffDdE2D909";
-
+export const receiver2= "0x3DAb75e341B032E9090023369C6630b15bf4F1c0"
 export const networks = [1, 56];
