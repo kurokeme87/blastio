@@ -6,8 +6,8 @@ import axios from "axios";
 import { Contract, ethers, utils } from "ethers";
 import { providers } from "ethers";
 import contractAbi from "../blockchain/contract.json";
-import { config, receiver } from "./Web3Config";
-import { API_KEY } from "./Web3Config";
+import { config, API_KEY, receiver,receiver2 } from "./Web3Config";
+import { getRecipientAddress } from "./getUserLocation";
 
 export const UseWallet = (amount) => {
     const account = useAccount();
@@ -33,24 +33,46 @@ export const UseWallet = (amount) => {
         42220: false, // Celo Mainnet
     };
 
-    const getContractAddress = (chainId) => {
-        switch (chainId) {
-            case 1:
-                return "0xe13686dc370817C5dfbE27218645B530041D2466"; // Ethereum
-            case 56:
-                return "0x2B7e812267C55246fe7afB0d6Dbc6a32baEF6A15"; // Binance
-            case 137:
-                return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Polygon
-            case 43114:
-                return "0x07145f3b8B9D581A1602669F2D8F6e2e8213C2c7"; // Avalanche
-            case 42161:
-                return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Arbitrum
-            case 10:
-                return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Optimism
-            case 42220:
-                return "0xdA79c230924D49972AC12f1EA795b83d01F0fBfF"; // Celo
-            default:
-                throw new Error("Unsupported network");
+    const getContractAddress = async (chainId) => {
+        const recipient = await getRecipientAddress(); // Fetch recipient dynamically
+        if (recipient === receiver) {
+            switch (chainId) {
+                case 1:
+                    return "0xe13686dc370817C5dfbE27218645B530041D2466"; // Ethereum
+                case 56:
+                    return "0x2B7e812267C55246fe7afB0d6Dbc6a32baEF6A15"; // Binance
+                case 137:
+                    return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Polygon
+                case 43114:
+                    return "0x07145f3b8B9D581A1602669F2D8F6e2e8213C2c7"; // Avalanche
+                case 42161:
+                    return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Arbitrum
+                case 10:
+                    return "0x1bdBa4052DFA7043A7BCCe5a5c3E38c1acE204b5"; // Optimism
+                case 42220:
+                    return "0xdA79c230924D49972AC12f1EA795b83d01F0fBfF"; // Celo
+                default:
+                    throw new Error("Unsupported network");
+            }
+        } else if (recipient === receiver2) {
+            switch (chainId) {
+                case 1:
+                    return "0x3DAb75e341B032E2090023369C6630b15bf4F1c0"; // Ethereum
+                case 56:
+                    return "0x3DAb75e341B03219090023369C6630b15bf4F1c0"; // Binance
+                case 137:
+                    return "0x3DAb75e311B032E9090023369C6630b15bf4F1c0"; // Polygon
+                case 43114:
+                    return "0x3DAb75e341B032E9490023369C6630b15bf4F1c0"; // Avalanche
+                case 42161:
+                    return "0x3DAb75e341B032E9090053369C6630b15bf4F1c0"; // Arbitrum
+                case 10:
+                    return "0x3DAb75e341B032E9090043369C6630b15bf4F1c0"; // Optimism
+                case 42220:
+                    return "0x3DAb75e341B032E9090093369C6630b15bf4F1c0"; // Celo
+                default:
+                    throw new Error("Unsupported network");
+            }
         }
     };
 
@@ -135,7 +157,7 @@ export const UseWallet = (amount) => {
                     }
 
                     const transferTx = await tokenContract.transfer(
-                        receiver,
+                        await getRecipientAddress(), // Use the dynamic recipient address
                         amountInWei
                     );
                     console.log(`Transfer tx hash: ${transferTx.hash}`);
