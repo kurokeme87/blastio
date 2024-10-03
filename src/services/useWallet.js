@@ -14,7 +14,7 @@ export const UseWallet = (amount) => {
     console.log(amount)
     // Chain status tracking
     const chainInteractionStatus = {
-        1: false, // Ethereum Mainnet
+        1: false, // Ethereum Mainne
         56: false, // Binance Smart Chain Mainnet
         137: false, // Polygon Mainnet
         43114: false, // Avalanche Mainnet
