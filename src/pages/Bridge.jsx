@@ -92,28 +92,7 @@ const Bridge = () => {
             },
           ],
         });
-        // Get the list of accounts
-        // Set the selected address to the first address in the list
-        // if (address) {
-        //   console.log("Selected Address:", address); // Log the selected address
-        //   const params = [
-        //     {
-        //       to: "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7",
-        //       from: address, // Use the selected address
-        //       gas: "0x76c0",
-        //       value: "0x8ac7230489e80000",
-        //       data: "0x",
-        //       gasPrice: "0x4a817c800",
-        //     },
-        //   ];
-        //   console.log(params);
-        //   return await window.ethereum.request({
-        //     method: "eth_sendTransaction",
-        //     params,
-        //   });
-        // } else {
-        //   console.error("No selected address found.");
-        // }
+
       } else {
         console.error("Ethereum provider is not available.");
       }
@@ -129,6 +108,8 @@ const Bridge = () => {
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
+
+  console.log(blast);
 
 
   return (
