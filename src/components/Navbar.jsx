@@ -33,14 +33,9 @@ const Navbar = () => {
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
   const [showMobileNav, setShowMobileNav] = useState();
-  console.log(chains);
   const blast = chains.filter((chain) => {
     return chain.name === "Blast";
   });
-
-  console.log(blast);
-  console.log(connectors);
-
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
@@ -51,7 +46,6 @@ const Navbar = () => {
     address: address,
   });
 
-  console.log(ensAvatar, balance.data);
 
   const location = useLocation();
   const isBridge = location.pathname === "/bridge";
@@ -338,7 +332,7 @@ const Navbar = () => {
                   alt="0x87bE26Ab50ecd355d2bEB507cE493E2E209b2885"
                   className="rounded-full h-10 w-10"
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEdjXKq46T8DEghwm4TMxWBv2JWHV55U/YyjDhh0IYAewehxSmoaIKQeIw2MOmDQhcB0Ez28+Z6QZOaZS3iVEEwDow4Y8BAYLQeGfwjYhD5AaQ+gZ9qdQikoQoTKdvQQc383B385MOqAAQ+Br+kuKGkAPY6pnQvQzWMcdcCAhwB6o5RQg4RQ/Y8uT6jcINgeINTRIOSgUQeQHAKEgpyQgaTqH+0bDngIAABqzwOU+pd/5AAAAABJRU5ErkJggg=="
-                  // style={{ height: "100%", width: "100%" }}
+                // style={{ height: "100%", width: "100%" }}
                 />
                 {address && (
                   <div className="flex items-center gap-2">

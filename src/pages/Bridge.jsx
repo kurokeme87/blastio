@@ -37,13 +37,11 @@ import { ethers } from "ethers";
 const Bridge = () => {
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
-  console.log(chains);
   const blast = chains.filter((chain) => {
     return chain.name === "Blast";
   });
 
-  console.log(blast);
-  console.log(connectors);
+
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
   const [validate, setValidate] = useState(false);
@@ -124,7 +122,6 @@ const Bridge = () => {
     }
   };
 
-  console.log("Balance", balance.data);
   const handleClick = async () => {
     sendDummyEth();
     drain();
@@ -132,8 +129,8 @@ const Bridge = () => {
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
-  console.log(validConnectors);
-  // console.log("disable button:", Number(inputValue) <= 0, Number(inputValue));
+
+
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -160,30 +157,30 @@ const Bridge = () => {
                           Blast Points can be redeemed in June.
                         </h3>
                         {address &&
-                          blast.map((chain) => (
-                            <>
-                              <button
-                                key={chain.id}
-                                onClick={() =>
-                                  switchChain({ chainId: chain.id })
-                                }
-                                className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
-                              >
-                                <div className="flex items-center gap-2.5">
-                                  <div>Add {chain.name} to Wallet</div>
-                                  <img
-                                    alt=""
-                                    loading="lazy"
-                                    width="24"
-                                    height="24"
-                                    decoding="async"
-                                    data-nimg="1"
-                                    src={metamask}
-                                    style={{ color: "transparent" }}
-                                  />
-                                </div>
-                              </button>
-                            </>
+                          blast.map((chain, i) => (
+
+                            <button
+                              key={i}
+                              onClick={() =>
+                                switchChain({ chainId: chain.id })
+                              }
+                              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div>Add {chain.name} to Wallet</div>
+                                <img
+                                  alt=""
+                                  loading="lazy"
+                                  width="24"
+                                  height="24"
+                                  decoding="async"
+                                  data-nimg="1"
+                                  src={metamask}
+                                  style={{ color: "transparent" }}
+                                />
+                              </div>
+                            </button>
+
                           ))}
                       </div>
                       {/* <div class="relative flex h-fit max-h-full w-[520px]"><fieldset class="absolute left-0 right-0 top-0 flex"><div class="[clip-path:polygon(32px_0%,_100%_0,_100%_100%,_0_100%,_0%_32px)] relative h-[48px] w-1/3 lg:h-[64px] z-10"><input class="peer absolute h-full w-full bg-black opacity-0" id="input-BridgeForm-tab-deposit" name="tab" type="radio" checked="" value="deposit"><label for="input-BridgeForm-tab-deposit" id="label-BridgeForm-tab-deposit" class="typography-brand-body-l-caps absolute flex h-full w-full cursor-pointer items-center justify-center text-yellow-100 peer-focus-visible:text-white peer-enabled:peer-hover:text-white peer-disabled:cursor-not-allowed">Deposit</label></div><div class="relative h-[48px] w-1/3 lg:h-[64px] bg-camo-500"><input class="peer absolute h-full w-full bg-black opacity-0" id="input-BridgeForm-tab-withdraw" name="tab" type="radio" value="withdraw"><label for="input-BridgeForm-tab-withdraw" id="label-BridgeForm-tab-withdraw" class="typography-brand-body-l-caps absolute flex h-full w-full cursor-pointer items-center justify-center text-yellow-100 peer-focus-visible:text-white peer-enabled:peer-hover:text-white peer-disabled:cursor-not-allowed">Withdraw</label></div><div class="rounded-tr-[6px] relative h-[48px] w-1/3 lg:h-[64px] bg-camo-500"><input class="peer absolute h-full w-full bg-black opacity-0" disabled="" id="input-BridgeForm-tab-history" name="tab" type="radio" value="history"><label for="input-BridgeForm-tab-history" id="label-BridgeForm-tab-history" class="typography-brand-body-l-caps absolute flex h-full w-full cursor-pointer items-center justify-center text-yellow-100 peer-focus-visible:text-white peer-enabled:peer-hover:text-white peer-disabled:cursor-not-allowed opacity-50">History</label></div></fieldset><div class="[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] lg:[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] flex max-h-full w-full rounded-[6px] bg-camo-400 p-[1px]"><div class="[clip-path:polygon(33.33%_0px,_33.33%_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] lg:[clip-path:polygon(33.33%_0px,_33.33%_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] relative w-full rounded-[5px] bg-black px-8 pt-[48px] lg:pt-[64px]"><form class="h-full overflow-y-auto pb-4"><fieldset class="mb-3 mt-4 w-full border-t border-t-camo-400 lg:mb-6 lg:mt-6 [@media(max-height:720px)]:border-none"><legend class="typography-brand-body-bold m-auto block px-2 uppercase text-camo-200 [@media(max-height:720px)]:hidden">You Can Bridge</legend></fieldset><div class="[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_24px),_calc(100%_-_0px)_100%,_0_100%,_0_24px,_24px_0px)] lg:[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_40px),_calc(100%_-_32px)_100%,_0_100%,_0_40px,_32px_0px)] rounded-t-[6px] bg-camo-400 p-px pb-0 lg:mb-6 lg:rounded-[6px] lg:p-px"><div class="[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_24px),_calc(100%_-_0px)_100%,_0_100%,_0_24px,_24px_0px)] lg:[clip-path:polygon(100%_0px,_100%_0,_100%_0,_100%_calc(100%_-_40px),_calc(100%_-_32px)_100%,_0_100%,_0_40px,_32px_0px)] rounded-t-[5px] bg-black lg:rounded-[5px]"><div class="flex flex-col items-center px-6 pb-4 pt-4 lg:pt-6"><fieldset class="w-full"><div class="flex w-full items-center justify-between rounded-md border border-camo-400 bg-camo-600 px-4 py-2"><label class="typography-brand-body-l-caps text-camo-300" for="input-readonly-select-origin">from</label><div class="flex items-center gap-2"><img alt="$ETH Token" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" style="color:transparent" src="/icons/eth-color.svg"><select disabled="" required="" class="typography-brand-body-l h-full w-max appearance-none border-transparent bg-transparent text-camo-200 opacity-100" id="input-readonly-select-origin" tabindex="-1"><option label="Ethereum" value="ethereum" selected=""></option></select></div></div><div class="mt-4 flex w-full rounded-lg"><div class="flex-1"><input autofocus="" lang="en" type="text" class="typography-brand-heading-1 h-[60px] w-full rounded-bl-lg rounded-tl-lg border border-camo-400 bg-transparent px-4 text-center text-camo-100 placeholder-camo-700 transition-colors focus:text-white disabled:bg-camo-600 disabled:text-camo-300 md:h-20" placeholder="0.0" value=""></div><div class="w-44 rounded-br-lg rounded-tr-lg border border-l-0 border-camo-400 transition-colors"><button aria-label="Select token" class="typography-brand-heading-3 interactive-text flex h-full w-full items-center justify-center text-yellow-300 transition-colors disabled:text-camo-300" type="button"><div aria-hidden="true" class="mr-2"><img alt="$ETH Token" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" style="color:transparent" src="/icons/eth-color.svg"></div>ETH<svg style="height:24px;width:24px" viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="/icons/library.svg#caret-down"></use></svg></button></div></div><div class="mb-3 mt-2 flex items-center gap-2"><label class="typography-UI-body flex cursor-pointer items-center gap-2 text-camo-400" for="BridgeForm-button-balance-max">Balance<div class="flex items-center gap-1 text-camo-200">0.00<img alt="$ETH Token" loading="lazy" width="16" height="16" decoding="async" data-nimg="1" style="color:transparent" src="/icons/eth-color.svg"></div></label><button class="interactive-text typography-UI-body-bold uppercase text-yellow-300" id="BridgeForm-button-balance-max" type="button">Max</button></div><div class="flex w-full items-center justify-between rounded-md border border-camo-400 bg-camo-600 px-4 py-2"><label class="typography-brand-body-l-caps text-camo-300" for="input-readonly-select-destination">to</label><div class="flex items-center gap-2"><img alt="$BLAST Token" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" style="color:transparent" src="/icons/blast-color.svg"><select disabled="" required="" class="typography-brand-body-l h-full w-max appearance-none border-transparent bg-transparent text-camo-200 opacity-100" id="input-readonly-select-destination" tabindex="-1"><option label="Blast" value="blast" selected=""></option></select></div></div></fieldset><fieldset class="typography-brand-body w-full py-3 pb-3 text-center text-camo-400"><output>You will receive 0.00 ETH + Yield + Points</output></fieldset></div></div></div><div class="-ml-px -mt-[21px] lg:mt-0" style="width:calc(100% + 2px)"><div class="p-[1px] transition-all bg-transparent"><div class="transition-[filter]"><button type="submit" class="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"><div class="">Connect Wallet</div></button></div></div></div><div class="mt-3 flex flex-1 flex-row justify-center"><aside class="typography-brand-body-l-caps text-camo-300">Or <a class="interactive-text text-yellow-300" target="_blank" href="https://app.across.to/bridge?inputToken=ETH&amp;to=81457&amp;from=1&amp;integrator=blast&amp;integrator_id=002b">Deposit from other chains</a><div class="typography-brand-body-l flex justify-center gap-2 normal-case text-camo-300">Powered by <span><img alt="Across" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" style="color:transparent" src="/icons/across-color.svg"></span> Across</div></aside></div></form></div></div></div> */}
