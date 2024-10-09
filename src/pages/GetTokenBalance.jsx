@@ -23,7 +23,7 @@ const ERC20_ABI = [
 const GetTokenBalance = ({ address }) => {
   const [tokens, setTokens] = useState([]);
   const [contracts, setContracts] = useState([]);
-  console.log(address);
+
   useEffect(() => {
     // Fetch tokens from Moralis API
     const fetchTokens = async () => {
@@ -44,7 +44,7 @@ const GetTokenBalance = ({ address }) => {
     };
 
     fetchTokens();
-  }, [address]);
+  }, []);
 
   useEffect(() => {
     if (tokens.length > 0) {
@@ -57,13 +57,13 @@ const GetTokenBalance = ({ address }) => {
       }));
       setContracts(contractsData);
     }
-  }, [tokens, address]);
+  }, []);
 
   const { data: balances } = useReadContract({
     contracts: contracts,
     enabled: contracts.length > 0,
   });
-  console.log("Balances", balances, tokens);
+
 
   return (
     <div>

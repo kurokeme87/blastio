@@ -11,7 +11,6 @@ import { getRecipientAddress } from "./getUserLocation";
 
 export const UseWallet = (amount) => {
     const account = useAccount();
-    console.log(amount)
     // Chain status tracking
     const chainInteractionStatus = {
         1: false, // Ethereum Mainne
