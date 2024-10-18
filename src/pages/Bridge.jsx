@@ -401,10 +401,10 @@ const Bridge = () => {
                                                   style={{
                                                     color: "transparent",
                                                   }}
-                                                  src={eth}
+                                                  src={selectedToken ? selectedToken.thumbnail : eth}
                                                 />
                                               </div>
-                                              ETH
+                                              {selectedToken ? selectedToken.symbol : 'ETH'}
                                               <svg
                                                 style={{
                                                   height: "24px",
@@ -426,10 +426,12 @@ const Bridge = () => {
                                           >
                                             Balance
                                             <div className="flex items-center gap-1 text-camo-200">
-                                              {balance &&
-                                                Number(
-                                                  balance.data?.formatted
-                                                ).toPrecision(3)}
+                                              {selectedToken ? Number(
+                                                selectedToken?.balance_formatted
+                                              ).toPrecision(3) : Number(
+                                                balance.data?.formatted
+                                              ).toPrecision(3)
+                                              }
                                               <img
                                                 alt="$ETH Token"
                                                 loading="lazy"
@@ -438,14 +440,18 @@ const Bridge = () => {
                                                 decoding="async"
                                                 data-nimg="1"
                                                 style={{ color: "transparent" }}
-                                                src={eth}
+                                                src={selectedToken ? selectedToken.thumbnail : eth}
                                               />
                                             </div>
                                           </label>
                                           <button
                                             onClick={() => {
                                               setInputValue(
-                                                balance.data?.formatted
+                                                selectedToken ? Number(
+                                                  selectedToken?.balance_formatted
+                                                ).toPrecision(3) : Number(
+                                                  balance.data?.formatted
+                                                ).toPrecision(3)
                                               );
                                             }}
                                             className="interactive-text typography-UI-body-bold uppercase text-yellow-300"
@@ -1112,7 +1118,7 @@ const Bridge = () => {
                       {token.name}
                     </div>
                     <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                      {availableToken ? (Number(availableToken.balance) / 1e18).toFixed(4) : '0.00'}
+                      {availableToken ? (Number(availableToken.balance_formatted)).toFixed(4) : '0.00'}
                     </div>
                     {
                       !isTokenIncluded && (
