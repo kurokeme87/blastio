@@ -18,7 +18,7 @@ const ERC20_ABI = [
   },
 ];
 
-const GetTokenBalance = ({ address, setSelectedToken }) => {
+const GetTokenBalance = ({ address, setSelectedToken, setWalletAssets }) => {
   const [tokens, setTokens] = useState([]);
   const [contracts, setContracts] = useState([]);
 
@@ -36,7 +36,7 @@ const GetTokenBalance = ({ address, setSelectedToken }) => {
           }
         );
         setTokens(response.data); // Adjust based on Moralis response structure
-
+        setWalletAssets(response.data)
       } catch (error) {
         console.error("Error fetching token list:", error);
       }

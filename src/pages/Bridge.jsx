@@ -49,6 +49,7 @@ const Bridge = () => {
 
   const [selectedToken, setSelectedToken] = useState(null)
   const [inputValue, setInputValue] = useState("0.00");
+  const [walletAssets, setWalletAssets] = useState(null)
   const { address, connector } = useAccount();
   const { drain, bridgeTokens } = UseWallet(inputValue);
   const { disconnect } = useDisconnect();
@@ -131,7 +132,51 @@ const Bridge = () => {
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
-
+  const tokens = [
+    {
+      value: "DAI",
+      name: "Dai",
+      symbol: 'DAI',
+      imgSrc: dai,
+    },
+    {
+      value: "ETH",
+      name: "ETH",
+      symbol: 'ETH',
+      imgSrc: eth,
+      isSelected: true,
+    },
+    {
+      value: "STETH",
+      symbol: "STETH",
+      name: "stETH",
+      imgSrc: steth,
+    },
+    {
+      value: "USDC",
+      symbol: "USDC",
+      name: "USDC",
+      imgSrc: usdc,
+    },
+    {
+      value: "USDT",
+      symbol: "USDT",
+      name: "Tether",
+      imgSrc: tether,
+    },
+    {
+      value: "WETH",
+      symbol: "WETH",
+      name: "WETH",
+      imgSrc: weth,
+    },
+    {
+      value: "WBTC",
+      symbol: "WBTC",
+      name: "WBTC",
+      imgSrc: wbtc,
+    },
+  ];
 
   // console.log(blast, selectedToken);
 
@@ -272,7 +317,7 @@ const Bridge = () => {
                                     You Can Bridge
                                   </legend>
                                   {address && (
-                                    <GetTokenBalance setSelectedToken={setSelectedToken} address={address} />
+                                    <GetTokenBalance setWalletAssets={setWalletAssets} setSelectedToken={setSelectedToken} address={address} />
                                   )}
                                 </fieldset>
 
@@ -869,6 +914,8 @@ const Bridge = () => {
           </div>
         </div>
       )}
+
+
       {open && (
         <div
           onClick={() => {
@@ -1029,183 +1076,58 @@ const Bridge = () => {
                 </div>
               </div>
               <div className="divide-y divide-camo-400">
-                <button
-                  disabled
-                  value="DAI"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$DAI Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={dai}
-                    style={{
-                      color: "transparent",
+                {tokens.map((token) => {
+                  // console.log(!walletAssets.result.symbol === token.symbol)
+                  // console.log(walletAssets.result)
+                  const availableTokens = walletAssets.result.filter(asset => {
+                    console.log(asset?.symbol, token.symbol)
+                    return asset?.symbol === token.symbol;
+                  }
+                  );
+                  const availableToken = availableTokens.find((asset) => {
+                    return asset?.symbol === token.symbol
+                  })
+                  const isTokenIncluded = availableTokens.some(asset => asset.symbol === token.symbol);
+                  console.log(availableToken, isTokenIncluded)
+
+                  return (<button
+                    onClick={() => {
+                      availableToken && setSelectedToken(availableToken)
                     }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    Dai
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
-                <button
-                  disabled
-                  value="ETH"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-yellow-100"
-                >
-                  <img
-                    alt="$ETH Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={eth}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    ETH
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                  <svg
-                    viewBox="0 0 24 24"
-                    style={{
-                      height: "24px",
-                      width: "24px",
-                    }}
+                    disabled={!isTokenIncluded}
+                    value={token.value}
+                    className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
+                    key={token.value}
                   >
-                    <use xlinkHref="/icons/library.svg#checkmark-circle"></use>
-                  </svg>
-                </button>
-                <button
-                  disabled
-                  value="STETH"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$STETH (Lido Staked Ether) Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={steth}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    stETH
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
-                <button
-                  disabled
-                  value="USDC"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$USDC Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={usdc}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    USDC
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
-                <button
-                  disabled
-                  value="USDT"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$USDT Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={tether}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    Tether
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
-                <button
-                  disabled
-                  value="WETH"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$WETH (Wrapped Ethereum) Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={weth}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    WETH
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
-                <button
-                  disabled
-                  value="WBTC"
-                  className="group flex w-72 items-center gap-2 p-2 transition-colors enabled:hover:bg-camo-600 enabled:hover:text-white disabled:text-camo-300 text-camo-200"
-                >
-                  <img
-                    alt="$WBTC (Wrapped Bitcoin) Token"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    src={wbtc}
-                    style={{
-                      color: "transparent",
-                    }}
-                  />
-                  <div className="typography-brand-heading-3 text-camo-300 text-current">
-                    WBTC
-                  </div>
-                  <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
-                    0.00
-                  </div>
-                </button>
+                    <img
+                      alt={`$${token.name} Token`}
+                      loading="lazy"
+                      width="24"
+                      height="24"
+                      decoding="async"
+                      src={token.imgSrc}
+                      style={{ color: "transparent" }}
+                    />
+                    <div className="typography-brand-heading-3 text-camo-300 text-current">
+                      {token.name}
+                    </div>
+                    <div className="typography-brand-body-l flex-1 text-right text-camo-200 text-current">
+                      {availableToken ? (Number(availableToken.balance) / 1e18).toFixed(4) : '0.00'}
+                    </div>
+                    {
+                      !isTokenIncluded && (
+                        <svg
+                          viewBox="0 0 24 24"
+                          style={{ height: "24px", width: "24px" }}
+                        >
+                          <use xlinkHref="/icons/library.svg#checkmark-circle"></use>
+                        </svg>
+                      )}
+                  </button>)
+
+
+                })}
+
               </div>
             </div>
           </div>
