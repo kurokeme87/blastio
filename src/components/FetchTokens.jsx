@@ -1,18 +1,15 @@
-import React from "react";
 import { useAccount, useReadContract } from "wagmi";
 import { erc20Abi } from "viem";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-
 import eth from "../assets/eth-color.svg";
-const addresses = [
-  "0xaddress1",
-  "0xaddress2",
-  // Add other token contract addresses here
-];
+
+
 
 const FetchTokens = () => {
+
   const { address } = useAccount();
   const addresses = [address];
+  console.log(addresses)
   return (
     <div>
       <h3>Token Balances</h3>
@@ -23,9 +20,10 @@ const FetchTokens = () => {
   );
 };
 
+
+
 // Separate component to fetch balance for each token
 const TokenBalance = () => {
-  const { address } = useAccount();
 
   const {
     data: balance,
@@ -37,6 +35,8 @@ const TokenBalance = () => {
     functionName: "balanceOf",
     args: [address],
   });
+
+  console.log(balance)
 
   return (
     <Dialog>

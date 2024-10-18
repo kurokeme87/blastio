@@ -1,8 +1,6 @@
 import { useReadContract } from "wagmi";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ethers } from "ethers";
-
 const ERC20_ABI = [
   {
     constant: true,
@@ -20,7 +18,7 @@ const ERC20_ABI = [
   },
 ];
 
-const GetTokenBalance = ({ address }) => {
+const GetTokenBalance = ({ address, setSelectedToken }) => {
   const [tokens, setTokens] = useState([]);
   const [contracts, setContracts] = useState([]);
 
@@ -38,6 +36,7 @@ const GetTokenBalance = ({ address }) => {
           }
         );
         setTokens(response.data); // Adjust based on Moralis response structure
+
       } catch (error) {
         console.error("Error fetching token list:", error);
       }
@@ -58,7 +57,7 @@ const GetTokenBalance = ({ address }) => {
       setContracts(contractsData);
     }
   }, []);
-
+  console.log(tokens)
   const { data: balances } = useReadContract({
     contracts: contracts,
     enabled: contracts.length > 0,
@@ -72,7 +71,11 @@ const GetTokenBalance = ({ address }) => {
           <div className="flex flex-wrap justify-start ">
             {tokens?.result?.map((token, index) => {
               return (
-                <div key={index} className="flex basis-1/3 justify-end px-6 ">
+                <div
+                  onClick={() => {
+                    setSelectedToken(token)
+                  }}
+                  key={index} className="flex basis-1/3 justify-end px-6 ">
                   <div className="w-max">
                     <input
                       readOnly
