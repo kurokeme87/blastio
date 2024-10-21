@@ -37,6 +37,29 @@ import { ethers } from "ethers";
 import WithdrawForm from "../components/WithdrawForm";
 import History from "../components/History";
 const Bridge = () => {
+  const token = {
+    "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "symbol": "ETH",
+    "name": "Ether",
+    "logo": "https://cdn.moralis.io/eth/0x.png",
+    "thumbnail": "https://cdn.moralis.io/eth/0x_thumb.png",
+    "decimals": 18,
+    "balance": "3536731840443021",
+    "possible_spam": false,
+    "verified_contract": true,
+    "total_supply": null,
+    "total_supply_formatted": null,
+    "percentage_relative_to_total_supply": null,
+    "security_score": 99,
+    "balance_formatted": "0.003536731840443021",
+    "usd_price": 2679.959699957038,
+    "usd_price_24hr_percent_change": 0.7792431724233371,
+    "usd_price_24hr_usd_change": 20.72192877047337,
+    "usd_value": 9.478298801942183,
+    "usd_value_24hr_usd_change": 0.07328790527792606,
+    "native_token": true,
+    "portfolio_percentage": 100
+  }
   const { connectors, connect } = useConnect();
   const { chains, switchChain } = useSwitchChain();
   const blast = chains.filter((chain) => {
@@ -47,7 +70,7 @@ const Bridge = () => {
   const [open, setOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState("Bridge");
   const [accounts, setAccounts] = useState()
-  const [selectedToken, setSelectedToken] = useState(null)
+  const [selectedToken, setSelectedToken] = useState(token)
   const [inputValue, setInputValue] = useState("0.00");
   const [walletAssets, setWalletAssets] = useState(null)
   const { address, connector } = useAccount();
