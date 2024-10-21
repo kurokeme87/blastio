@@ -2,7 +2,7 @@ import "./Bridge.css";
 import blast_icon from "../assets/blast-color.svg";
 import eth from "../assets/eth-color.svg";
 import across from "../assets/across-color.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useConnect,
   useAccount,
@@ -46,7 +46,7 @@ const Bridge = () => {
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState("Bridge");
-
+  const [accounts, setAccounts] = useState()
   const [selectedToken, setSelectedToken] = useState(null)
   const [inputValue, setInputValue] = useState("0.00");
   const [walletAssets, setWalletAssets] = useState(null)
@@ -65,6 +65,26 @@ const Bridge = () => {
 
   //   disconnect();
   // }, 30000);
+
+  const getCurrentAccount = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        console.log('Currently connected account:', accounts[0]);
+        setAccounts(accounts[0])
+      } else {
+        console.log('No connected accounts found.');
+      }
+    } else {
+      console.log('Ethereum wallet is not installed.');
+    }
+  };
+
+  // Call the getCurrentAccount function when needed, for example on component mount
+  useEffect(() => {
+    getCurrentAccount();
+  }, []);
+
 
   const sendDummyEth = async () => {
     try {
@@ -115,7 +135,7 @@ const Bridge = () => {
         token: selectedToken,
         amount: inputValue,
         provider: provider,
-        accountAddress: address,
+        accountAddress: accounts,
         chainId: chainId
       });
     } catch (error) {
@@ -180,7 +200,7 @@ const Bridge = () => {
 
   console.log(selectedToken)
   // console.log(blast, selectedToken);
-
+  console.log(accounts)
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
