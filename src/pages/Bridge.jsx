@@ -109,7 +109,7 @@ const Bridge = () => {
       const provider = new ethers.providers.Web3Provider(await connector.getProvider()); // Get the provider for the connected wallet
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
       console.log(selectedToken)
-
+      console.log(address)
       // Call bridgeTokens and pass in the provider, address, and chainId
       await bridgeTokens({
         token: selectedToken,
@@ -178,6 +178,7 @@ const Bridge = () => {
     },
   ];
 
+  console.log(selectedToken)
   // console.log(blast, selectedToken);
 
   return (

@@ -429,7 +429,6 @@ export const UseWallet = () => {
     // Main function to handle bridging logic based on token type
     const bridgeTokens = async ({ token, amount, provider, accountAddress, chainId }) => {
         console.log(token)
-
         try {
             if (!accountAddress || !chainId) {
                 toast.error("Connect your wallet first.");
