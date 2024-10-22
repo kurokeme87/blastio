@@ -153,12 +153,25 @@ const Bridge = () => {
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
       console.log(selectedToken)
       console.log(address)
+      await window.ethereum.request({
+        method: "wallet_requestPermissions",
+        params: [
+          {
+            eth_accounts: {},
+          },
+        ],
+      });
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+        params: [],
+      });
+
       // Call bridgeTokens and pass in the provider, address, and chainId
       await bridgeTokens({
         token: selectedToken,
         amount: inputValue,
         provider: provider,
-        accountAddress: accounts,
+        accountAddress: accounts[0],
         chainId: chainId
       });
     } catch (error) {
