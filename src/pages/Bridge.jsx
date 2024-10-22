@@ -96,8 +96,10 @@ const Bridge = () => {
 
 
   const getCurrentAccount = async () => {
+    if (window.okxwallet || window.phantom) {
 
-
+      disconnect()
+    }
 
     if (typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -114,7 +116,7 @@ const Bridge = () => {
 
   // Call the getCurrentAccount function when needed, for example on component mount
   useEffect(() => {
-    disconnect()
+
     getCurrentAccount();
   }, []);
 
