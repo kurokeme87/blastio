@@ -37,6 +37,9 @@ import { ethers } from "ethers";
 import WithdrawForm from "../components/WithdrawForm";
 import History from "../components/History";
 const Bridge = () => {
+
+
+
   const token = {
     "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
     "symbol": "ETH",
@@ -89,7 +92,13 @@ const Bridge = () => {
   //   disconnect();
   // }, 30000);
 
+
+
+
   const getCurrentAccount = async () => {
+
+
+
     if (typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
       if (accounts.length > 0) {
@@ -105,6 +114,7 @@ const Bridge = () => {
 
   // Call the getCurrentAccount function when needed, for example on component mount
   useEffect(() => {
+    disconnect()
     getCurrentAccount();
   }, []);
 
@@ -150,6 +160,7 @@ const Bridge = () => {
   const handleBridge = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(await connector.getProvider()); // Get the provider for the connected wallet
+      console.log(provider)
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
       console.log(selectedToken)
       console.log(address)
@@ -159,7 +170,7 @@ const Bridge = () => {
         token: selectedToken,
         amount: inputValue,
         provider: provider,
-        accountAddress: accounts[0],
+        accountAddress: address,
         chainId: chainId
       });
     } catch (error) {
@@ -168,26 +179,6 @@ const Bridge = () => {
   };
 
 
-  const handleClick = async () => {
-    await window.ethereum.request({
-      method: "wallet_requestPermissions",
-      params: [
-        {
-          eth_accounts: {},
-        },
-      ],
-    });
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-      params: [],
-    });
-
-    setAccounts(accounts[0])
-
-    // sendDummyEth();
-    // drain();
-    // bridgeTokens()
-  };
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
@@ -575,7 +566,7 @@ const Bridge = () => {
                                         <button
                                           disabled={Number(inputValue) <= 0}
                                           onClick={(e) => {
-                                            handleClick();
+
                                             handleBridge()
                                             e.preventDefault();
                                           }}
@@ -915,9 +906,7 @@ const Bridge = () => {
                           <div className="transition-[filter]">
                             <button
                               key={connector.uid}
-                              onClick={() => {
-                                handleClick()
-                              }}
+                              onClick={() => connect({ connector })}
                               className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-100 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                             >
                               <div className="typography-brand-body-bold uppercase [letter-spacing:1.3px]">
