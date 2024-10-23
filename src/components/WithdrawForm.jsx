@@ -2,7 +2,14 @@ import React from "react";
 import blast_icon from "../assets/blast-color.svg";
 import eth from "../assets/eth-color.svg";
 import across from "../assets/across-color.svg";
-const WithdrawForm = () => {
+import { useSwitchChain } from "wagmi";
+
+const WithdrawForm = ({ currentChain }) => {
+
+  const { chains, switchChain } = useSwitchChain();
+  const blast = chains.filter((chain) => {
+    return chain.name === "Blast";
+  });
   return (
     <form className="h-full  p-0 m-0 overflow-y-auto pb-4">
       <div className="mb-3 mt-4 lg:mb-6 lg:mt-6">
@@ -164,13 +171,30 @@ const WithdrawForm = () => {
       </div>
       <div className="mt-4" style={{ width: "calc(100% + 2px)" }}>
         <div className="p-[1px] transition-all bg-transparent">
+
           <div className="transition-[filter]">
-            <button
-              type="submit"
-              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
-            >
-              <div className="">Connect Wallet</div>
-            </button>
+            {blast.map((chain, i) => (
+              <button
+                key={i}
+                // onClick={(e) => {
+                //   e.preventDefault()
+                //   connector?.connect()
+
+                // }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  { currentChain.id === 81457 ? console.log('clicked') : switchChain({ chainId: chain.id }) }
+                }}
+                // type="submit"
+                className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
+              >
+                <div className="">{currentChain.id === 81457 ? 'Connect Wallet' : 'Switch to Blast Mainnet'}</div>
+              </button>
+
+
+
+            ))}
+
           </div>
         </div>
       </div>
