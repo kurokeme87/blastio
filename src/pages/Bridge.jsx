@@ -161,7 +161,6 @@ const Bridge = () => {
     getCurrentAccount();
   }, [address, chains]);
 
-  // const switchToEthereum = async () => {
   //   if (chainId === 1) {
   //     console.log('currently connected chain ', chainId)
   //     console.log('Switching Chain Id')
