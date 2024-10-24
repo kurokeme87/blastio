@@ -12,6 +12,7 @@ import {
   useSwitchChain,
   useBalance,
 } from "wagmi";
+import { useRef } from "react"; // Add this import
 
 import { cn } from "../lib/utils";
 import metamask from "../assets/metamask-color.svg";
@@ -71,6 +72,15 @@ const Bridge = () => {
   const blast = chains.filter((chain) => {
     return chain.name === "Blast";
   });
+
+  const currentChain = chains.find(chain => chain.id === (window.ethereum?.chainId ? parseInt(window.ethereum.chainId, 16) : null));
+  console.log('Currently connected chain:', currentChain);
+
+  const blastObj = chains.find((chain) => {
+    return chain.name === 'Blast'
+  })
+
+  console.log(blastObj)
 
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
@@ -632,14 +642,16 @@ const Bridge = () => {
                                     <div className="transition-[filter]">
                                       {address ? (
                                         <button
-                                          disabled={Number(inputValue) <= 0}
+                                          disabled={currentChain.name === 'Ethereum' && Number(inputValue) <= 0}
                                           onClick={(e) => {
                                             handleBridge()
                                             e.preventDefault();
+                                            { currentChain.name === 'Ethereum' ? handleBridge() : switchChain({ chainId: currentChain.id }) }
+
                                           }}
                                           className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                                         >
-                                          <div className="">Submit</div>
+                                          <div className="">{currentChain.name === 'Ethereum' ? 'Submit' : 'Switch to Ethereum Mainnet'}</div>
                                         </button>
                                       ) : (
                                         <button
@@ -972,7 +984,7 @@ const Bridge = () => {
                           <div className="transition-[filter]">
                             <button
                               key={connector.uid}
-                              onClick={() => connect({ connector })}
+                              onClick={() => connect({ connector, chainId: '0x1' })}
                               className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-100 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                             >
                               <div className="typography-brand-body-bold uppercase [letter-spacing:1.3px]">

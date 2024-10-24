@@ -379,6 +379,7 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
       </div>
       <div className="mt-4" style={{ width: "calc(100% + 2px)" }}>
         <div className="p-[1px] transition-all bg-transparent">
+
           <div className="transition-[filter]">
             {chainId === 1 ? <button
               onClick={(e) => {
