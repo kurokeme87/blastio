@@ -13,7 +13,6 @@ import {
   useBalance,
 } from "wagmi";
 import { useRef } from "react"; // Add this import
-import { useRef } from "react"; // Add this import
 
 import { cn } from "../lib/utils";
 import metamask from "../assets/metamask-color.svg";
@@ -80,10 +79,6 @@ const Bridge = () => {
   const blastObj = chains.find((chain) => {
     return chain.name === 'Blast'
   })
-
-  console.log(blastObj)
-
-
 
   console.log(blastObj)
 
@@ -331,6 +326,32 @@ const Bridge = () => {
                           </div>
                         </button>
                         <div className="mb-14 mt-14 h-24"></div>
+
+                        {/* {address &&
+                          blast.map((chain, i) => (
+                            <button
+                              key={i}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                switchChain({ chainId: chain.id })
+                              }}
+                              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div>Add {chain.name} to Wallet</div>
+                                <img
+                                  alt=""
+                                  loading="lazy"
+                                  width="24"
+                                  height="24"
+                                  decoding="async"
+                                  data-nimg="1"
+                                  src={metamask}
+                                  style={{ color: "transparent" }}
+                                />
+                              </div>
+                            </button>
+                          ))} */}
                       </div>
                       <div className="relative flex h-fit  xl:max-h-full w-[520px]">
                         <fieldset className="absolute left-0 right-0 top-0 flex">
