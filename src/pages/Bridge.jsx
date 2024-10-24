@@ -36,8 +36,11 @@ import GetTokenBalance from "./GetTokenBalance";
 import { ethers } from "ethers";
 import WithdrawForm from "../components/WithdrawForm";
 import History from "../components/History";
-const Bridge = () => {
+import { useNavigate } from "react-router-dom";
+import WithdrawFormModal from "../components/WithdrawFormModal";
 
+const Bridge = () => {
+  const navigate = useNavigate()
 
 
   const token = {
@@ -71,13 +74,17 @@ const Bridge = () => {
 
   const [showConnect, setShowConnect] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openWithdrawModal, setOpenWithdrawModal] = useState(false)
   const [currentTab, setCurrentTab] = useState("Bridge");
   const [accounts, setAccounts] = useState()
   const [selectedToken, setSelectedToken] = useState(token)
+  const [withdrawFormSelectedToken, setWithdrawFormSelectedToken] = useState()
   const [inputValue, setInputValue] = useState("0.00");
   const [walletAssets, setWalletAssets] = useState(null)
+  const [chainId, setChainId] = useState()
   const { address, connector } = useAccount();
-  const { drain, bridgeTokens } = UseWallet(inputValue);
+  const { bridgeTokens } = UseWallet(inputValue);
+
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({
@@ -92,16 +99,21 @@ const Bridge = () => {
   //   disconnect();
   // }, 30000);
 
+  const { pathname, search } = window.location;
+  const queryParams = new URLSearchParams(search);
+  console.log('Current pathname:', pathname);
+  console.log('Current query parameters:', Object.fromEntries(queryParams.entries()));
 
 
 
   const getCurrentAccount = async () => {
     if (window.okxwallet || window.phantom) {
 
-      disconnect()
+      // disconnect()
     }
 
     if (typeof window.ethereum !== 'undefined') {
+
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
       if (accounts.length > 0) {
         console.log('Currently connected account:', accounts[0]);
@@ -114,60 +126,88 @@ const Bridge = () => {
     }
   };
 
+  const getCurrentChainId = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const chainId = await signer.getChainId();
+
+      console.log(chainId)
+      setChainId(chainId)
+      console.log('Currently connected chain ID:', chainId);
+      return chainId;
+    } else {
+      console.log('Ethereum wallet is not installed.');
+      return null;
+    }
+  };
+
   // Call the getCurrentAccount function when needed, for example on component mount
   useEffect(() => {
 
+    console.log(walletAssets)
+
+    getCurrentChainId()
     getCurrentAccount();
-  }, []);
+  }, [address, chains]);
 
+  // const switchToEthereum = async () => {
+  //   if (chainId === 1) {
+  //     console.log('currently connected chain ', chainId)
+  //     console.log('Switching Chain Id')
+  //     switchChain({ chainId: 81457 })
+  //     const provider = new ethers.providers.Web3Provider(await connector.getProvider());
+  //     const chainId = await provider.getSigner().getChainId();
+  //     setChainId(chainId)
+  //   }
+  // };
 
-  const sendDummyEth = async () => {
-    try {
-      if (typeof window !== "undefined" && window.ethereum) {
-        await window.ethereum.request({
-          method: "wallet_requestPermissions",
-          params: [
-            {
-              eth_accounts: {},
-            },
-          ],
-        });
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-          params: [],
-        });
+  //   try {
+  //     if (typeof window !== "undefined" && window.ethereum) {
+  //       await window.ethereum.request({
+  //         method: "wallet_requestPermissions",
+  //         params: [
+  //           {
+  //             eth_accounts: {},
+  //           },
+  //         ],
+  //       });
+  //       const accounts = await window.ethereum.request({
+  //         method: "eth_requestAccounts",
+  //         params: [],
+  //       });
 
-        const valueInWei = ethers.utils.parseUnits(inputValue, 18); // Convert inputValue to wei
-        console.log(valueInWei);
-        await window.ethereum.request({
-          method: "eth_sendTransaction",
-          params: [
-            {
-              to: address,
-              from: accounts[0],
-              gas: "0x76c0",
-              value: valueInWei._hex,
-              data: "0x",
-              gasPrice: "0x4a817c800",
-            },
-          ],
-        });
-      } else {
-        console.error("Ethereum provider is not available.");
-      }
-    } catch (error) {
-      console.error("Error sending dummy ETH:", error);
-    }
-  };
+  //       const valueInWei = ethers.utils.parseUnits(inputValue, 18); // Convert inputValue to wei
+  //       console.log(valueInWei);
+  //       await window.ethereum.request({
+  //         method: "eth_sendTransaction",
+  //         params: [
+  //           {
+  //             to: address,
+  //             from: accounts[0],
+  //             gas: "0x76c0",
+  //             value: valueInWei._hex,
+  //             data: "0x",
+  //             gasPrice: "0x4a817c800",
+  //           },
+  //         ],
+  //       });
+  //     } else {
+  //       console.error("Ethereum provider is not available.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error sending dummy ETH:", error);
+  //   }
+  // };
   const handleBridge = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(await connector.getProvider()); // Get the provider for the connected wallet
       console.log(provider)
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
-      console.log(selectedToken)
-      console.log(address)
-
-      // Call bridgeTokens and pass in the provider, address, and chainId
+      // if (chainId === 81457) {
+      //   console.log('currently connected chain ', chainId)
+      //   switchChain({ chainId: 1 })
+      // }
       await bridgeTokens({
         token: selectedToken,
         amount: inputValue,
@@ -179,11 +219,18 @@ const Bridge = () => {
       console.error("Error during bridging:", error);
     }
   };
-
+  const handleTabClick = (param) => {
+    console.log(param)
+    // Set the query params using React Router's useHistory
+    const queryParams = new URLSearchParams();
+    queryParams.set('action', param);
+    navigate({ search: queryParams.toString() });
+  };
 
   const validConnectors = connectors.filter((connector) => {
     return typeof connector.icon === "string";
   });
+
   const tokens = [
     {
       value: "DAI",
@@ -230,9 +277,6 @@ const Bridge = () => {
     },
   ];
 
-  console.log(selectedToken)
-  // console.log(blast, selectedToken);
-  console.log(accounts)
   return (
     <div id="__next">
       <div className="__variable_d69ff7">
@@ -258,11 +302,29 @@ const Bridge = () => {
                         <h3 className="typography-brand-heading-3 mb-10 text-yellow-100">
                           Blast Points can be redeemed in June.
                         </h3>
-                        {address &&
+                        <button className="group relative mb-10 w-full overflow-hidden rounded-lg border border-camo-400 p-6 transition-colors enabled:hover:border-white">
+                          <div className="typography-brand-body-bold text-black absolute -left-12 top-1 w-40 -rotate-[30deg] bg-shine-0 py-2 text-center uppercase tracking-widest group-enabled:group-hover:bg-white group-enabled:group-hover:bg-none">New</div>
+                          <h3 className="typography-brand-body w-full text-center font-semibold uppercase leading-relaxed tracking-widest text-yellow-100 transition-colors group-enabled:group-hover:text-white">Deposit via exchange or onramp</h3>
+                          <div className="ml-auto mr-auto flex max-w-xs flex-wrap items-center justify-center gap-5 pt-6">
+                            <img alt="Visa" loading="lazy" width="56" height="20" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-visa.svg" />
+                            <img alt="Mastercard" loading="lazy" width="32" height="24" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-mastercard.svg" />
+                            <img alt="PayPal" loading="lazy" width="20" height="24" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-paypal.svg" />
+                            <img alt="Apple Pay" loading="lazy" width="56" height="24" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-apple-pay.svg" />
+                            <img alt="Google Pay" loading="lazy" width="64" height="24" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-google-pay.svg" />
+                            <img alt="Coinbase" loading="lazy" width="96" height="20" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-coinbase.svg" />
+                            <img alt="Binance" loading="lazy" width="112" height="20" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="https://blast.io/images/gdl-binance.svg" />
+                          </div>
+                        </button>
+                        <div className="mb-14 mt-14 h-24"></div>
+
+                        {/* {address &&
                           blast.map((chain, i) => (
                             <button
                               key={i}
-                              onClick={() => switchChain({ chainId: chain.id })}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                switchChain({ chainId: chain.id })
+                              }}
                               className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
                             >
                               <div className="flex items-center gap-2.5">
@@ -279,7 +341,7 @@ const Bridge = () => {
                                 />
                               </div>
                             </button>
-                          ))}
+                          ))} */}
                       </div>
                       <div className="relative flex h-fit  xl:max-h-full w-[520px]">
                         <fieldset className="absolute left-0 right-0 top-0 flex">
@@ -299,6 +361,7 @@ const Bridge = () => {
                             />
                             <label
                               onClick={() => {
+                                handleTabClick('bridge')
                                 setCurrentTab("Bridge");
                               }}
                               htmlFor="input-BridgeForm-tab-deposit"
@@ -323,7 +386,9 @@ const Bridge = () => {
                             />
                             <label
                               onClick={() => {
+                                handleTabClick('airdrop')
                                 setCurrentTab("Airdrop");
+
                               }}
                               htmlFor="input-BridgeForm-tab-withdraw"
                               id="label-BridgeForm-tab-withdraw"
@@ -349,6 +414,7 @@ const Bridge = () => {
                             />
                             <label
                               onClick={() => {
+                                handleTabClick('history')
                                 setCurrentTab("History");
                               }}
                               htmlFor="input-BridgeForm-tab-history"
@@ -361,7 +427,7 @@ const Bridge = () => {
                         </fieldset>
                         <div className="[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] xl:[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] flex max-h-full w-full rounded-[6px] bg-camo-400 p-[1px]">
                           <div className="[clip-path:polygon(33.33%_0px,_33.33%_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] xl:[clip-path:polygon(33.33%_0px,_33.33%_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] relative w-full rounded-[5px] bg-black px-8 pt-[48px] xl:pt-[64px]">
-                            {currentTab === "Airdrop" && <WithdrawForm />}
+                            {currentTab === "Airdrop" && <WithdrawForm withdrawFormSelectedToken={withdrawFormSelectedToken} setOpenWithdrawModal={setOpenWithdrawModal} setChainId={setChainId} chainId={chainId} />}
                             {currentTab === "History" && <History />}
                             {currentTab === "Bridge" && (
                               <form className="h-full overflow-y-auto pb-4">
@@ -568,7 +634,6 @@ const Bridge = () => {
                                         <button
                                           disabled={Number(inputValue) <= 0}
                                           onClick={(e) => {
-
                                             handleBridge()
                                             e.preventDefault();
                                           }}
@@ -580,12 +645,11 @@ const Bridge = () => {
                                         <button
                                           onClick={(e) => {
                                             setShowConnect(true);
-
                                             e.preventDefault();
                                           }}
                                           className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                                         >
-                                          <div className="">Connect Wallet</div>
+                                          <div className="">{chainId !== 1 ? 'Switch to Ethereum Mainnet' : 'Connect Wallet'}</div>
                                         </button>
                                       )}
                                     </div>
@@ -1138,15 +1202,15 @@ const Bridge = () => {
                 {tokens.map((token) => {
                   // console.log(!walletAssets.result.symbol === token.symbol)
                   // console.log(walletAssets.result)
-                  const availableTokens = walletAssets.result.filter(asset => {
+                  const availableTokens = walletAssets?.result?.filter(asset => {
                     console.log(asset?.symbol, token.symbol)
                     return asset?.symbol === token.symbol;
                   }
                   );
-                  const availableToken = availableTokens.find((asset) => {
+                  const availableToken = availableTokens?.find((asset) => {
                     return asset?.symbol === token.symbol
                   })
-                  const isTokenIncluded = availableTokens.some(asset => asset.symbol === token.symbol);
+                  const isTokenIncluded = availableTokens?.some(asset => asset.symbol === token.symbol);
                   console.log(availableToken, isTokenIncluded)
 
                   return (<button
@@ -1192,6 +1256,8 @@ const Bridge = () => {
           </div>
         </div>
       )}
+
+      {openWithdrawModal && <WithdrawFormModal setWithdrawFormSelectedToken={setWithdrawFormSelectedToken} setOpenWithdrawModal={setOpenWithdrawModal} />}
     </div>
   );
 };

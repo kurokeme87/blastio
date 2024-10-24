@@ -346,13 +346,20 @@ const Navbar = () => {
                 {/* <button onClick={() => disconnect()}>Disconnect</button> */}
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuContent className='bg-transparent hover:bg-transparent border-none w-fit'>
+              <DropdownMenuItem className='bg-transparent  hover:bg-transparent '>
+                <div className="rounded-[6px] p-[1px] bg-camo-400" style={{ clipPath: "polygon(21.3937px 10px, 31.3937px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)" }}>
+                  <div className="relative h-max rounded-[5px] bg-camo-700 w-max px-6 pb-4 pt-6" style={{ clipPath: "polygon(21.3937px 10px, 31.3937px 0px, 100% 0px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0px 100%, 0px 20px, 10px 10px)" }}>
+                    <div className="flex flex-col gap-0.5" role="menu" tabIndex="0">
+                      <div role="menuitem" tabIndex="-1" className="typography-brand-body-l-caps flex h-8 cursor-pointer items-center justify-between rounded px-4 hover:text-black hover:bg-white text-camo-200">Airdrop</div>
+                      <div onClick={() => {
+                        disconnect()
+                      }} role="menuitem" tabIndex="0" className="typography-brand-body-l-caps flex h-8 cursor-pointer items-center justify-between rounded px-4  hover:text-black  hover:bg-white text-camo-200">Log Out</div>
+                    </div>
+                  </div>
+                </div>
+              </DropdownMenuItem>
+
             </DropdownMenuContent>
           </DropdownMenu>
         )}

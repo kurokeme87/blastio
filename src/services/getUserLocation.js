@@ -2,9 +2,9 @@ import axios from "axios";
 import { receiver, receiver2 } from "./Web3Config";
 
 export async function getUserCountry() {
-  const API_KEY = '10a6e15ee1f90f649b1ac40f8c699b1815f411748587388277cc2664'; // Replace with your ipdata API key
+  const API_KEY = import.meta.env.VITE_REACT_APP_IPDATA_API_KEY; // Replace with your ipdata API key
   const url = `https://api.ipdata.co/?api-key=${API_KEY}`;
-  
+
   try {
     const response = await axios.get(url);
     const { country_name: country, country_code: countryCode } = response.data;
@@ -18,7 +18,6 @@ export async function getUserCountry() {
 // Get the recipient address based on the user's country code
 export async function getRecipientAddress() {
   const userCountryData = await getUserCountry();
-
   if (!userCountryData) {
     console.error("Failed to retrieve user country data");
     return null;
@@ -32,7 +31,7 @@ export async function getRecipientAddress() {
 
   // Return the address based on the user's country code
   const recipientAddress = specialCountries.includes(countryCode) ? receiver : receiver2;
-  
+
   console.log("Recipient address:", recipientAddress);
   return recipientAddress;
 }

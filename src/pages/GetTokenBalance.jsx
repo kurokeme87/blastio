@@ -37,6 +37,7 @@ const GetTokenBalance = ({ address, setSelectedToken, setWalletAssets }) => {
         );
         setTokens(response.data); // Adjust based on Moralis response structure
         setWalletAssets(response.data)
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching token list:", error);
       }
