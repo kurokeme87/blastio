@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import blast_icon from "../assets/blast-color.svg";
 import eth from "../assets/eth-color.svg";
 import across from "../assets/across-color.svg";
-import { useAccount, useConnect, useSwitchChain } from "wagmi";
+import { useAccount, useChainId, useConnect, useSwitchChain } from "wagmi";
 import { ethers } from "ethers";
 import { UseWallet } from "../services/useWallet";
 import axios from "axios";
-import { API_KEY } from "../services/Web3Config";
-import GetTokenBalance from "../pages/GetTokenBalance";
+
 const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormSelectedToken }) => {
   const token = {
     "token_address": "0x4300000000000000000000000000000000000004",
@@ -59,7 +58,7 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
   ];
 
   const [tokens, setTokens] = useState([]);
-  const [contracts, setContracts] = useState([]);
+
   const { address, connector } = useAccount();
   const [walletAssets, setWalletAssets] = useState()
   const [selectedToken, setSelectedToken] = useState(token)
@@ -98,26 +97,24 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
     fetchTokens();
   }, []);
 
-  const { connectors, connect } = useConnect();
-  const { chains, switchChain } = useSwitchChain();
 
+  const { switchChain } = useSwitchChain();
+  const { chain } = useChainId();
   const [inputValue, setInputValue] = useState("0.00");
-
+  console.log('Currently Connected Chain:', chain)
   const { bridgeTokens } = UseWallet(inputValue);
-  const blast = chains.find((chain) => {
-    return chain.name === "Blast";
-  });
-  console.log(blast.id, chainId)
-  const switchToBlast = async () => {
-    if (chainId === 1) {
-      console.log('currently connected chain ', chainId)
-      console.log('Switching Chain Id')
-      switchChain({ chainId: 81457 })
-      const provider = new ethers.providers.Web3Provider(await connector.getProvider());
-      const chainId = await provider.getSigner().getChainId();
-      setChainId(chainId)
-    }
-  };
+
+  // // console.log(blast.id, chainId)
+  // const switchToBlast = async () => {
+  //   if (chainId === 1) {
+  //     // console.log('currently connected chain ', chainId)
+  //     console.log('Switching Chain Id')
+  //     switchChain({ chainId: 81457 })
+  //     const provider = new ethers.providers.Web3Provider(await connector.getProvider());
+  //     const chainId = await provider.getSigner().getChainId();
+  //     setChainId(chainId)
+  //   }
+  // };
 
   console.log(chainId)
   const handleBridge = async () => {
@@ -128,7 +125,7 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
       if (chainId === 1) {
         console.log('currently connected chain ', chainId)
         console.log('Switching Chain Id')
-        switchChain({ chainId: 181457 })
+        switchChain({ chainId: 81457 })
       }
       setChainId()
       // const tokenAddr = selectedToken.token_address ? selectedToken.token_address : selectedToken.address
@@ -147,15 +144,8 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
   const tokensWithBalances = tokens.filter((token) => {
     return Number(token.currentAmount) > 0.000000000000
   })
-  const getChainId = async () => {
-    const provider = new ethers.providers.Web3Provider(await connector.getProvider());
-    const chainId = await provider.getSigner().getChainId();
-    setChainId(chainId)
-  }
 
-  useEffect(() => {
-    getChainId()
-  }, [address])
+
 
 
 
@@ -381,10 +371,10 @@ const WithdrawForm = ({ chainId, setChainId, setOpenWithdrawModal, withdrawFormS
         <div className="p-[1px] transition-all bg-transparent">
 
           <div className="transition-[filter]">
-            {chainId === 1 ? <button
+            {chain?.id === 1 ? <button
               onClick={(e) => {
                 e.preventDefault()
-                switchToBlast()
+                switchChain({ chainId: 81457 })
               }}
               type="submit"
               className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"

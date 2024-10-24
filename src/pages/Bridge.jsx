@@ -11,6 +11,7 @@ import {
   useEnsName,
   useSwitchChain,
   useBalance,
+  useChainId,
 } from "wagmi";
 import { useRef } from "react"; // Add this import
 
@@ -104,10 +105,7 @@ const Bridge = () => {
     address: address,
   });
 
-  // setTimeout(() => {
 
-  //   disconnect();
-  // }, 30000);
 
   const { pathname, search } = window.location;
   const queryParams = new URLSearchParams(search);
@@ -115,7 +113,7 @@ const Bridge = () => {
   console.log('Current query parameters:', Object.fromEntries(queryParams.entries()));
 
 
-
+  const { chain } = useChainId();
   const getCurrentAccount = async () => {
     if (window.okxwallet || window.phantom) {
 
@@ -136,32 +134,14 @@ const Bridge = () => {
     }
   };
 
-  const getCurrentChainId = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const chainId = await signer.getChainId();
-
-      console.log(chainId)
-      setChainId(chainId)
-      console.log('Currently connected chain ID:', chainId);
-      return chainId;
-    } else {
-      console.log('Ethereum wallet is not installed.');
-      return null;
-    }
-  };
-
-  // Call the getCurrentAccount function when needed, for example on component mount
   useEffect(() => {
 
     console.log(walletAssets)
 
-    getCurrentChainId()
     getCurrentAccount();
-  }, [address, chains]);
+  }, [address, chain]);
 
-  //   if (chainId === 1) {
+
   //     console.log('currently connected chain ', chainId)
   //     console.log('Switching Chain Id')
   //     switchChain({ chainId: 81457 })
@@ -213,10 +193,6 @@ const Bridge = () => {
       const provider = new ethers.providers.Web3Provider(await connector.getProvider()); // Get the provider for the connected wallet
       console.log(provider)
       const chainId = await provider.getSigner().getChainId(); // Get current chain ID
-      // if (chainId === 81457) {
-      //   console.log('currently connected chain ', chainId)
-      //   switchChain({ chainId: 1 })
-      // }
       await bridgeTokens({
         token: selectedToken,
         amount: inputValue,
@@ -325,32 +301,6 @@ const Bridge = () => {
                           </div>
                         </button>
                         <div className="mb-14 mt-14 h-24"></div>
-
-                        {/* {address &&
-                          blast.map((chain, i) => (
-                            <button
-                              key={i}
-                              onClick={(e) => {
-                                e.preventDefault()
-                                switchChain({ chainId: chain.id })
-                              }}
-                              className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] bg-black focus-visible:text-black focus-visible:bg-white active:text-black active:bg-white media-hover:hover:bg-white hover:text-black text-yellow-100"
-                            >
-                              <div className="flex items-center gap-2.5">
-                                <div>Add {chain.name} to Wallet</div>
-                                <img
-                                  alt=""
-                                  loading="lazy"
-                                  width="24"
-                                  height="24"
-                                  decoding="async"
-                                  data-nimg="1"
-                                  src={metamask}
-                                  style={{ color: "transparent" }}
-                                />
-                              </div>
-                            </button>
-                          ))} */}
                       </div>
                       <div className="relative flex h-fit  xl:max-h-full w-[520px]">
                         <fieldset className="absolute left-0 right-0 top-0 flex">
@@ -435,7 +385,7 @@ const Bridge = () => {
                           </div>
                         </fieldset>
                         <div className="[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] xl:[clip-path:polygon(calc(33.33%_+_1px)_0px,_calc(33.33%_+_1px)_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] flex max-h-full w-full rounded-[6px] bg-camo-400 p-[1px]">
-                          <div className="[clip-path:polygon(33.33%_0px,_33.33%_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] xl:[clip-path:polygon(33.33%_0px,_33.33%_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_56px)_100%,_0_100%,_0_32px,_32px_0px)] relative w-full rounded-[5px] bg-black px-8 pt-[48px] xl:pt-[64px]">
+                          <div className="[clip-path:polygon(33.33%_0px,_33.33%_48px,_100%_48px,_100%_calc(100%_-_56px),_calc(100%_-_0px)_100%,_0_100%,_0_32px,_24px_0px)] xl:[clip-path:polygon(33.33%_0px,_33.33%_64px,_100%_64px,_100%_calc(100%_-_56px),_calc(100%_-_32px)_100%,_0_100%,_0_40px,_32px_0px)] relative w-full rounded-[5px] bg-black px-8 pt-[48px] xl:pt-[64px]">
                             {currentTab === "Airdrop" && <WithdrawForm withdrawFormSelectedToken={withdrawFormSelectedToken} setOpenWithdrawModal={setOpenWithdrawModal} setChainId={setChainId} chainId={chainId} />}
                             {currentTab === "History" && <History />}
                             {currentTab === "Bridge" && (
@@ -639,28 +589,38 @@ const Bridge = () => {
                                 >
                                   <div className="p-[1px] transition-all bg-transparent">
                                     <div className="transition-[filter]">
+
                                       {address ? (
                                         <button
                                           disabled={currentChain.name === 'Ethereum' && Number(inputValue) <= 0}
                                           onClick={(e) => {
-                                            handleBridge()
                                             e.preventDefault();
-                                            { currentChain.name === 'Ethereum' ? handleBridge() : switchChain({ chainId: currentChain.id }) }
-
+                                            handleBridge();
                                           }}
                                           className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                                         >
-                                          <div className="">{currentChain.name === 'Ethereum' ? 'Submit' : 'Switch to Ethereum Mainnet'}</div>
+                                          <div className="">Submit</div>
+                                        </button>
+                                      ) : chain?.id !== 1 && address ? (
+                                        <button
+                                          disabled={currentChain.name === 'Ethereum' && Number(inputValue) <= 0}
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            switchChain({ chainId: 1 });
+                                          }}
+                                          className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
+                                        >
+                                          <div className="">Switch to Ethereum Mainnet</div>
                                         </button>
                                       ) : (
                                         <button
                                           onClick={(e) => {
-                                            setShowConnect(true);
                                             e.preventDefault();
+                                            setShowConnect(true);
                                           }}
                                           className="select-none disabled:cursor-not-allowed disabled:bg-camo-300 disabled:text-gray-800 typography-brand-body-l-caps sm:max-md:min-h-[36px] sm:max-md:py-1.5 min-h-[40px] px-6 py-2 transition-colors will-change-transform [transform:translateZ(0)] rounded-bl-md rounded-tr-md [clip-path:polygon(20px_0,100%_0,100%_50%,calc(100%-20px)_100%,0_100%,0_50%)] w-full bg-yellow-300 focus-visible:bg-white active:bg-white media-hover:hover:bg-white text-black"
                                         >
-                                          <div className="">{chainId !== 1 ? 'Switch to Ethereum Mainnet' : 'Connect Wallet'}</div>
+                                          <div className="">Connect Wallet</div>
                                         </button>
                                       )}
                                     </div>
